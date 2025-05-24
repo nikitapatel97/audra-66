@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarContent, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Send, Heart, User, Bot } from "lucide-react";
 
 interface Message {
@@ -112,7 +112,7 @@ export const ChatbotDashboard = () => {
                 className={`flex gap-3 ${message.sender === "user" ? "flex-row-reverse" : ""}`}
               >
                 <Avatar className="w-8 h-8 flex-shrink-0">
-                  <AvatarContent className={`${
+                  <AvatarFallback className={`${
                     message.sender === "ai" 
                       ? "bg-gradient-to-r from-purple-500 to-pink-500" 
                       : "bg-gray-500"
@@ -122,9 +122,6 @@ export const ChatbotDashboard = () => {
                     ) : (
                       <User className="w-4 h-4 text-white" />
                     )}
-                  </AvatarContent>
-                  <AvatarFallback>
-                    {message.sender === "ai" ? "A" : "U"}
                   </AvatarFallback>
                 </Avatar>
                 
@@ -149,10 +146,9 @@ export const ChatbotDashboard = () => {
             {isTyping && (
               <div className="flex gap-3">
                 <Avatar className="w-8 h-8">
-                  <AvatarContent className="bg-gradient-to-r from-purple-500 to-pink-500">
+                  <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500">
                     <Bot className="w-4 h-4 text-white" />
-                  </AvatarContent>
-                  <AvatarFallback>A</AvatarFallback>
+                  </AvatarFallback>
                 </Avatar>
                 <div className="bg-gray-100 rounded-2xl px-4 py-3">
                   <div className="flex space-x-1">

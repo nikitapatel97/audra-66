@@ -14,6 +14,8 @@ const emotionColors = {
   frustrated: "bg-orange-100 text-orange-800 border-orange-200"
 };
 
+const emotions = ["happy", "sad", "anxious", "calm", "excited", "frustrated"];
+
 const mockEntries = [
   {
     id: 1,
@@ -35,8 +37,6 @@ export const JournalingDashboard = () => {
   const [currentEntry, setCurrentEntry] = useState("");
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
   const [viewMode, setViewMode] = useState<"journal" | "calendar">("journal");
-
-  const emotions = ["happy", "sad", "anxious", "calm", "excited", "frustrated"];
 
   const toggleEmotion = (emotion: string) => {
     setSelectedEmotions(prev => 
@@ -175,7 +175,7 @@ export const JournalingDashboard = () => {
                 {Array.from({ length: 35 }, (_, i) => {
                   const day = i - 6; // Start from previous month
                   const hasEntry = Math.random() > 0.7;
-                  const emotions = hasEntry ? [emotions[Math.floor(Math.random() * emotions.length)]] : [];
+                  const entryEmotions = hasEntry ? [emotions[Math.floor(Math.random() * emotions.length)]] : [];
                   
                   return (
                     <div 
@@ -189,14 +189,14 @@ export const JournalingDashboard = () => {
                       }`}
                     >
                       <div className="font-medium">{day > 0 && day <= 31 ? day : ""}</div>
-                      {hasEntry && emotions.length > 0 && (
+                      {hasEntry && entryEmotions.length > 0 && (
                         <div className="flex justify-center mt-1">
                           <div className={`w-2 h-2 rounded-full ${
-                            emotions[0] === "happy" ? "bg-yellow-400" :
-                            emotions[0] === "sad" ? "bg-blue-400" :
-                            emotions[0] === "anxious" ? "bg-red-400" :
-                            emotions[0] === "calm" ? "bg-green-400" :
-                            emotions[0] === "excited" ? "bg-purple-400" :
+                            entryEmotions[0] === "happy" ? "bg-yellow-400" :
+                            entryEmotions[0] === "sad" ? "bg-blue-400" :
+                            entryEmotions[0] === "anxious" ? "bg-red-400" :
+                            entryEmotions[0] === "calm" ? "bg-green-400" :
+                            entryEmotions[0] === "excited" ? "bg-purple-400" :
                             "bg-orange-400"
                           }`} />
                         </div>

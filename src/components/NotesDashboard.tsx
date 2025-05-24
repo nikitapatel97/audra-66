@@ -1,0 +1,287 @@
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Plus, Edit3, Trash2, Search, Heart, Shield, Target, AlertTriangle, Star, User } from "lucide-react";
+
+const noteCategories = [
+  {
+    id: "values",
+    title: "Partner Values",
+    description: "What you're looking for in a partner",
+    icon: Heart,
+    color: "from-pink-500 to-rose-500"
+  },
+  {
+    id: "boundaries", 
+    title: "Dating Boundaries",
+    description: "Your non-negotiables in relationships",
+    icon: Shield,
+    color: "from-purple-500 to-indigo-500"
+  },
+  {
+    id: "goals",
+    title: "Relationship Goals", 
+    description: "What you want to achieve in dating/relationships",
+    icon: Target,
+    color: "from-blue-500 to-cyan-500"
+  },
+  {
+    id: "redflags",
+    title: "Red Flags",
+    description: "Warning signs you've learned to watch for",
+    icon: AlertTriangle,
+    color: "from-red-500 to-orange-500"
+  },
+  {
+    id: "trauma",
+    title: "Past Experiences",
+    description: "Important relationship/dating history for context",
+    icon: User,
+    color: "from-gray-500 to-slate-500"
+  },
+  {
+    id: "preferences",
+    title: "Personal Preferences",
+    description: "Your likes, dislikes, and deal-breakers",
+    icon: Star,
+    color: "from-yellow-500 to-amber-500"
+  }
+];
+
+const mockNotes = {
+  values: [
+    { id: 1, title: "Emotional Intelligence", content: "Someone who can communicate their feelings and understand mine. They don't shut down during conflict." },
+    { id: 2, title: "Growth Mindset", content: "I want someone who is always working on themselves and sees challenges as opportunities to grow together." }
+  ],
+  boundaries: [
+    { id: 1, title: "Communication", content: "I will not tolerate being ignored for days without explanation. I need clear, honest communication." },
+    { id: 2, title: "Respect", content: "My time and energy are valuable. I won't chase someone who isn't showing equal effort." }
+  ],
+  goals: [
+    { id: 1, title: "Healthy Partnership", content: "I want a relationship where we both maintain our independence while building something together." }
+  ],
+  redflags: [
+    { id: 1, title: "Love Bombing", content: "When someone is overly intense too quickly - learned this from my last situationship." }
+  ],
+  trauma: [],
+  preferences: []
+};
+
+export const NotesDashboard = () => {
+  const [selectedCategory, setSelectedCategory] = useState("values");
+  const [isAddingNote, setIsAddingNote] = useState(false);
+  const [newNoteTitle, setNewNoteTitle] = useState("");
+  const [newNoteContent, setNewNoteContent] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const currentCategory = noteCategories.find(cat => cat.id === selectedCategory);
+  const currentNotes = mockNotes[selectedCategory as keyof typeof mockNotes] || [];
+
+  const filteredNotes = currentNotes.filter(note => 
+    note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    note.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleAddNote = () => {
+    if (newNoteTitle.trim() && newNoteContent.trim()) {
+      // In real app, this would save to database
+      console.log("Adding note:", { title: newNoteTitle, content: newNoteContent, category: selectedCategory });
+      setNewNoteTitle("");
+      setNewNoteContent("");
+      setIsAddingNote(false);
+    }
+  };
+
+  return (
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50 min-h-screen">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+            Your{" "}
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              personal notes
+            </span>
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Store your values, boundaries, and relationship insights in one private place. The more context you provide, the smarter Audra becomes.
+          </p>
+        </div>
+
+        <div className="max-w-6xl mx-auto">
+          {/* Search Bar */}
+          <div className="mb-8 max-w-md mx-auto">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Input
+                placeholder="Search your notes..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 border-purple-200 focus:border-purple-400"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Categories Sidebar */}
+            <div className="lg:col-span-1">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-purple-100 shadow-lg sticky top-8">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Categories</h3>
+                <div className="space-y-2">
+                  {noteCategories.map((category) => {
+                    const Icon = category.icon;
+                    const isActive = selectedCategory === category.id;
+                    const noteCount = mockNotes[category.id as keyof typeof mockNotes]?.length || 0;
+                    
+                    return (
+                      <button
+                        key={category.id}
+                        onClick={() => setSelectedCategory(category.id)}
+                        className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all ${
+                          isActive 
+                            ? `bg-gradient-to-r ${category.color} text-white shadow-md` 
+                            : "hover:bg-purple-50 text-gray-700"
+                        }`}
+                      >
+                        <Icon className="w-5 h-5" />
+                        <div className="flex-1">
+                          <div className="font-medium text-sm">{category.title}</div>
+                          <div className={`text-xs ${isActive ? "text-white/80" : "text-gray-500"}`}>
+                            {noteCount} note{noteCount !== 1 ? 's' : ''}
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* Notes Content */}
+            <div className="lg:col-span-2">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-purple-100 shadow-lg">
+                {/* Category Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    {currentCategory && (
+                      <>
+                        <div className={`p-2 rounded-lg bg-gradient-to-r ${currentCategory.color} text-white`}>
+                          <currentCategory.icon className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold text-gray-900">{currentCategory.title}</h3>
+                          <p className="text-sm text-gray-600">{currentCategory.description}</p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  <Button
+                    onClick={() => setIsAddingNote(true)}
+                    className="bg-gradient-to-r from-purple-600 to-pink-600"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Note
+                  </Button>
+                </div>
+
+                {/* Add New Note Form */}
+                {isAddingNote && (
+                  <Card className="mb-6 border-purple-200">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-lg">Add New Note</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <Input
+                        placeholder="Note title..."
+                        value={newNoteTitle}
+                        onChange={(e) => setNewNoteTitle(e.target.value)}
+                        className="border-purple-200 focus:border-purple-400"
+                      />
+                      <Textarea
+                        placeholder="Write your thoughts, experiences, or insights..."
+                        value={newNoteContent}
+                        onChange={(e) => setNewNoteContent(e.target.value)}
+                        className="min-h-24 border-purple-200 focus:border-purple-400"
+                      />
+                      <div className="flex gap-2">
+                        <Button
+                          onClick={handleAddNote}
+                          className="bg-gradient-to-r from-purple-600 to-pink-600"
+                        >
+                          Save Note
+                        </Button>
+                        <Button
+                          variant="outline"
+                          onClick={() => {
+                            setIsAddingNote(false);
+                            setNewNoteTitle("");
+                            setNewNoteContent("");
+                          }}
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Notes List */}
+                <div className="space-y-4">
+                  {filteredNotes.length === 0 ? (
+                    <div className="text-center py-12">
+                      <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        {currentCategory && <currentCategory.icon className="w-8 h-8 text-purple-600" />}
+                      </div>
+                      <h4 className="text-lg font-medium text-gray-900 mb-2">No notes yet</h4>
+                      <p className="text-gray-600 mb-4">
+                        Start building your emotional memory bank by adding your first note.
+                      </p>
+                      <Button
+                        onClick={() => setIsAddingNote(true)}
+                        variant="outline"
+                        className="border-purple-300 text-purple-600 hover:bg-purple-50"
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Add Your First Note
+                      </Button>
+                    </div>
+                  ) : (
+                    filteredNotes.map((note) => (
+                      <Card key={note.id} className="border-purple-100 hover:shadow-md transition-shadow">
+                        <CardHeader className="pb-3">
+                          <div className="flex items-start justify-between">
+                            <CardTitle className="text-lg text-gray-900">{note.title}</CardTitle>
+                            <div className="flex gap-1">
+                              <Button size="sm" variant="ghost" className="text-gray-500 hover:text-purple-600">
+                                <Edit3 className="w-4 h-4" />
+                              </Button>
+                              <Button size="sm" variant="ghost" className="text-gray-500 hover:text-red-600">
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </div>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-gray-700 leading-relaxed">{note.content}</p>
+                          <div className="mt-3 flex items-center justify-between">
+                            <Badge variant="outline" className="text-purple-600 border-purple-200">
+                              {currentCategory?.title}
+                            </Badge>
+                            <span className="text-xs text-gray-500">Added today</span>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};

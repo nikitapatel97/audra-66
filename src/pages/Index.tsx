@@ -21,7 +21,7 @@ const Index = () => {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden md:block min-h-screen cosmic-sparkle">
+      <div className="hidden md:block min-h-screen journal-paper">
         <Navigation />
         <Hero />
         <Features />

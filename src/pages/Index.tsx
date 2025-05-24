@@ -21,7 +21,7 @@ const Index = () => {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden md:block min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50">
+      <div className="hidden md:block min-h-screen cosmic-sparkle">
         <Navigation />
         <Hero />
         <Features />

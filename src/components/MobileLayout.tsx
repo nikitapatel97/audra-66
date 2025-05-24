@@ -27,20 +27,20 @@ export const MobileLayout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50">
+    <div className="min-h-screen cosmic-sparkle">
       <Navigation />
       
       {/* Mobile Content */}
       <div className="pt-16 pb-20 px-4">
         {/* Hero Section - Condensed for mobile */}
         <div className="py-6 text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-3">
+          <h1 className="text-2xl font-bold text-white mb-3">
             Welcome to{" "}
-            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Audra
             </span>
           </h1>
-          <p className="text-sm text-gray-600 mb-6 max-w-sm mx-auto">
+          <p className="text-sm text-purple-200 mb-6 max-w-sm mx-auto">
             Your AI companion for emotional growth and healthier relationships
           </p>
         </div>

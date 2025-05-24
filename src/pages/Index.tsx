@@ -9,6 +9,7 @@ import { Hero } from "@/components/Hero";
 import { JournalingDashboard } from "@/components/JournalingDashboard";
 import { NotesDashboard } from "@/components/NotesDashboard";
 import { ChatbotDashboard } from "@/components/ChatbotDashboard";
+import { SocialDashboard } from "@/components/SocialDashboard";
 import { PremiumDashboard } from "@/components/PremiumDashboard";
 
 const Index = () => {
@@ -27,6 +28,7 @@ const Index = () => {
         <JournalingDashboard />
         <NotesDashboard />
         <ChatbotDashboard />
+        <SocialDashboard />
         <PremiumDashboard />
         <Stats />
         <CTA />

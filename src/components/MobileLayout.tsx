@@ -5,6 +5,7 @@ import { MobileNavigation } from "@/components/MobileNavigation";
 import { JournalingDashboard } from "@/components/JournalingDashboard";
 import { NotesDashboard } from "@/components/NotesDashboard";
 import { MobileChatbotDashboard } from "@/components/MobileChatbotDashboard";
+import { MobileSocialDashboard } from "@/components/MobileSocialDashboard";
 import { PremiumDashboard } from "@/components/PremiumDashboard";
 
 export const MobileLayout = () => {
@@ -16,6 +17,8 @@ export const MobileLayout = () => {
         return <JournalingDashboard />;
       case "notes":
         return <NotesDashboard />;
+      case "social":
+        return <MobileSocialDashboard />;
       case "premium":
         return <PremiumDashboard />;
       default:

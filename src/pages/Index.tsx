@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
 import { JournalingDashboard } from "@/components/JournalingDashboard";
 import { NotesDashboard } from "@/components/NotesDashboard";
+import { ChatbotDashboard } from "@/components/ChatbotDashboard";
 import { Stats } from "@/components/Stats";
 import { CTA } from "@/components/CTA";
 import { Navigation } from "@/components/Navigation";
@@ -16,6 +17,7 @@ const Index = () => {
       <Features />
       <JournalingDashboard />
       <NotesDashboard />
+      <ChatbotDashboard />
       <Stats />
       <CTA />
       <Footer />

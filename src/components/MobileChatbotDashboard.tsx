@@ -6,11 +6,18 @@ import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Send, Heart, Sparkles } from "lucide-react";
 
+interface Message {
+  id: number;
+  type: "ai" | "user";
+  content: string;
+  timestamp: Date;
+}
+
 export const MobileChatbotDashboard = () => {
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      type: "ai" as const,
+      type: "ai",
       content: "Hi! I'm Audra, your emotional growth companion. How are you feeling today?",
       timestamp: new Date(Date.now() - 300000),
     },
@@ -27,9 +34,9 @@ export const MobileChatbotDashboard = () => {
   const handleSendMessage = () => {
     if (!inputMessage.trim()) return;
 
-    const userMessage = {
+    const userMessage: Message = {
       id: Date.now(),
-      type: "user" as const,
+      type: "user",
       content: inputMessage,
       timestamp: new Date(),
     };
@@ -40,9 +47,9 @@ export const MobileChatbotDashboard = () => {
 
     // Simulate AI response
     setTimeout(() => {
-      const aiResponse = {
+      const aiResponse: Message = {
         id: Date.now() + 1,
-        type: "ai" as const,
+        type: "ai",
         content: "I understand you're going through something important. Let's explore this together. Can you tell me more about what's on your mind?",
         timestamp: new Date(),
       };

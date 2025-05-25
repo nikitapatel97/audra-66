@@ -97,40 +97,40 @@ export const NotesDashboard = () => {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50/40 min-h-screen">
+    <section className="py-8 md:py-20 px-3 md:px-4 sm:px-6 lg:px-8 bg-gray-50/40 min-h-screen">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6 journal-title">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-3xl lg:text-5xl font-light text-gray-900 mb-4 md:mb-6 journal-title">
             Your{" "}
             <span className="italic text-gray-700">
               personal notes
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto journal-body">
+          <p className="text-sm md:text-xl text-gray-600 max-w-3xl mx-auto journal-body">
             Store your values, boundaries, and relationship insights in one private place. The more context you provide, the smarter Audra becomes.
           </p>
         </div>
 
         <div className="max-w-6xl mx-auto">
           {/* Search Bar */}
-          <div className="mb-8 max-w-md mx-auto">
+          <div className="mb-6 md:mb-8 max-w-md mx-auto">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-3 h-3 md:w-4 md:h-4" />
               <Input
                 placeholder="Search your notes..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 border-gray-200 focus:border-gray-400"
+                className="pl-8 md:pl-10 text-sm border-gray-200 focus:border-gray-400"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
             {/* Categories Sidebar */}
             <div className="lg:col-span-1">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm sticky top-8">
-                <h3 className="text-lg font-normal text-gray-900 mb-4 journal-title">Categories</h3>
-                <div className="space-y-2">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-gray-200 shadow-sm sticky top-8">
+                <h3 className="text-base md:text-lg font-normal text-gray-900 mb-3 md:mb-4 journal-title">Categories</h3>
+                <div className="space-y-1 md:space-y-2">
                   {noteCategories.map((category) => {
                     const Icon = category.icon;
                     const isActive = selectedCategory === category.id;
@@ -140,15 +140,15 @@ export const NotesDashboard = () => {
                       <button
                         key={category.id}
                         onClick={() => setSelectedCategory(category.id)}
-                        className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all ${
+                        className={`w-full flex items-center gap-2 md:gap-3 p-2 md:p-3 rounded-lg text-left transition-all ${
                           isActive 
                             ? "bg-gray-900 text-white shadow-sm" 
                             : "hover:bg-gray-50 text-gray-700"
                         }`}
                       >
-                        <Icon className="w-5 h-5" />
-                        <div className="flex-1">
-                          <div className="font-medium text-sm">{category.title}</div>
+                        <Icon className="w-4 h-4 md:w-5 md:h-5" />
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium text-xs md:text-sm truncate">{category.title}</div>
                           <div className={`text-xs ${isActive ? "text-gray-300" : "text-gray-500"}`}>
                             {noteCount} note{noteCount !== 1 ? 's' : ''}
                           </div>
@@ -162,54 +162,55 @@ export const NotesDashboard = () => {
 
             {/* Notes Content */}
             <div className="lg:col-span-2">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-gray-200 shadow-sm">
                 {/* Category Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
+                <div className="flex items-center justify-between mb-4 md:mb-6">
+                  <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
                     {currentCategory && (
                       <>
-                        <div className="p-2 rounded-lg bg-gray-900 text-white">
-                          <currentCategory.icon className="w-5 h-5" />
+                        <div className="p-1.5 md:p-2 rounded-lg bg-gray-900 text-white flex-shrink-0">
+                          <currentCategory.icon className="w-4 h-4 md:w-5 md:h-5" />
                         </div>
-                        <div>
-                          <h3 className="text-xl font-normal text-gray-900 journal-title">{currentCategory.title}</h3>
-                          <p className="text-sm text-gray-600">{currentCategory.description}</p>
+                        <div className="min-w-0 flex-1">
+                          <h3 className="text-lg md:text-xl font-normal text-gray-900 journal-title truncate">{currentCategory.title}</h3>
+                          <p className="text-xs md:text-sm text-gray-600 line-clamp-2">{currentCategory.description}</p>
                         </div>
                       </>
                     )}
                   </div>
                   <Button
                     onClick={() => setIsAddingNote(true)}
-                    className="bg-gray-900 hover:bg-gray-800"
+                    className="bg-gray-900 hover:bg-gray-800 text-xs md:text-sm px-3 md:px-4 py-2 ml-2"
                   >
-                    <Plus className="w-4 h-4 mr-2" />
-                    Add Note
+                    <Plus className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
+                    <span className="hidden sm:inline">Add Note</span>
+                    <span className="sm:hidden">Add</span>
                   </Button>
                 </div>
 
                 {/* Add New Note Form */}
                 {isAddingNote && (
-                  <Card className="mb-6 border-gray-200">
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-lg journal-title">Add New Note</CardTitle>
+                  <Card className="mb-4 md:mb-6 border-gray-200">
+                    <CardHeader className="pb-2 md:pb-3">
+                      <CardTitle className="text-base md:text-lg journal-title">Add New Note</CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-4">
+                    <CardContent className="space-y-3 md:space-y-4">
                       <Input
                         placeholder="Note title..."
                         value={newNoteTitle}
                         onChange={(e) => setNewNoteTitle(e.target.value)}
-                        className="border-gray-200 focus:border-gray-400"
+                        className="border-gray-200 focus:border-gray-400 text-sm"
                       />
                       <Textarea
                         placeholder="Write your thoughts, experiences, or insights..."
                         value={newNoteContent}
                         onChange={(e) => setNewNoteContent(e.target.value)}
-                        className="min-h-24 border-gray-200 focus:border-gray-400"
+                        className="min-h-20 md:min-h-24 border-gray-200 focus:border-gray-400 text-sm"
                       />
                       <div className="flex gap-2">
                         <Button
                           onClick={handleAddNote}
-                          className="bg-gray-900 hover:bg-gray-800"
+                          className="bg-gray-900 hover:bg-gray-800 text-xs md:text-sm"
                         >
                           Save Note
                         </Button>
@@ -220,7 +221,7 @@ export const NotesDashboard = () => {
                             setNewNoteTitle("");
                             setNewNoteContent("");
                           }}
-                          className="border-gray-300 hover:bg-gray-50"
+                          className="border-gray-300 hover:bg-gray-50 text-xs md:text-sm"
                         >
                           Cancel
                         </Button>
@@ -230,45 +231,45 @@ export const NotesDashboard = () => {
                 )}
 
                 {/* Notes List */}
-                <div className="space-y-4">
+                <div className="space-y-3 md:space-y-4">
                   {filteredNotes.length === 0 ? (
-                    <div className="text-center py-12">
-                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        {currentCategory && <currentCategory.icon className="w-8 h-8 text-gray-600" />}
+                    <div className="text-center py-8 md:py-12">
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+                        {currentCategory && <currentCategory.icon className="w-6 h-6 md:w-8 md:h-8 text-gray-600" />}
                       </div>
-                      <h4 className="text-lg font-medium text-gray-900 mb-2">No notes yet</h4>
-                      <p className="text-gray-600 mb-4">
+                      <h4 className="text-base md:text-lg font-medium text-gray-900 mb-2">No notes yet</h4>
+                      <p className="text-sm md:text-base text-gray-600 mb-3 md:mb-4 px-4">
                         Start building your emotional memory bank by adding your first note.
                       </p>
                       <Button
                         onClick={() => setIsAddingNote(true)}
                         variant="outline"
-                        className="border-gray-300 text-gray-700 hover:bg-gray-50"
+                        className="border-gray-300 text-gray-700 hover:bg-gray-50 text-xs md:text-sm"
                       >
-                        <Plus className="w-4 h-4 mr-2" />
+                        <Plus className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
                         Add Your First Note
                       </Button>
                     </div>
                   ) : (
                     filteredNotes.map((note) => (
                       <Card key={note.id} className="border-gray-200 hover:shadow-md transition-shadow">
-                        <CardHeader className="pb-3">
-                          <div className="flex items-start justify-between">
-                            <CardTitle className="text-lg text-gray-900 journal-title">{note.title}</CardTitle>
-                            <div className="flex gap-1">
-                              <Button size="sm" variant="ghost" className="text-gray-500 hover:text-gray-700">
-                                <Edit3 className="w-4 h-4" />
+                        <CardHeader className="pb-2 md:pb-3">
+                          <div className="flex items-start justify-between gap-2">
+                            <CardTitle className="text-sm md:text-lg text-gray-900 journal-title flex-1 min-w-0 line-clamp-2">{note.title}</CardTitle>
+                            <div className="flex gap-1 flex-shrink-0">
+                              <Button size="sm" variant="ghost" className="text-gray-500 hover:text-gray-700 p-1 md:p-2">
+                                <Edit3 className="w-3 h-3 md:w-4 md:h-4" />
                               </Button>
-                              <Button size="sm" variant="ghost" className="text-gray-500 hover:text-red-600">
-                                <Trash2 className="w-4 h-4" />
+                              <Button size="sm" variant="ghost" className="text-gray-500 hover:text-red-600 p-1 md:p-2">
+                                <Trash2 className="w-3 h-3 md:w-4 md:h-4" />
                               </Button>
                             </div>
                           </div>
                         </CardHeader>
                         <CardContent>
-                          <p className="text-gray-700 leading-relaxed journal-body">{note.content}</p>
-                          <div className="mt-3 flex items-center justify-between">
-                            <Badge variant="outline" className="text-gray-600 border-gray-200">
+                          <p className="text-xs md:text-sm text-gray-700 leading-relaxed journal-body mb-3 line-clamp-3 md:line-clamp-none">{note.content}</p>
+                          <div className="flex items-center justify-between">
+                            <Badge variant="outline" className="text-gray-600 border-gray-200 text-xs">
                               {currentCategory?.title}
                             </Badge>
                             <span className="text-xs text-gray-500">Added today</span>

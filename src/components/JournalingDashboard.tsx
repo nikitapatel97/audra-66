@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Mic, PenTool, BarChart3 } from "lucide-react";
+import { Calendar, Mic, PenTool, BarChart3, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from "lucide-react";
 
 const emotionColors = {
   happy: "bg-green-50 text-green-700 border-green-200",
@@ -32,16 +32,150 @@ const mockEntries = [
   }
 ];
 
+const monthNames = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
 export const JournalingDashboard = () => {
   const [currentEntry, setCurrentEntry] = useState("");
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
   const [viewMode, setViewMode] = useState<"journal" | "calendar">("journal");
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [calendarView, setCalendarView] = useState<"month" | "year">("month");
 
   const toggleEmotion = (emotion: string) => {
     setSelectedEmotions(prev => 
       prev.includes(emotion) 
         ? prev.filter(e => e !== emotion)
         : [...prev, emotion]
+    );
+  };
+
+  const navigateMonth = (direction: 'prev' | 'next') => {
+    setCurrentDate(prev => {
+      const newDate = new Date(prev);
+      if (direction === 'prev') {
+        newDate.setMonth(newDate.getMonth() - 1);
+      } else {
+        newDate.setMonth(newDate.getMonth() + 1);
+      }
+      return newDate;
+    });
+  };
+
+  const navigateYear = (direction: 'prev' | 'next') => {
+    setCurrentDate(prev => {
+      const newDate = new Date(prev);
+      if (direction === 'prev') {
+        newDate.setFullYear(newDate.getFullYear() - 1);
+      } else {
+        newDate.setFullYear(newDate.getFullYear() + 1);
+      }
+      return newDate;
+    });
+  };
+
+  const renderMonthView = () => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startingDayOfWeek = firstDay.getDay();
+
+    const days = [];
+    
+    // Add empty cells for days before the first day of the month
+    for (let i = 0; i < startingDayOfWeek; i++) {
+      days.push(
+        <div key={`empty-${i}`} className="aspect-square p-2 rounded-lg border border-gray-100" />
+      );
+    }
+
+    // Add days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      const hasEntry = Math.random() > 0.7;
+      const entryEmotions = hasEntry ? [emotions[Math.floor(Math.random() * emotions.length)]] : [];
+      
+      days.push(
+        <div 
+          key={day} 
+          className={`aspect-square p-2 rounded-lg border text-center text-sm cursor-pointer ${
+            hasEntry 
+              ? "border-gray-400 bg-gray-50 hover:bg-gray-100" 
+              : "border-gray-200 hover:border-gray-300"
+          }`}
+        >
+          <div className="font-medium text-gray-900">{day}</div>
+          {hasEntry && entryEmotions.length > 0 && (
+            <div className="flex justify-center mt-1">
+              <div className={`w-2 h-2 rounded-full ${
+                entryEmotions[0] === "happy" ? "bg-green-400" :
+                entryEmotions[0] === "sad" ? "bg-blue-400" :
+                entryEmotions[0] === "anxious" ? "bg-red-400" :
+                entryEmotions[0] === "calm" ? "bg-gray-400" :
+                entryEmotions[0] === "excited" ? "bg-yellow-400" :
+                "bg-orange-400"
+              }`} />
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    return (
+      <div className="grid grid-cols-7 gap-2">
+        {days}
+      </div>
+    );
+  };
+
+  const renderYearView = () => {
+    const year = currentDate.getFullYear();
+    const months = [];
+
+    for (let month = 0; month < 12; month++) {
+      const hasEntries = Math.random() > 0.3;
+      const entryCount = hasEntries ? Math.floor(Math.random() * 15) + 1 : 0;
+
+      months.push(
+        <div 
+          key={month}
+          className={`p-4 rounded-lg border text-center cursor-pointer ${
+            hasEntries 
+              ? "border-gray-400 bg-gray-50 hover:bg-gray-100" 
+              : "border-gray-200 hover:border-gray-300"
+          }`}
+          onClick={() => {
+            setCurrentDate(new Date(year, month, 1));
+            setCalendarView("month");
+          }}
+        >
+          <div className="font-medium text-gray-900 mb-2">{monthNames[month]}</div>
+          {hasEntries && (
+            <div className="text-xs text-gray-600">
+              {entryCount} {entryCount === 1 ? 'entry' : 'entries'}
+            </div>
+          )}
+          {hasEntries && (
+            <div className="flex justify-center mt-2 space-x-1">
+              {Array.from({ length: Math.min(entryCount, 3) }, (_, i) => (
+                <div key={i} className="w-1.5 h-1.5 bg-gray-400 rounded-full" />
+              ))}
+              {entryCount > 3 && (
+                <span className="text-xs text-gray-500">+{entryCount - 3}</span>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    return (
+      <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
+        {months}
+      </div>
     );
   };
 
@@ -162,54 +296,76 @@ export const JournalingDashboard = () => {
           ) : (
             /* Calendar View */
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm">
-              <div className="grid grid-cols-7 gap-2 mb-4">
-                {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(day => (
-                  <div key={day} className="text-center text-sm font-medium text-gray-500 p-2">
-                    {day}
-                  </div>
-                ))}
-              </div>
-              
-              <div className="grid grid-cols-7 gap-2">
-                {Array.from({ length: 35 }, (_, i) => {
-                  const day = i - 6; // Start from previous month
-                  const hasEntry = Math.random() > 0.7;
-                  const entryEmotions = hasEntry ? [emotions[Math.floor(Math.random() * emotions.length)]] : [];
+              {/* Calendar Header with Navigation */}
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-4">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => calendarView === "month" ? navigateMonth("prev") : navigateYear("prev")}
+                    className="border-gray-300 hover:bg-gray-50"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </Button>
                   
-                  return (
-                    <div 
-                      key={i} 
-                      className={`aspect-square p-2 rounded-lg border text-center text-sm ${
-                        day <= 0 || day > 31 
-                          ? "border-gray-100 text-gray-300" 
-                          : hasEntry 
-                            ? "border-purple-200 bg-purple-50 cursor-pointer hover:bg-purple-100" 
-                            : "border-gray-200 hover:border-purple-200 cursor-pointer"
-                      }`}
-                    >
-                      <div className="font-medium">{day > 0 && day <= 31 ? day : ""}</div>
-                      {hasEntry && entryEmotions.length > 0 && (
-                        <div className="flex justify-center mt-1">
-                          <div className={`w-2 h-2 rounded-full ${
-                            entryEmotions[0] === "happy" ? "bg-yellow-400" :
-                            entryEmotions[0] === "sad" ? "bg-blue-400" :
-                            entryEmotions[0] === "anxious" ? "bg-red-400" :
-                            entryEmotions[0] === "calm" ? "bg-green-400" :
-                            entryEmotions[0] === "excited" ? "bg-purple-400" :
-                            "bg-orange-400"
-                          }`} />
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+                  <div className="text-center">
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      {calendarView === "month" 
+                        ? `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`
+                        : currentDate.getFullYear()
+                      }
+                    </h3>
+                  </div>
+                  
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => calendarView === "month" ? navigateMonth("next") : navigateYear("next")}
+                    className="border-gray-300 hover:bg-gray-50"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </Button>
+                </div>
+
+                <Button
+                  variant="outline"
+                  onClick={() => setCalendarView(calendarView === "month" ? "year" : "month")}
+                  className="border-gray-300 hover:bg-gray-50"
+                >
+                  {calendarView === "month" ? (
+                    <>
+                      <ZoomOut className="w-4 h-4 mr-2" />
+                      Year View
+                    </>
+                  ) : (
+                    <>
+                      <ZoomIn className="w-4 h-4 mr-2" />
+                      Month View
+                    </>
+                  )}
+                </Button>
               </div>
+
+              {calendarView === "month" && (
+                <>
+                  <div className="grid grid-cols-7 gap-2 mb-4">
+                    {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(day => (
+                      <div key={day} className="text-center text-sm font-medium text-gray-500 p-2">
+                        {day}
+                      </div>
+                    ))}
+                  </div>
+                  {renderMonthView()}
+                </>
+              )}
+
+              {calendarView === "year" && renderYearView()}
               
-              <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-100">
+              <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
                 <h4 className="font-semibold text-gray-900 mb-2">Emotional Overview</h4>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                     <span>Happy: 8 days</span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -221,11 +377,11 @@ export const JournalingDashboard = () => {
                     <span>Anxious: 5 days</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                    <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
                     <span>Calm: 6 days</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
                     <span>Excited: 4 days</span>
                   </div>
                   <div className="flex items-center gap-2">

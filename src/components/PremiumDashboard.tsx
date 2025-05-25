@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -50,34 +49,45 @@ export const PremiumDashboard = () => {
 
   return (
     <section className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Starry Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo-950 via-purple-950 to-black">
-        {/* Stars */}
+      {/* Enhanced Cosmic Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-purple-950 via-pink-900 to-black opacity-90"></div>
+        
+        {/* Flowing Organic Shapes */}
+        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-blue-500/10 to-purple-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-r from-pink-500/10 to-indigo-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
+        
+        {/* Enhanced Stars */}
         <div className="absolute inset-0">
-          {[...Array(50)].map((_, i) => (
+          {[...Array(100)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-1 h-1 bg-white rounded-full opacity-60 animate-pulse"
+              className="absolute bg-white rounded-full opacity-40"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${2 + Math.random() * 3}s`
+                width: `${1 + Math.random() * 3}px`,
+                height: `${1 + Math.random() * 3}px`,
+                animation: `twinkle ${2 + Math.random() * 4}s ease-in-out infinite`,
+                animationDelay: `${Math.random() * 5}s`
               }}
             />
           ))}
         </div>
-        {/* Larger twinkling stars */}
+        
+        {/* Shooting Stars */}
         <div className="absolute inset-0">
-          {[...Array(20)].map((_, i) => (
-            <Star
+          {[...Array(3)].map((_, i) => (
+            <div
               key={i}
-              className="absolute w-2 h-2 text-white opacity-40 animate-pulse"
+              className="absolute w-1 h-20 bg-gradient-to-b from-white to-transparent opacity-20 animate-pulse"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 4}s`,
-                animationDuration: `${3 + Math.random() * 2}s`
+                left: `${20 + i * 30}%`,
+                top: `${10 + i * 20}%`,
+                transform: `rotate(${-30 + i * 15}deg)`,
+                animationDelay: `${i * 3}s`,
+                animationDuration: '6s'
               }}
             />
           ))}
@@ -86,102 +96,92 @@ export const PremiumDashboard = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-8 md:mb-16">
-          <div className="flex items-center justify-center gap-2 mb-3 md:mb-4">
-            <Crown className="w-6 h-6 md:w-8 md:h-8 text-yellow-400" />
-            <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs md:text-sm border-0">
-              Premium Feature
-            </Badge>
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 flex items-center justify-center">
+              <Crown className="w-6 h-6 text-black" />
+            </div>
+            <div className="px-4 py-1 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-white/20 backdrop-blur-sm">
+              <span className="text-white text-sm font-light">Premium Feature</span>
+            </div>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-5xl font-light text-white mb-4 md:mb-6">
-            Your{" "}
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-normal">
-              Emotional Intelligence
-            </span>{" "}
-            Reports
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-light text-white mb-6 cosmic-title">
+            Your Emotional
+            <span className="block mt-2">Intelligence Reports</span>
           </h2>
-          <p className="text-sm md:text-xl text-purple-200 max-w-3xl mx-auto font-light leading-relaxed">
-            Get personalized insights into your emotional growth, relationship patterns, and areas for development. 
+          <div className="accent-line mx-auto mb-8"></div>
+          <p className="text-base md:text-xl text-white/70 max-w-3xl mx-auto font-light leading-relaxed">
+            Personalized insights into your emotional growth, relationship patterns, and areas for development. 
             Share with therapists, partners, or keep as your personal growth mirror.
           </p>
         </div>
 
-        {/* Feature Highlights - Mobile Optimized */}
-        <div className="max-w-6xl mx-auto mb-8 md:mb-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        {/* Feature Highlights - Artistic Cards */}
+        <div className="max-w-6xl mx-auto mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {/* Emotional Reports */}
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
-              <CardContent className="p-4 text-center">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <BarChart3 className="w-5 h-5 text-purple-300" />
-                  <h3 className="text-sm md:text-base font-light">Emotional Reports</h3>
-                </div>
-                <p className="text-xs md:text-sm text-purple-200 font-light">
-                  Monthly, quarterly & annual insights
-                </p>
-              </CardContent>
-            </Card>
+            <div className="glass-card p-6 text-center group">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <BarChart3 className="w-6 h-6 text-purple-300 group-hover:scale-110 transition-transform" />
+                <h3 className="text-base md:text-lg font-light text-white">Emotional Reports</h3>
+              </div>
+              <p className="text-sm text-white/70 font-light">
+                Monthly, quarterly & annual insights
+              </p>
+            </div>
 
             {/* Voice-Aware AI */}
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
-              <CardContent className="p-4 text-center">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Mic className="w-5 h-5 text-purple-300" />
-                  <h3 className="text-sm md:text-base font-light">Voice-Aware AI</h3>
-                </div>
-                <p className="text-xs md:text-sm text-purple-200 font-light">
-                  AI checks in when you sound off
-                </p>
-              </CardContent>
-            </Card>
+            <div className="glass-card p-6 text-center group">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <Mic className="w-6 h-6 text-purple-300 group-hover:scale-110 transition-transform" />
+                <h3 className="text-base md:text-lg font-light text-white">Voice-Aware AI</h3>
+              </div>
+              <p className="text-sm text-white/70 font-light">
+                AI checks in when you sound off
+              </p>
+            </div>
 
             {/* Couples' Insights */}
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
-              <CardContent className="p-4 text-center">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <Users className="w-5 h-5 text-purple-300" />
-                  <h3 className="text-sm md:text-base font-light">Couples' Insights</h3>
-                </div>
-                <p className="text-xs md:text-sm text-purple-200 font-light">
-                  Shared reports with your partner
-                </p>
-              </CardContent>
-            </Card>
+            <div className="glass-card p-6 text-center group">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <Users className="w-6 h-6 text-purple-300 group-hover:scale-110 transition-transform" />
+                <h3 className="text-base md:text-lg font-light text-white">Couples' Insights</h3>
+              </div>
+              <p className="text-sm text-white/70 font-light">
+                Shared reports with your partner
+              </p>
+            </div>
           </div>
 
           {/* Add Someone Feature */}
-          <Card className="bg-white/10 backdrop-blur-md border-white/20 mb-6">
-            <CardContent className="p-4 md:p-6 text-center">
-              <div className="flex items-center justify-center gap-2 mb-3">
-                <UserPlus className="w-5 h-5 md:w-6 md:h-6 text-purple-300" />
-                <h3 className="text-base md:text-lg font-light text-white">Add Your Partner</h3>
-              </div>
-              <p className="text-xs md:text-sm text-white/90 mb-4 max-w-md mx-auto font-light">
-                Invite your partner to join and get shared relationship insights together
-              </p>
-              <Button className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-sm border-0 font-light">
-                <UserPlus className="w-4 h-4 mr-2" />
-                Invite Partner
-              </Button>
-            </CardContent>
-          </Card>
+          <div className="glass-card p-6 md:p-8 text-center mb-8">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <UserPlus className="w-6 h-6 md:w-8 md:h-8 text-purple-300" />
+              <h3 className="text-lg md:text-xl font-light text-white cosmic-title">Add Your Partner</h3>
+            </div>
+            <p className="text-sm md:text-base text-white/80 mb-6 max-w-md mx-auto font-light leading-relaxed">
+              Invite your partner to join and get shared relationship insights together
+            </p>
+            <button className="cosmic-button px-8 py-3 font-light">
+              <UserPlus className="w-4 h-4 mr-2" />
+              Invite Partner
+            </button>
+          </div>
 
           {/* Upgrade Prompt */}
-          <Card className="bg-white/10 backdrop-blur-md border-white/20">
-            <CardContent className="p-4 md:p-8 text-center">
-              <div className="flex items-center justify-center gap-2 mb-3 md:mb-4">
-                <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-yellow-400" />
-                <h3 className="text-lg md:text-2xl font-light text-white">Unlock Premium Insights</h3>
-              </div>
-              <p className="text-xs md:text-base text-white/90 mb-4 md:mb-6 max-w-2xl mx-auto font-light leading-relaxed">
-                Upgrade to Premium to access detailed emotional reports, voice-aware AI coaching, 
-                and couples' shared insights. Transform your relationship journey with data-driven growth.
-              </p>
-              <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 md:px-8 py-2 md:py-3 text-sm md:text-lg border-0 font-light">
-                <Crown className="w-4 h-4 md:w-5 md:h-5 mr-2" />
-                Upgrade to Premium
-              </Button>
-            </CardContent>
-          </Card>
+          <div className="glass-card p-6 md:p-8 text-center">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-yellow-400" />
+              <h3 className="text-xl md:text-2xl font-light text-white cosmic-title">Unlock Premium Insights</h3>
+            </div>
+            <p className="text-sm md:text-base text-white/80 mb-6 max-w-2xl mx-auto font-light leading-relaxed">
+              Upgrade to Premium to access detailed emotional reports, voice-aware AI coaching, 
+              and couples' shared insights. Transform your relationship journey with data-driven growth.
+            </p>
+            <button className="cosmic-button px-8 py-4 text-lg font-light">
+              <Crown className="w-5 h-5 mr-2" />
+              Upgrade to Premium
+            </button>
+          </div>
         </div>
 
         {/* Premium Features Preview */}

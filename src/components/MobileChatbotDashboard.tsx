@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Send, Heart, Sparkles } from "lucide-react";
+import { Send, Heart, Sparkles, Bot } from "lucide-react";
 
 interface Message {
   id: number;
@@ -59,34 +59,41 @@ export const MobileChatbotDashboard = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="text-center mb-4">
-        <h2 className="text-xl font-bold text-gray-900 mb-2">Chat with Audra</h2>
-        <p className="text-sm text-gray-600">Your AI companion for emotional support</p>
+    <div className="space-y-6 p-4">
+      <div className="text-center mb-6">
+        <div className="flex items-center justify-center gap-3 mb-3">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center">
+            <Bot className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h2 className="text-xl font-light text-white cosmic-title">Chat with Audra</h2>
+            <p className="text-xs text-white/60 font-light">Your AI companion for emotional support</p>
+          </div>
+        </div>
       </div>
 
       {/* Chat Container */}
-      <Card className="h-96 flex flex-col">
-        <CardContent className="flex-1 p-3 overflow-y-auto space-y-3">
+      <div className="glass-card h-96 flex flex-col overflow-hidden">
+        <div className="flex-1 p-4 overflow-y-auto space-y-4">
           {messages.map((message) => (
             <div
               key={message.id}
-              className={`flex gap-2 ${
+              className={`flex gap-3 ${
                 message.type === "user" ? "justify-end" : "justify-start"
               }`}
             >
               {message.type === "ai" && (
-                <Avatar className="w-6 h-6 flex-shrink-0">
-                  <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs">
+                <Avatar className="w-8 h-8 flex-shrink-0">
+                  <AvatarFallback className="bg-gradient-to-r from-purple-400 to-pink-400 text-white text-sm">
                     A
                   </AvatarFallback>
                 </Avatar>
               )}
               <div
-                className={`max-w-[80%] rounded-lg px-3 py-2 text-sm ${
+                className={`max-w-[75%] rounded-3xl px-4 py-3 text-sm font-light ${
                   message.type === "user"
-                    ? "bg-purple-600 text-white"
-                    : "bg-gray-100 text-gray-900"
+                    ? "chat-bubble chat-bubble-user text-white"
+                    : "chat-bubble text-white/90"
                 }`}
               >
                 {message.content}
@@ -95,58 +102,55 @@ export const MobileChatbotDashboard = () => {
           ))}
           
           {isTyping && (
-            <div className="flex gap-2 justify-start">
-              <Avatar className="w-6 h-6 flex-shrink-0">
-                <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs">
+            <div className="flex gap-3 justify-start">
+              <Avatar className="w-8 h-8 flex-shrink-0">
+                <AvatarFallback className="bg-gradient-to-r from-purple-400 to-pink-400 text-white text-sm">
                   A
                 </AvatarFallback>
               </Avatar>
-              <div className="bg-gray-100 rounded-lg px-3 py-2 text-sm">
+              <div className="chat-bubble px-4 py-3">
                 <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+                  <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
+                  <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
                 </div>
               </div>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Quick Questions */}
-      <div className="space-y-2">
-        <p className="text-xs text-gray-600 font-medium">Suggested questions:</p>
+      <div className="space-y-3">
+        <p className="text-xs text-white/60 font-light accent-line">Suggested questions:</p>
         <div className="space-y-2">
           {suggestedQuestions.map((question, index) => (
-            <Button
+            <button
               key={index}
-              variant="outline"
-              size="sm"
-              className="w-full text-left text-xs h-auto py-2 px-3"
+              className="w-full text-left text-xs py-3 px-4 cosmic-button font-light"
               onClick={() => setInputMessage(question)}
             >
               {question}
-            </Button>
+            </button>
           ))}
         </div>
       </div>
 
       {/* Input */}
-      <div className="flex gap-2">
-        <Input
+      <div className="flex gap-3">
+        <input
           placeholder="Type your message..."
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
           onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-          className="flex-1 text-sm"
+          className="flex-1 text-sm py-3 px-4 cosmic-input font-light"
         />
-        <Button
+        <button
           onClick={handleSendMessage}
-          size="sm"
-          className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+          className="cosmic-button px-4 py-3 flex items-center justify-center"
         >
           <Send className="w-4 h-4" />
-        </Button>
+        </button>
       </div>
     </div>
   );

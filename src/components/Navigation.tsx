@@ -11,28 +11,28 @@ export const Navigation = () => {
             <div className="w-8 h-8 bg-gray-900 rounded-sm flex items-center justify-center">
               <Heart className="w-4 h-4 text-white" />
             </div>
-            <span className="text-2xl font-light text-gray-900 journal-title">
+            <span className="text-2xl font-light text-gray-900 font-playfair">
               Audra
             </span>
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors elegant-link">
+            <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors font-crimson">
               Features
             </a>
-            <a href="#dashboard" className="text-gray-600 hover:text-gray-900 transition-colors elegant-link">
+            <a href="#dashboard" className="text-gray-600 hover:text-gray-900 transition-colors font-crimson">
               Dashboard
             </a>
-            <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors elegant-link">
+            <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors font-crimson">
               About
             </a>
           </div>
           
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" className="text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-normal">
+            <Button variant="ghost" className="text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-crimson">
               Sign In
             </Button>
-            <Button className="journal-button-primary border-0">
+            <Button className="bg-gray-900 hover:bg-gray-800 border-0 font-crimson">
               Get Started
             </Button>
           </div>

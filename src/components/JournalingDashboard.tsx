@@ -220,16 +220,16 @@ export const JournalingDashboard = () => {
   };
 
   return (
-    <section id="dashboard" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50/40">
+    <section id="dashboard" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6 journal-title">
+          <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6 font-playfair">
             Your{" "}
-            <span className="italic text-gray-700">
+            <span className="italic text-gray-600 font-playfair">
               emotional dashboard
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto journal-body">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto font-crimson italic">
             Experience the first core dashboard: intelligent journaling that understands your emotions and helps you grow.
           </p>
         </div>
@@ -240,7 +240,7 @@ export const JournalingDashboard = () => {
             <Button 
               variant={viewMode === "journal" ? "default" : "outline"}
               onClick={() => setViewMode("journal")}
-              className={viewMode === "journal" ? "bg-gray-900 hover:bg-gray-800" : "border-gray-300 hover:bg-gray-50"}
+              className={viewMode === "journal" ? "bg-gray-900 hover:bg-gray-800 font-crimson" : "border-gray-300 hover:bg-gray-50 font-crimson"}
             >
               <PenTool className="w-4 h-4 mr-2" />
               Journal View
@@ -248,7 +248,7 @@ export const JournalingDashboard = () => {
             <Button 
               variant={viewMode === "calendar" ? "default" : "outline"}
               onClick={() => setViewMode("calendar")}
-              className={viewMode === "calendar" ? "bg-gray-900 hover:bg-gray-800" : "border-gray-300 hover:bg-gray-50"}
+              className={viewMode === "calendar" ? "bg-gray-900 hover:bg-gray-800 font-crimson" : "border-gray-300 hover:bg-gray-50 font-crimson"}
             >
               <Calendar className="w-4 h-4 mr-2" />
               Calendar View
@@ -256,7 +256,7 @@ export const JournalingDashboard = () => {
             <Button 
               variant={viewMode === "insights" ? "default" : "outline"}
               onClick={() => setViewMode("insights")}
-              className={viewMode === "insights" ? "bg-gray-900 hover:bg-gray-800" : "border-gray-300 hover:bg-gray-50"}
+              className={viewMode === "insights" ? "bg-gray-900 hover:bg-gray-800 font-crimson" : "border-gray-300 hover:bg-gray-50 font-crimson"}
             >
               <BarChart3 className="w-4 h-4 mr-2" />
               Insights
@@ -266,18 +266,18 @@ export const JournalingDashboard = () => {
           {viewMode === "journal" ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* New Entry */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm">
-                <h3 className="text-xl font-normal text-gray-900 mb-4 journal-title">New Entry</h3>
+              <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                <h3 className="text-xl font-normal text-gray-900 mb-4 font-playfair">New Entry</h3>
                 
                 <Textarea
                   placeholder="What's on your mind? Share your thoughts about relationships, dating, or just how you're feeling..."
                   value={currentEntry}
                   onChange={(e) => setCurrentEntry(e.target.value)}
-                  className="min-h-32 mb-4 border-gray-200 focus:border-gray-400"
+                  className="min-h-32 mb-4 border-gray-200 focus:border-gray-400 font-crimson"
                 />
                 
                 <div className="mb-4">
-                  <p className="text-sm font-medium text-gray-700 mb-2">How are you feeling?</p>
+                  <p className="text-sm font-medium text-gray-700 mb-2 font-crimson">How are you feeling?</p>
                   <div className="flex flex-wrap gap-2">
                     {emotions.map((emotion) => (
                       <Button
@@ -285,7 +285,7 @@ export const JournalingDashboard = () => {
                         variant="outline"
                         size="sm"
                         onClick={() => toggleEmotion(emotion)}
-                        className={`${
+                        className={`font-crimson ${
                           selectedEmotions.includes(emotion) 
                             ? emotionColors[emotion as keyof typeof emotionColors]
                             : "border-gray-200 hover:border-gray-300"
@@ -298,7 +298,7 @@ export const JournalingDashboard = () => {
                 </div>
                 
                 <div className="flex gap-2">
-                  <Button className="flex-1 bg-gray-900 hover:bg-gray-800">
+                  <Button className="flex-1 bg-gray-900 hover:bg-gray-800 font-crimson">
                     <PenTool className="w-4 h-4 mr-2" />
                     Save Entry
                   </Button>
@@ -309,28 +309,28 @@ export const JournalingDashboard = () => {
               </div>
 
               {/* Recent Entries */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm">
-                <h3 className="text-xl font-normal text-gray-900 mb-4 journal-title">Recent Entries</h3>
+              <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                <h3 className="text-xl font-normal text-gray-900 mb-4 font-playfair">Recent Entries</h3>
                 
                 <div className="space-y-4">
                   {mockEntries.map((entry) => (
                     <div key={entry.id} className="border-l-4 border-gray-300 pl-4 py-2">
-                      <p className="text-sm text-gray-500 mb-1">{entry.date}</p>
-                      <p className="text-gray-800 mb-2 journal-body text-base">{entry.content}</p>
+                      <p className="text-sm text-gray-500 mb-1 font-crimson">{entry.date}</p>
+                      <p className="text-gray-800 mb-2 font-crimson italic text-base">{entry.content}</p>
                       <div className="flex flex-wrap gap-1 mb-2">
                         {entry.emotions.map((emotion) => (
                           <Badge 
                             key={emotion} 
                             variant="outline" 
-                            className={emotionColors[emotion as keyof typeof emotionColors] || "border-gray-200 text-gray-700"}
+                            className={`font-crimson ${emotionColors[emotion as keyof typeof emotionColors] || "border-gray-200 text-gray-700"}`}
                           >
                             {emotion}
                           </Badge>
                         ))}
                       </div>
                       <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
-                        <p className="text-sm text-gray-700 font-medium">💡 AI Insight</p>
-                        <p className="text-sm text-gray-600">{entry.aiInsight}</p>
+                        <p className="text-sm text-gray-700 font-medium font-crimson">💡 AI Insight</p>
+                        <p className="text-sm text-gray-600 font-crimson italic">{entry.aiInsight}</p>
                       </div>
                     </div>
                   ))}
@@ -339,10 +339,10 @@ export const JournalingDashboard = () => {
             </div>
           ) : viewMode === "insights" ? (
             /* Insights View */
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm">
+            <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
               <div className="mb-6">
-                <h3 className="text-2xl font-normal text-gray-900 mb-4 journal-title">AI Insights Examples</h3>
-                <p className="text-gray-600 text-center">
+                <h3 className="text-2xl font-normal text-gray-900 mb-4 font-playfair">AI Insights Examples</h3>
+                <p className="text-gray-600 text-center font-crimson italic">
                   Here are examples of the kind of insights Audra provides based on your journaling patterns
                 </p>
               </div>
@@ -356,20 +356,20 @@ export const JournalingDashboard = () => {
                           {example.icon}
                         </div>
                         <div>
-                          <Badge variant="outline" className="mb-2 text-xs">
+                          <Badge variant="outline" className="mb-2 text-xs font-crimson">
                             {example.type}
                           </Badge>
-                          <CardTitle className="text-lg">{example.title}</CardTitle>
+                          <CardTitle className="text-lg font-playfair">{example.title}</CardTitle>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-gray-700 mb-3 leading-relaxed">
+                      <p className="text-gray-700 mb-3 leading-relaxed font-crimson italic">
                         {example.insight}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {example.emotions.map((emotion) => (
-                          <Badge key={emotion} variant="secondary" className="text-xs">
+                          <Badge key={emotion} variant="secondary" className="text-xs font-crimson">
                             {emotion}
                           </Badge>
                         ))}
@@ -379,10 +379,10 @@ export const JournalingDashboard = () => {
                 ))}
                 
                 <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-4 text-center">
-                  <p className="text-sm text-gray-600 mb-3">
+                  <p className="text-sm text-gray-600 mb-3 font-crimson italic">
                     Your personal insights will be generated based on your unique journaling patterns and emotional journey.
                   </p>
-                  <Button className="bg-gray-900 hover:bg-gray-800">
+                  <Button className="bg-gray-900 hover:bg-gray-800 font-crimson">
                     Start Journaling to Generate Your Insights
                   </Button>
                 </div>
@@ -390,7 +390,7 @@ export const JournalingDashboard = () => {
             </div>
           ) : (
             /* Calendar View */
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm">
+            <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
               {/* Calendar Header with Navigation */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-4">
@@ -404,7 +404,7 @@ export const JournalingDashboard = () => {
                   </Button>
                   
                   <div className="text-center">
-                    <h3 className="text-xl font-semibold text-gray-900">
+                    <h3 className="text-xl font-semibold text-gray-900 font-playfair">
                       {calendarView === "month" 
                         ? `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`
                         : currentDate.getFullYear()
@@ -425,7 +425,7 @@ export const JournalingDashboard = () => {
                 <Button
                   variant="outline"
                   onClick={() => setCalendarView(calendarView === "month" ? "year" : "month")}
-                  className="border-gray-300 hover:bg-gray-50"
+                  className="border-gray-300 hover:bg-gray-50 font-crimson"
                 >
                   {calendarView === "month" ? (
                     <>
@@ -445,7 +445,7 @@ export const JournalingDashboard = () => {
                 <>
                   <div className="grid grid-cols-7 gap-2 mb-4">
                     {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(day => (
-                      <div key={day} className="text-center text-sm font-medium text-gray-500 p-2">
+                      <div key={day} className="text-center text-sm font-medium text-gray-500 p-2 font-crimson">
                         {day}
                       </div>
                     ))}
@@ -457,31 +457,31 @@ export const JournalingDashboard = () => {
               {calendarView === "year" && renderYearView()}
               
               <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">Emotional Overview</h4>
+                <h4 className="font-semibold text-gray-900 mb-2 font-playfair">Emotional Overview</h4>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                    <span>Happy: 8 days</span>
+                    <span className="font-crimson">Happy: 8 days</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
-                    <span>Sad: 3 days</span>
+                    <span className="font-crimson">Sad: 3 days</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                    <span>Anxious: 5 days</span>
+                    <span className="font-crimson">Anxious: 5 days</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-                    <span>Calm: 6 days</span>
+                    <span className="font-crimson">Calm: 6 days</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                    <span>Excited: 4 days</span>
+                    <span className="font-crimson">Excited: 4 days</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-orange-400 rounded-full"></div>
-                    <span>Frustrated: 2 days</span>
+                    <span className="font-crimson">Frustrated: 2 days</span>
                   </div>
                 </div>
               </div>

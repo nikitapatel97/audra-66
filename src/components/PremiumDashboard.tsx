@@ -149,13 +149,13 @@ export const PremiumDashboard = () => {
           </div>
 
           {/* Add Someone Feature */}
-          <Card className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 backdrop-blur-md border-pink-300/30 mb-6">
+          <Card className="bg-white/10 backdrop-blur-md border-white/20 mb-6">
             <CardContent className="p-4 md:p-6 text-center">
               <div className="flex items-center justify-center gap-2 mb-3">
-                <UserPlus className="w-5 h-5 md:w-6 md:h-6 text-pink-300" />
+                <UserPlus className="w-5 h-5 md:w-6 md:h-6 text-purple-300" />
                 <h3 className="text-base md:text-lg font-light text-white">Add Your Partner</h3>
               </div>
-              <p className="text-xs md:text-sm text-purple-200 mb-4 max-w-md mx-auto font-light">
+              <p className="text-xs md:text-sm text-white/90 mb-4 max-w-md mx-auto font-light">
                 Invite your partner to join and get shared relationship insights together
               </p>
               <Button className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-sm border-0 font-light">
@@ -166,13 +166,13 @@ export const PremiumDashboard = () => {
           </Card>
 
           {/* Upgrade Prompt */}
-          <Card className="bg-gradient-to-r from-purple-500/20 to-indigo-500/20 backdrop-blur-md border-purple-300/30">
+          <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardContent className="p-4 md:p-8 text-center">
               <div className="flex items-center justify-center gap-2 mb-3 md:mb-4">
                 <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-yellow-400" />
                 <h3 className="text-lg md:text-2xl font-light text-white">Unlock Premium Insights</h3>
               </div>
-              <p className="text-xs md:text-base text-purple-200 mb-4 md:mb-6 max-w-2xl mx-auto font-light leading-relaxed">
+              <p className="text-xs md:text-base text-white/90 mb-4 md:mb-6 max-w-2xl mx-auto font-light leading-relaxed">
                 Upgrade to Premium to access detailed emotional reports, voice-aware AI coaching, 
                 and couples' shared insights. Transform your relationship journey with data-driven growth.
               </p>

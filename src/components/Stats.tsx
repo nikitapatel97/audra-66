@@ -30,17 +30,17 @@ export const Stats = () => {
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 journal-paper">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 cosmic-sparkle">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6 journal-title">
+          <h2 className="text-3xl md:text-5xl font-light text-white mb-6 font-playfair">
             The{" "}
-            <span className="italic text-gray-600">
+            <span className="italic text-white/80 font-playfair">
               unserious stats
             </span>
             {" "}our users love
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto journal-body">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto font-crimson italic">
             Because sometimes the best insights come from tracking how many times you cried last month 
             (and realizing your happiest days are always in summer).
           </p>
@@ -49,45 +49,45 @@ export const Stats = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <div key={index} className="text-center group hover:scale-105 transition-all duration-300">
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-8 border border-gray-200 shadow-sm hover:shadow-md">
-                <div className="w-16 h-16 bg-gray-900 rounded-sm flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+              <div className="glass-card rounded-lg p-8 border border-white/20 shadow-sm hover:shadow-md">
+                <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-sm flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                   <stat.icon className="w-8 h-8 text-white" />
                 </div>
-                <div className="text-4xl font-light text-gray-900 mb-2 journal-title">{stat.number}</div>
-                <div className="text-lg font-normal text-gray-800 mb-2 journal-title">{stat.label}</div>
-                <div className="text-sm text-gray-600 journal-body">{stat.description}</div>
+                <div className="text-4xl font-light text-white mb-2 font-playfair">{stat.number}</div>
+                <div className="text-lg font-normal text-white/90 mb-2 font-playfair">{stat.label}</div>
+                <div className="text-sm text-white/80 font-crimson italic">{stat.description}</div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-16 bg-gray-50 rounded-lg p-8 md:p-12 border border-gray-200">
+        <div className="mt-16 glass-card rounded-lg p-8 md:p-12 border border-white/20">
           <div className="text-center">
-            <h3 className="text-2xl md:text-3xl font-light text-gray-900 mb-4 journal-title">
+            <h3 className="text-2xl md:text-3xl font-light text-white mb-4 font-playfair">
               Your emotional journey, visualized
             </h3>
-            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto journal-body">
+            <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto font-crimson italic">
               From tracking your seasonal mood patterns to understanding why Thursdays always hit different, 
               Audra helps you see the bigger picture of your emotional landscape.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-              <div className="bg-white/60 backdrop-blur-sm rounded-lg p-6 border border-gray-200">
+              <div className="glass-card rounded-lg p-6 border border-white/20">
                 <div className="text-2xl mb-2">😭</div>
-                <div className="text-lg font-normal text-gray-900 journal-title">Cry Counter</div>
-                <div className="text-sm text-gray-600 journal-body">Track those emotional releases and see the patterns</div>
+                <div className="text-lg font-normal text-white font-playfair">Cry Counter</div>
+                <div className="text-sm text-white/80 font-crimson italic">Track those emotional releases and see the patterns</div>
               </div>
               
-              <div className="bg-white/60 backdrop-blur-sm rounded-lg p-6 border border-gray-200">
+              <div className="glass-card rounded-lg p-6 border border-white/20">
                 <div className="text-2xl mb-2">☀️</div>
-                <div className="text-lg font-normal text-gray-900 journal-title">Seasonal Happiness</div>
-                <div className="text-sm text-gray-600 journal-body">Discover when you're naturally most content</div>
+                <div className="text-lg font-normal text-white font-playfair">Seasonal Happiness</div>
+                <div className="text-sm text-white/80 font-crimson italic">Discover when you're naturally most content</div>
               </div>
               
-              <div className="bg-white/60 backdrop-blur-sm rounded-lg p-6 border border-gray-200">
+              <div className="glass-card rounded-lg p-6 border border-white/20">
                 <div className="text-2xl mb-2">💔</div>
-                <div className="text-lg font-normal text-gray-900 journal-title">Situationship Clarity</div>
-                <div className="text-sm text-gray-600 journal-body">Finally understand your relationship patterns</div>
+                <div className="text-lg font-normal text-white font-playfair">Situationship Clarity</div>
+                <div className="text-sm text-white/80 font-crimson italic">Finally understand your relationship patterns</div>
               </div>
             </div>
           </div>

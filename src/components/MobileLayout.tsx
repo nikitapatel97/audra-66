@@ -9,20 +9,20 @@ import { MobileSocialDashboard } from "@/components/MobileSocialDashboard";
 import { PremiumDashboard } from "@/components/PremiumDashboard";
 
 export const MobileLayout = () => {
-  const [activeTab, setActiveTab] = useState("chatbot");
+  const [activeTab, setActiveTab] = useState("journal");
 
   const renderActiveTab = () => {
     switch (activeTab) {
-      case "journal":
-        return <JournalingDashboard />;
       case "notes":
         return <NotesDashboard />;
+      case "chatbot":
+        return <MobileChatbotDashboard />;
       case "social":
         return <MobileSocialDashboard />;
       case "premium":
         return <PremiumDashboard />;
       default:
-        return <MobileChatbotDashboard />;
+        return <JournalingDashboard />;
     }
   };
 

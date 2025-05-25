@@ -14,20 +14,6 @@ export const MobileNavigation = ({ activeTab, onTabChange }: MobileNavigationPro
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => onTabChange("chatbot")}
-          className={`flex flex-col items-center gap-1 px-2 py-2 ${
-            activeTab === "chatbot" 
-              ? "text-purple-400 bg-purple-500/20" 
-              : "text-purple-200"
-          }`}
-        >
-          <MessageCircle className="w-4 h-4" />
-          <span className="text-xs">AI Chat</span>
-        </Button>
-        
-        <Button
-          variant="ghost"
-          size="sm"
           onClick={() => onTabChange("journal")}
           className={`flex flex-col items-center gap-1 px-2 py-2 ${
             activeTab === "journal" 
@@ -51,6 +37,20 @@ export const MobileNavigation = ({ activeTab, onTabChange }: MobileNavigationPro
         >
           <FileText className="w-4 h-4" />
           <span className="text-xs">Notes</span>
+        </Button>
+        
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => onTabChange("chatbot")}
+          className={`flex flex-col items-center gap-1 px-2 py-2 ${
+            activeTab === "chatbot" 
+              ? "text-purple-400 bg-purple-500/20" 
+              : "text-purple-200"
+          }`}
+        >
+          <MessageCircle className="w-4 h-4" />
+          <span className="text-xs">AI Chat</span>
         </Button>
         
         <Button

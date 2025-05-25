@@ -12,7 +12,7 @@ export const Hero = () => {
     ],
     donts: [
       "Check your ex's social media",
-      "Overthink that text response",
+      "Text your situationship back",
       "Compare your journey to others'"
     ]
   };

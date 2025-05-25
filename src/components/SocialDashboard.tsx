@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -76,14 +75,14 @@ export const SocialDashboard = () => {
   return (
     <div className="space-y-4">
       <div className="text-center mb-4">
-        <h2 className="text-xl font-bold text-gray-900 mb-2">Community</h2>
+        <h2 className="text-xl font-normal text-gray-900 mb-2 journal-title">Community</h2>
         <p className="text-sm text-gray-600">Share your journey with close friends</p>
       </div>
 
       {/* Add Friends Button */}
-      <Card className="border-dashed border-purple-200">
+      <Card className="border-dashed border-gray-200">
         <CardContent className="p-4 text-center">
-          <Button variant="ghost" className="text-purple-600 hover:text-purple-700">
+          <Button variant="ghost" className="text-gray-600 hover:text-gray-700">
             <Plus className="w-4 h-4 mr-2" />
             Add Friends
           </Button>
@@ -94,11 +93,11 @@ export const SocialDashboard = () => {
       {/* Feed Posts */}
       <div className="space-y-4">
         {feedPosts.map((post) => (
-          <Card key={post.id} className="border border-purple-100">
+          <Card key={post.id} className="border border-gray-200">
             <CardContent className="p-4">
               <div className="flex items-start gap-3">
                 <Avatar className="w-8 h-8 flex-shrink-0">
-                  <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs">
+                  <AvatarFallback className="bg-gray-600 text-white text-xs">
                     {post.author.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
                 </Avatar>
@@ -123,7 +122,7 @@ export const SocialDashboard = () => {
                       <span className="text-xs">{post.likes}</span>
                     </Button>
                     
-                    <Button variant="ghost" size="sm" className="h-auto p-1 text-gray-500 hover:text-purple-600">
+                    <Button variant="ghost" size="sm" className="h-auto p-1 text-gray-500 hover:text-gray-600">
                       <MessageCircle className="w-4 h-4 mr-1" />
                       <span className="text-xs">{post.comments}</span>
                     </Button>
@@ -136,9 +135,9 @@ export const SocialDashboard = () => {
       </div>
 
       {/* Share Your Own Update */}
-      <Card className="border border-purple-200 bg-purple-50">
+      <Card className="border border-gray-200 bg-gray-50">
         <CardContent className="p-4 text-center">
-          <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white">
+          <Button className="bg-gray-900 hover:bg-gray-800 text-white">
             <Users className="w-4 h-4 mr-2" />
             Share Your Progress
           </Button>

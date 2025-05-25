@@ -13,42 +13,42 @@ const noteCategories = [
     title: "Partner Values",
     description: "What you're looking for in a partner",
     icon: Heart,
-    color: "from-pink-500 to-rose-500"
+    color: "from-gray-600 to-gray-800"
   },
   {
     id: "boundaries", 
     title: "Dating Boundaries",
     description: "Your non-negotiables in relationships",
     icon: Shield,
-    color: "from-purple-500 to-indigo-500"
+    color: "from-gray-600 to-gray-800"
   },
   {
     id: "goals",
     title: "Relationship Goals", 
     description: "What you want to achieve in dating/relationships",
     icon: Target,
-    color: "from-blue-500 to-cyan-500"
+    color: "from-gray-600 to-gray-800"
   },
   {
     id: "redflags",
     title: "Red Flags",
     description: "Warning signs you've learned to watch for",
     icon: AlertTriangle,
-    color: "from-red-500 to-orange-500"
+    color: "from-gray-600 to-gray-800"
   },
   {
     id: "trauma",
     title: "Past Experiences",
     description: "Important relationship/dating history for context",
     icon: User,
-    color: "from-gray-500 to-slate-500"
+    color: "from-gray-600 to-gray-800"
   },
   {
     id: "preferences",
     title: "Personal Preferences",
     description: "Your likes, dislikes, and deal-breakers",
     icon: Star,
-    color: "from-yellow-500 to-amber-500"
+    color: "from-gray-600 to-gray-800"
   }
 ];
 
@@ -97,16 +97,16 @@ export const NotesDashboard = () => {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50 min-h-screen">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50/40 min-h-screen">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6 journal-title">
             Your{" "}
-            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="italic text-gray-700">
               personal notes
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto journal-body">
             Store your values, boundaries, and relationship insights in one private place. The more context you provide, the smarter Audra becomes.
           </p>
         </div>
@@ -120,7 +120,7 @@ export const NotesDashboard = () => {
                 placeholder="Search your notes..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 border-purple-200 focus:border-purple-400"
+                className="pl-10 border-gray-200 focus:border-gray-400"
               />
             </div>
           </div>
@@ -128,8 +128,8 @@ export const NotesDashboard = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Categories Sidebar */}
             <div className="lg:col-span-1">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-purple-100 shadow-lg sticky top-8">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Categories</h3>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm sticky top-8">
+                <h3 className="text-lg font-normal text-gray-900 mb-4 journal-title">Categories</h3>
                 <div className="space-y-2">
                   {noteCategories.map((category) => {
                     const Icon = category.icon;
@@ -142,14 +142,14 @@ export const NotesDashboard = () => {
                         onClick={() => setSelectedCategory(category.id)}
                         className={`w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all ${
                           isActive 
-                            ? `bg-gradient-to-r ${category.color} text-white shadow-md` 
-                            : "hover:bg-purple-50 text-gray-700"
+                            ? "bg-gray-900 text-white shadow-sm" 
+                            : "hover:bg-gray-50 text-gray-700"
                         }`}
                       >
                         <Icon className="w-5 h-5" />
                         <div className="flex-1">
                           <div className="font-medium text-sm">{category.title}</div>
-                          <div className={`text-xs ${isActive ? "text-white/80" : "text-gray-500"}`}>
+                          <div className={`text-xs ${isActive ? "text-gray-300" : "text-gray-500"}`}>
                             {noteCount} note{noteCount !== 1 ? 's' : ''}
                           </div>
                         </div>
@@ -162,17 +162,17 @@ export const NotesDashboard = () => {
 
             {/* Notes Content */}
             <div className="lg:col-span-2">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-purple-100 shadow-lg">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm">
                 {/* Category Header */}
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     {currentCategory && (
                       <>
-                        <div className={`p-2 rounded-lg bg-gradient-to-r ${currentCategory.color} text-white`}>
+                        <div className="p-2 rounded-lg bg-gray-900 text-white">
                           <currentCategory.icon className="w-5 h-5" />
                         </div>
                         <div>
-                          <h3 className="text-xl font-bold text-gray-900">{currentCategory.title}</h3>
+                          <h3 className="text-xl font-normal text-gray-900 journal-title">{currentCategory.title}</h3>
                           <p className="text-sm text-gray-600">{currentCategory.description}</p>
                         </div>
                       </>
@@ -180,7 +180,7 @@ export const NotesDashboard = () => {
                   </div>
                   <Button
                     onClick={() => setIsAddingNote(true)}
-                    className="bg-gradient-to-r from-purple-600 to-pink-600"
+                    className="bg-gray-900 hover:bg-gray-800"
                   >
                     <Plus className="w-4 h-4 mr-2" />
                     Add Note
@@ -189,27 +189,27 @@ export const NotesDashboard = () => {
 
                 {/* Add New Note Form */}
                 {isAddingNote && (
-                  <Card className="mb-6 border-purple-200">
+                  <Card className="mb-6 border-gray-200">
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-lg">Add New Note</CardTitle>
+                      <CardTitle className="text-lg journal-title">Add New Note</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <Input
                         placeholder="Note title..."
                         value={newNoteTitle}
                         onChange={(e) => setNewNoteTitle(e.target.value)}
-                        className="border-purple-200 focus:border-purple-400"
+                        className="border-gray-200 focus:border-gray-400"
                       />
                       <Textarea
                         placeholder="Write your thoughts, experiences, or insights..."
                         value={newNoteContent}
                         onChange={(e) => setNewNoteContent(e.target.value)}
-                        className="min-h-24 border-purple-200 focus:border-purple-400"
+                        className="min-h-24 border-gray-200 focus:border-gray-400"
                       />
                       <div className="flex gap-2">
                         <Button
                           onClick={handleAddNote}
-                          className="bg-gradient-to-r from-purple-600 to-pink-600"
+                          className="bg-gray-900 hover:bg-gray-800"
                         >
                           Save Note
                         </Button>
@@ -220,6 +220,7 @@ export const NotesDashboard = () => {
                             setNewNoteTitle("");
                             setNewNoteContent("");
                           }}
+                          className="border-gray-300 hover:bg-gray-50"
                         >
                           Cancel
                         </Button>
@@ -232,8 +233,8 @@ export const NotesDashboard = () => {
                 <div className="space-y-4">
                   {filteredNotes.length === 0 ? (
                     <div className="text-center py-12">
-                      <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        {currentCategory && <currentCategory.icon className="w-8 h-8 text-purple-600" />}
+                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        {currentCategory && <currentCategory.icon className="w-8 h-8 text-gray-600" />}
                       </div>
                       <h4 className="text-lg font-medium text-gray-900 mb-2">No notes yet</h4>
                       <p className="text-gray-600 mb-4">
@@ -242,7 +243,7 @@ export const NotesDashboard = () => {
                       <Button
                         onClick={() => setIsAddingNote(true)}
                         variant="outline"
-                        className="border-purple-300 text-purple-600 hover:bg-purple-50"
+                        className="border-gray-300 text-gray-700 hover:bg-gray-50"
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Add Your First Note
@@ -250,12 +251,12 @@ export const NotesDashboard = () => {
                     </div>
                   ) : (
                     filteredNotes.map((note) => (
-                      <Card key={note.id} className="border-purple-100 hover:shadow-md transition-shadow">
+                      <Card key={note.id} className="border-gray-200 hover:shadow-md transition-shadow">
                         <CardHeader className="pb-3">
                           <div className="flex items-start justify-between">
-                            <CardTitle className="text-lg text-gray-900">{note.title}</CardTitle>
+                            <CardTitle className="text-lg text-gray-900 journal-title">{note.title}</CardTitle>
                             <div className="flex gap-1">
-                              <Button size="sm" variant="ghost" className="text-gray-500 hover:text-purple-600">
+                              <Button size="sm" variant="ghost" className="text-gray-500 hover:text-gray-700">
                                 <Edit3 className="w-4 h-4" />
                               </Button>
                               <Button size="sm" variant="ghost" className="text-gray-500 hover:text-red-600">
@@ -265,9 +266,9 @@ export const NotesDashboard = () => {
                           </div>
                         </CardHeader>
                         <CardContent>
-                          <p className="text-gray-700 leading-relaxed">{note.content}</p>
+                          <p className="text-gray-700 leading-relaxed journal-body">{note.content}</p>
                           <div className="mt-3 flex items-center justify-between">
-                            <Badge variant="outline" className="text-purple-600 border-purple-200">
+                            <Badge variant="outline" className="text-gray-600 border-gray-200">
                               {currentCategory?.title}
                             </Badge>
                             <span className="text-xs text-gray-500">Added today</span>

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Mic, PenTool, BarChart3, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from "lucide-react";
+import { InsightsModal } from "./InsightsModal";
 
 const emotionColors = {
   happy: "bg-green-50 text-green-700 border-green-200",
@@ -43,6 +44,7 @@ export const JournalingDashboard = () => {
   const [viewMode, setViewMode] = useState<"journal" | "calendar">("journal");
   const [currentDate, setCurrentDate] = useState(new Date());
   const [calendarView, setCalendarView] = useState<"month" | "year">("month");
+  const [showInsightsModal, setShowInsightsModal] = useState(false);
 
   const toggleEmotion = (emotion: string) => {
     setSelectedEmotions(prev => 
@@ -180,220 +182,231 @@ export const JournalingDashboard = () => {
   };
 
   return (
-    <section id="dashboard" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50/40">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6 journal-title">
-            Your{" "}
-            <span className="italic text-gray-700">
-              emotional dashboard
-            </span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto journal-body">
-            Experience the first core dashboard: intelligent journaling that understands your emotions and helps you grow.
-          </p>
-        </div>
-
-        <div className="max-w-5xl mx-auto">
-          {/* Dashboard Controls */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center">
-            <Button 
-              variant={viewMode === "journal" ? "default" : "outline"}
-              onClick={() => setViewMode("journal")}
-              className={viewMode === "journal" ? "bg-gray-900 hover:bg-gray-800" : "border-gray-300 hover:bg-gray-50"}
-            >
-              <PenTool className="w-4 h-4 mr-2" />
-              Journal View
-            </Button>
-            <Button 
-              variant={viewMode === "calendar" ? "default" : "outline"}
-              onClick={() => setViewMode("calendar")}
-              className={viewMode === "calendar" ? "bg-gray-900 hover:bg-gray-800" : "border-gray-300 hover:bg-gray-50"}
-            >
-              <Calendar className="w-4 h-4 mr-2" />
-              Calendar View
-            </Button>
-            <Button variant="outline" className="border-gray-300 hover:bg-gray-50">
-              <BarChart3 className="w-4 h-4 mr-2" />
-              Insights
-            </Button>
+    <>
+      <section id="dashboard" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50/40">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6 journal-title">
+              Your{" "}
+              <span className="italic text-gray-700">
+                emotional dashboard
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto journal-body">
+              Experience the first core dashboard: intelligent journaling that understands your emotions and helps you grow.
+            </p>
           </div>
 
-          {viewMode === "journal" ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* New Entry */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm">
-                <h3 className="text-xl font-normal text-gray-900 mb-4 journal-title">New Entry</h3>
-                
-                <Textarea
-                  placeholder="What's on your mind? Share your thoughts about relationships, dating, or just how you're feeling..."
-                  value={currentEntry}
-                  onChange={(e) => setCurrentEntry(e.target.value)}
-                  className="min-h-32 mb-4 border-gray-200 focus:border-gray-400"
-                />
-                
-                <div className="mb-4">
-                  <p className="text-sm font-medium text-gray-700 mb-2">How are you feeling?</p>
-                  <div className="flex flex-wrap gap-2">
-                    {emotions.map((emotion) => (
-                      <Button
-                        key={emotion}
-                        variant="outline"
-                        size="sm"
-                        onClick={() => toggleEmotion(emotion)}
-                        className={`${
-                          selectedEmotions.includes(emotion) 
-                            ? emotionColors[emotion as keyof typeof emotionColors]
-                            : "border-gray-200 hover:border-gray-300"
-                        }`}
-                      >
-                        {emotion}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="flex gap-2">
-                  <Button className="flex-1 bg-gray-900 hover:bg-gray-800">
-                    <PenTool className="w-4 h-4 mr-2" />
-                    Save Entry
-                  </Button>
-                  <Button variant="outline" size="icon" className="border-gray-200 hover:bg-gray-50">
-                    <Mic className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
+          <div className="max-w-5xl mx-auto">
+            {/* Dashboard Controls */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center">
+              <Button 
+                variant={viewMode === "journal" ? "default" : "outline"}
+                onClick={() => setViewMode("journal")}
+                className={viewMode === "journal" ? "bg-gray-900 hover:bg-gray-800" : "border-gray-300 hover:bg-gray-50"}
+              >
+                <PenTool className="w-4 h-4 mr-2" />
+                Journal View
+              </Button>
+              <Button 
+                variant={viewMode === "calendar" ? "default" : "outline"}
+                onClick={() => setViewMode("calendar")}
+                className={viewMode === "calendar" ? "bg-gray-900 hover:bg-gray-800" : "border-gray-300 hover:bg-gray-50"}
+              >
+                <Calendar className="w-4 h-4 mr-2" />
+                Calendar View
+              </Button>
+              <Button 
+                variant="outline" 
+                className="border-gray-300 hover:bg-gray-50"
+                onClick={() => setShowInsightsModal(true)}
+              >
+                <BarChart3 className="w-4 h-4 mr-2" />
+                Insights
+              </Button>
+            </div>
 
-              {/* Recent Entries */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm">
-                <h3 className="text-xl font-normal text-gray-900 mb-4 journal-title">Recent Entries</h3>
-                
-                <div className="space-y-4">
-                  {mockEntries.map((entry) => (
-                    <div key={entry.id} className="border-l-4 border-gray-300 pl-4 py-2">
-                      <p className="text-sm text-gray-500 mb-1">{entry.date}</p>
-                      <p className="text-gray-800 mb-2 journal-body text-base">{entry.content}</p>
-                      <div className="flex flex-wrap gap-1 mb-2">
-                        {entry.emotions.map((emotion) => (
-                          <Badge 
-                            key={emotion} 
-                            variant="outline" 
-                            className={emotionColors[emotion as keyof typeof emotionColors] || "border-gray-200 text-gray-700"}
-                          >
-                            {emotion}
-                          </Badge>
-                        ))}
-                      </div>
-                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
-                        <p className="text-sm text-gray-700 font-medium">💡 AI Insight</p>
-                        <p className="text-sm text-gray-600">{entry.aiInsight}</p>
-                      </div>
+            {viewMode === "journal" ? (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* New Entry */}
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm">
+                  <h3 className="text-xl font-normal text-gray-900 mb-4 journal-title">New Entry</h3>
+                  
+                  <Textarea
+                    placeholder="What's on your mind? Share your thoughts about relationships, dating, or just how you're feeling..."
+                    value={currentEntry}
+                    onChange={(e) => setCurrentEntry(e.target.value)}
+                    className="min-h-32 mb-4 border-gray-200 focus:border-gray-400"
+                  />
+                  
+                  <div className="mb-4">
+                    <p className="text-sm font-medium text-gray-700 mb-2">How are you feeling?</p>
+                    <div className="flex flex-wrap gap-2">
+                      {emotions.map((emotion) => (
+                        <Button
+                          key={emotion}
+                          variant="outline"
+                          size="sm"
+                          onClick={() => toggleEmotion(emotion)}
+                          className={`${
+                            selectedEmotions.includes(emotion) 
+                              ? emotionColors[emotion as keyof typeof emotionColors]
+                              : "border-gray-200 hover:border-gray-300"
+                          }`}
+                        >
+                          {emotion}
+                        </Button>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* Calendar View */
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm">
-              {/* Calendar Header with Navigation */}
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-4">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => calendarView === "month" ? navigateMonth("prev") : navigateYear("prev")}
-                    className="border-gray-300 hover:bg-gray-50"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </Button>
-                  
-                  <div className="text-center">
-                    <h3 className="text-xl font-semibold text-gray-900">
-                      {calendarView === "month" 
-                        ? `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`
-                        : currentDate.getFullYear()
-                      }
-                    </h3>
                   </div>
                   
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => calendarView === "month" ? navigateMonth("next") : navigateYear("next")}
-                    className="border-gray-300 hover:bg-gray-50"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button className="flex-1 bg-gray-900 hover:bg-gray-800">
+                      <PenTool className="w-4 h-4 mr-2" />
+                      Save Entry
+                    </Button>
+                    <Button variant="outline" size="icon" className="border-gray-200 hover:bg-gray-50">
+                      <Mic className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
 
-                <Button
-                  variant="outline"
-                  onClick={() => setCalendarView(calendarView === "month" ? "year" : "month")}
-                  className="border-gray-300 hover:bg-gray-50"
-                >
-                  {calendarView === "month" ? (
-                    <>
-                      <ZoomOut className="w-4 h-4 mr-2" />
-                      Year View
-                    </>
-                  ) : (
-                    <>
-                      <ZoomIn className="w-4 h-4 mr-2" />
-                      Month View
-                    </>
-                  )}
-                </Button>
-              </div>
-
-              {calendarView === "month" && (
-                <>
-                  <div className="grid grid-cols-7 gap-2 mb-4">
-                    {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(day => (
-                      <div key={day} className="text-center text-sm font-medium text-gray-500 p-2">
-                        {day}
+                {/* Recent Entries */}
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm">
+                  <h3 className="text-xl font-normal text-gray-900 mb-4 journal-title">Recent Entries</h3>
+                  
+                  <div className="space-y-4">
+                    {mockEntries.map((entry) => (
+                      <div key={entry.id} className="border-l-4 border-gray-300 pl-4 py-2">
+                        <p className="text-sm text-gray-500 mb-1">{entry.date}</p>
+                        <p className="text-gray-800 mb-2 journal-body text-base">{entry.content}</p>
+                        <div className="flex flex-wrap gap-1 mb-2">
+                          {entry.emotions.map((emotion) => (
+                            <Badge 
+                              key={emotion} 
+                              variant="outline" 
+                              className={emotionColors[emotion as keyof typeof emotionColors] || "border-gray-200 text-gray-700"}
+                            >
+                              {emotion}
+                            </Badge>
+                          ))}
+                        </div>
+                        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                          <p className="text-sm text-gray-700 font-medium">💡 AI Insight</p>
+                          <p className="text-sm text-gray-600">{entry.aiInsight}</p>
+                        </div>
                       </div>
                     ))}
                   </div>
-                  {renderMonthView()}
-                </>
-              )}
+                </div>
+              </div>
+            ) : (
+              /* Calendar View */
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 shadow-sm">
+                {/* Calendar Header with Navigation */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => calendarView === "month" ? navigateMonth("prev") : navigateYear("prev")}
+                      className="border-gray-300 hover:bg-gray-50"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </Button>
+                    
+                    <div className="text-center">
+                      <h3 className="text-xl font-semibold text-gray-900">
+                        {calendarView === "month" 
+                          ? `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`
+                          : currentDate.getFullYear()
+                        }
+                      </h3>
+                    </div>
+                    
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => calendarView === "month" ? navigateMonth("next") : navigateYear("next")}
+                      className="border-gray-300 hover:bg-gray-50"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                  </div>
 
-              {calendarView === "year" && renderYearView()}
-              
-              <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">Emotional Overview</h4>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                    <span>Happy: 8 days</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
-                    <span>Sad: 3 days</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                    <span>Anxious: 5 days</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-                    <span>Calm: 6 days</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                    <span>Excited: 4 days</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-orange-400 rounded-full"></div>
-                    <span>Frustrated: 2 days</span>
+                  <Button
+                    variant="outline"
+                    onClick={() => setCalendarView(calendarView === "month" ? "year" : "month")}
+                    className="border-gray-300 hover:bg-gray-50"
+                  >
+                    {calendarView === "month" ? (
+                      <>
+                        <ZoomOut className="w-4 h-4 mr-2" />
+                        Year View
+                      </>
+                    ) : (
+                      <>
+                        <ZoomIn className="w-4 h-4 mr-2" />
+                        Month View
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                {calendarView === "month" && (
+                  <>
+                    <div className="grid grid-cols-7 gap-2 mb-4">
+                      {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(day => (
+                        <div key={day} className="text-center text-sm font-medium text-gray-500 p-2">
+                          {day}
+                        </div>
+                      ))}
+                    </div>
+                    {renderMonthView()}
+                  </>
+                )}
+
+                {calendarView === "year" && renderYearView()}
+                
+                <div className="mt-6 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
+                  <h4 className="font-semibold text-gray-900 mb-2">Emotional Overview</h4>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                      <span>Happy: 8 days</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
+                      <span>Sad: 3 days</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                      <span>Anxious: 5 days</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
+                      <span>Calm: 6 days</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                      <span>Excited: 4 days</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-orange-400 rounded-full"></div>
+                      <span>Frustrated: 2 days</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      
+      <InsightsModal 
+        isOpen={showInsightsModal} 
+        onClose={() => setShowInsightsModal(false)} 
+      />
+    </>
   );
 };

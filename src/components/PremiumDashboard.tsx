@@ -108,7 +108,6 @@ export const PremiumDashboard = () => {
             Your Emotional
             <span className="block mt-2">Intelligence Reports</span>
           </h2>
-          <div className="accent-line mx-auto mb-8"></div>
           <p className="text-base md:text-xl text-white/70 max-w-3xl mx-auto font-light leading-relaxed">
             Personalized insights into your emotional growth, relationship patterns, and areas for development. 
             Share with therapists, partners, or keep as your personal growth mirror.

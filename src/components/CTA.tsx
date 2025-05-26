@@ -13,7 +13,7 @@ export const CTA = () => {
           </span>
         </div>
         
-        <h2 className="text-3xl md:text-5xl font-light text-white mb-6 journal-title">
+        <h2 className="text-3xl md:text-5xl font-light text-white mb-6 font-playfair">
           Ready to understand your{" "}
           <span className="italic text-gray-300">actual</span> feelings?
         </h2>

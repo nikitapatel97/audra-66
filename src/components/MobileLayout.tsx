@@ -47,7 +47,7 @@ export const MobileLayout = () => {
         )}
 
         {/* Active Tab Content */}
-        <div className={shouldShowHero ? "" : "pt-4"}>
+        <div className={shouldShowHero ? "" : "py-8"}>
           {renderActiveTab()}
         </div>
       </div>

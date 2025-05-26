@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -161,10 +162,12 @@ export const PremiumDashboard = () => {
             <p className="text-sm md:text-base text-white/80 mb-6 max-w-md mx-auto font-light leading-relaxed">
               Invite your partner to join and get shared relationship insights together
             </p>
-            <button className="cosmic-button px-8 py-3 font-light">
-              <UserPlus className="w-4 h-4 mr-2" />
-              Invite Partner
-            </button>
+            <div className="flex justify-center">
+              <button className="cosmic-button px-8 py-3 font-light">
+                <UserPlus className="w-4 h-4 mr-2" />
+                Invite Partner
+              </button>
+            </div>
           </div>
 
           {/* Upgrade Prompt */}
@@ -177,10 +180,12 @@ export const PremiumDashboard = () => {
               Upgrade to Premium to access detailed emotional reports, voice-aware AI coaching, 
               and couples' shared insights. Transform your relationship journey with data-driven growth.
             </p>
-            <button className="cosmic-button px-8 py-4 text-lg font-light">
-              <Crown className="w-5 h-5 mr-2" />
-              Upgrade to Premium
-            </button>
+            <div className="flex justify-center">
+              <button className="cosmic-button px-8 py-4 text-lg font-light">
+                <Crown className="w-5 h-5 mr-2" />
+                Upgrade to Premium
+              </button>
+            </div>
           </div>
         </div>
 

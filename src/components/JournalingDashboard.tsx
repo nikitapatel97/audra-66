@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -220,9 +221,9 @@ export const JournalingDashboard = () => {
   };
 
   return (
-    <section id="dashboard" className="px-4 sm:px-6 lg:px-8 bg-white sm:py-20">
+    <section id="dashboard" className="px-0 sm:px-6 lg:px-8 bg-white sm:py-20">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8 sm:mb-16">
+        <div className="text-center mb-8 sm:mb-16 px-4 sm:px-0">
           <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6 font-playfair">
             Your{" "}
             <span className="italic text-gray-600 font-playfair">
@@ -234,7 +235,7 @@ export const JournalingDashboard = () => {
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto px-4 sm:px-0">
           {/* Dashboard Controls */}
           <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center">
             <Button 

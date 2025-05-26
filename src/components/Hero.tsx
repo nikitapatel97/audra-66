@@ -18,7 +18,7 @@ export const Hero = () => {
   };
 
   return (
-    <section className="pt-16 pb-16 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+    <section className="pt-0 pb-16 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
       {/* Female Face Portrait Background */}
       <div className="absolute left-0 top-1/2 transform -translate-y-1/2 opacity-5 pointer-events-none">
         <svg 
@@ -90,7 +90,7 @@ export const Hero = () => {
           {/* Main Content */}
           <div className="lg:col-span-3">
             <div className="text-center lg:text-left">
-              <div className="inline-flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-full mb-8">
+              <div className="inline-flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-full mb-8 mt-20">
                 <Feather className="w-4 h-4 text-gray-600" />
                 <span className="text-sm font-normal text-gray-700 font-crimson italic">
                   Your emotional intelligence companion

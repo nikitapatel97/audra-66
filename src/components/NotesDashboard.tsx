@@ -11,6 +11,7 @@ const tagColors = {
   growth: "bg-green-50 text-green-700 border-green-200",
   redflags: "bg-red-50 text-red-700 border-red-200",
   patterns: "bg-purple-50 text-purple-700 border-purple-200",
+  exes: "bg-blue-50 text-blue-700 border-blue-200",
   healing: "bg-orange-50 text-orange-700 border-orange-200"
 };
 
@@ -47,7 +48,7 @@ export const NotesDashboard = () => {
   const [showNewNote, setShowNewNote] = useState(false);
   const [newNote, setNewNote] = useState({ title: "", content: "", tags: [] as string[] });
 
-  const availableTags = ["relationship", "growth", "redflags", "patterns", "healing"];
+  const availableTags = ["relationship", "growth", "redflags", "patterns", "exes", "healing"];
 
   const filteredNotes = mockNotes.filter(note => {
     const matchesSearch = note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

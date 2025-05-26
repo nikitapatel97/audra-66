@@ -223,7 +223,7 @@ export const JournalingDashboard = () => {
   return (
     <section id="dashboard" className="py-16 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8 md:mb-16">
+        <div className="text-center md:text-center mb-8 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6 font-playfair">
             Your{" "}
             <span className="italic text-gray-600 font-playfair">

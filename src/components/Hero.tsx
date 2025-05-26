@@ -18,8 +18,74 @@ export const Hero = () => {
   };
 
   return (
-    <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+      {/* Female Face Portrait Background */}
+      <div className="absolute left-0 top-1/2 transform -translate-y-1/2 opacity-5 pointer-events-none">
+        <svg 
+          width="400" 
+          height="500" 
+          viewBox="0 0 400 500" 
+          className="text-gray-300"
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Face outline */}
+          <path 
+            d="M200 80 C240 80, 270 110, 270 160 C270 200, 260 240, 240 280 C220 320, 200 340, 200 380 C200 340, 180 320, 160 280 C140 240, 130 200, 130 160 C130 110, 160 80, 200 80 Z" 
+            stroke="currentColor" 
+            strokeWidth="1.5" 
+            fill="none"
+          />
+          {/* Hair */}
+          <path 
+            d="M150 100 C140 70, 160 60, 200 65 C240 60, 260 70, 250 100 C255 120, 250 140, 240 150" 
+            stroke="currentColor" 
+            strokeWidth="1" 
+            fill="none"
+          />
+          {/* Eyes */}
+          <circle cx="180" cy="160" r="3" fill="currentColor" opacity="0.6" />
+          <circle cx="220" cy="160" r="3" fill="currentColor" opacity="0.6" />
+          {/* Nose */}
+          <path 
+            d="M200 170 C195 175, 200 180, 205 175" 
+            stroke="currentColor" 
+            strokeWidth="0.8" 
+            fill="none"
+          />
+          {/* Lips */}
+          <path 
+            d="M190 200 C195 205, 205 205, 210 200 C205 210, 195 210, 190 200" 
+            stroke="currentColor" 
+            strokeWidth="0.8" 
+            fill="none"
+          />
+          {/* Neck */}
+          <path 
+            d="M180 320 C185 360, 195 380, 200 400 C205 380, 215 360, 220 320" 
+            stroke="currentColor" 
+            strokeWidth="1.2" 
+            fill="none"
+          />
+          {/* Flowing hair details */}
+          <path 
+            d="M120 120 C100 130, 95 150, 110 160 C125 170, 135 150, 130 130" 
+            stroke="currentColor" 
+            strokeWidth="0.6" 
+            fill="none"
+            opacity="0.7"
+          />
+          <path 
+            d="M280 120 C300 130, 305 150, 290 160 C275 170, 265 150, 270 130" 
+            stroke="currentColor" 
+            strokeWidth="0.6" 
+            fill="none"
+            opacity="0.7"
+          />
+        </svg>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 items-start">
           {/* Main Content */}
           <div className="lg:col-span-3">
@@ -127,66 +193,6 @@ export const Hero = () => {
             </div>
             <h3 className="font-normal text-gray-900 mb-3 text-lg font-playfair">Built for Gen Z & Millennials</h3>
             <p className="text-gray-700 text-base leading-relaxed font-crimson italic">Designed for the complexity of modern relationships and situationships</p>
-          </div>
-        </div>
-
-        {/* Minimalist Line Art Section */}
-        <div className="mt-24 flex items-center justify-center">
-          <div className="max-w-4xl mx-auto text-center relative">
-            {/* Simple Line Art SVG */}
-            <svg 
-              width="300" 
-              height="200" 
-              viewBox="0 0 300 200" 
-              className="mx-auto mb-8 opacity-20"
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* Minimalist female silhouette */}
-              <path 
-                d="M150 20 C160 25, 165 35, 160 50 C155 65, 145 70, 150 85 L150 120 C148 140, 152 160, 150 180" 
-                stroke="currentColor" 
-                strokeWidth="1.5" 
-                className="text-gray-300"
-              />
-              {/* Hair/head outline */}
-              <path 
-                d="M140 25 C135 15, 145 10, 155 15 C165 20, 160 30, 155 35" 
-                stroke="currentColor" 
-                strokeWidth="1" 
-                className="text-gray-300"
-              />
-              {/* Arms */}
-              <path 
-                d="M150 85 C135 90, 125 100, 130 110" 
-                stroke="currentColor" 
-                strokeWidth="1" 
-                className="text-gray-300"
-              />
-              <path 
-                d="M150 85 C165 90, 175 100, 170 110" 
-                stroke="currentColor" 
-                strokeWidth="1" 
-                className="text-gray-300"
-              />
-              {/* Flowing lines */}
-              <path 
-                d="M120 60 C100 65, 95 75, 110 80 C125 85, 130 75, 125 65" 
-                stroke="currentColor" 
-                strokeWidth="0.8" 
-                className="text-gray-200"
-              />
-              <path 
-                d="M180 60 C200 65, 205 75, 190 80 C175 85, 170 75, 175 65" 
-                stroke="currentColor" 
-                strokeWidth="0.8" 
-                className="text-gray-200"
-              />
-            </svg>
-            
-            <p className="text-gray-500 font-crimson italic text-lg">
-              "Understanding yourself is the beginning of all wisdom"
-            </p>
           </div>
         </div>
       </div>

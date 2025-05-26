@@ -76,30 +76,30 @@ export const ChatbotDashboard = () => {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50 min-h-screen">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white min-h-screen">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6 font-playfair">
             Chat with{" "}
-            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="italic text-gray-600 font-playfair">
               Audra
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto font-crimson italic">
             Your personal relationship coach is here to help. Ask anything about dating, relationships, or navigating your love life.
           </p>
         </div>
 
-        <Card className="bg-white/90 backdrop-blur-sm border border-purple-100 shadow-xl h-[600px] flex flex-col">
+        <Card className="bg-white border border-gray-200 shadow-xl h-[600px] flex flex-col">
           {/* Chat Header */}
-          <div className="p-4 border-b border-purple-100 bg-gradient-to-r from-purple-600 to-pink-600 rounded-t-lg">
+          <div className="p-4 border-b border-gray-200 bg-gray-900 rounded-t-lg">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                 <Heart className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h3 className="text-white font-semibold">Audra</h3>
-                <p className="text-white/80 text-sm">Your relationship coach</p>
+                <h3 className="text-white font-normal font-playfair">Audra</h3>
+                <p className="text-white/80 text-sm font-crimson italic">Your relationship coach</p>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@ export const ChatbotDashboard = () => {
                 <Avatar className="w-8 h-8 flex-shrink-0">
                   <AvatarFallback className={`${
                     message.sender === "ai" 
-                      ? "bg-gradient-to-r from-purple-500 to-pink-500" 
+                      ? "bg-gray-900" 
                       : "bg-gray-500"
                   }`}>
                     {message.sender === "ai" ? (
@@ -129,13 +129,13 @@ export const ChatbotDashboard = () => {
                   <div
                     className={`rounded-2xl px-4 py-3 ${
                       message.sender === "user"
-                        ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                        ? "bg-gray-900 text-white"
                         : "bg-gray-100 text-gray-900"
                     }`}
                   >
-                    <p className="text-sm leading-relaxed">{message.content}</p>
+                    <p className="text-sm leading-relaxed font-crimson">{message.content}</p>
                   </div>
-                  <span className="text-xs text-gray-500 mt-1 px-2">
+                  <span className="text-xs text-gray-500 mt-1 px-2 font-crimson">
                     {formatTime(message.timestamp)}
                   </span>
                 </div>
@@ -146,7 +146,7 @@ export const ChatbotDashboard = () => {
             {isTyping && (
               <div className="flex gap-3">
                 <Avatar className="w-8 h-8">
-                  <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500">
+                  <AvatarFallback className="bg-gray-900">
                     <Bot className="w-4 h-4 text-white" />
                   </AvatarFallback>
                 </Avatar>
@@ -164,25 +164,25 @@ export const ChatbotDashboard = () => {
           </CardContent>
 
           {/* Message Input */}
-          <div className="p-4 border-t border-purple-100">
+          <div className="p-4 border-t border-gray-200">
             <div className="flex gap-2">
               <Input
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Ask Audra anything about dating and relationships..."
-                className="flex-1 border-purple-200 focus:border-purple-400"
+                className="flex-1 border-gray-200 focus:border-gray-400 font-crimson"
                 disabled={isTyping}
               />
               <Button
                 onClick={handleSendMessage}
                 disabled={!inputMessage.trim() || isTyping}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                className="bg-gray-900 hover:bg-gray-800 font-crimson"
               >
                 <Send className="w-4 h-4" />
               </Button>
             </div>
-            <p className="text-xs text-gray-500 mt-2 text-center">
+            <p className="text-xs text-gray-500 mt-2 text-center font-crimson italic">
               Audra remembers your journal entries and personal notes to give you personalized advice.
             </p>
           </div>
@@ -190,7 +190,7 @@ export const ChatbotDashboard = () => {
 
         {/* Suggested Questions */}
         <div className="mt-8">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+          <h4 className="text-lg font-normal text-gray-900 mb-4 text-center font-playfair">
             Popular questions to get you started
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -203,10 +203,10 @@ export const ChatbotDashboard = () => {
               <Button
                 key={index}
                 variant="outline"
-                className="text-left h-auto p-4 border-purple-200 hover:bg-purple-50 hover:border-purple-300"
+                className="text-left h-auto p-4 border-gray-200 hover:bg-gray-50 hover:border-gray-300 font-crimson"
                 onClick={() => setInputMessage(question)}
               >
-                <span className="text-sm text-gray-700">{question}</span>
+                <span className="text-sm text-gray-700 italic">{question}</span>
               </Button>
             ))}
           </div>

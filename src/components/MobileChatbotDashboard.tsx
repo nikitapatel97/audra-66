@@ -26,9 +26,10 @@ export const MobileChatbotDashboard = () => {
   const [isTyping, setIsTyping] = useState(false);
 
   const suggestedQuestions = [
-    "How do I handle relationship anxiety?",
-    "I'm feeling overwhelmed today",
-    "Help me process my emotions",
+    "How should I respond to this text from my crush?",
+    "What are some red flags I should watch out for?",
+    "How do I set better boundaries in dating?",
+    "I'm seeing my ex at a party. How should I handle it?"
   ];
 
   const handleSendMessage = () => {

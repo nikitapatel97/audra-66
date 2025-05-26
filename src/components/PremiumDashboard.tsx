@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -48,7 +49,7 @@ export const PremiumDashboard = () => {
   const currentData = mockReportData[selectedPeriod];
 
   return (
-    <section className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section className="py-4 md:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Enhanced Cosmic Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-purple-950 via-pink-900 to-black opacity-90"></div>
@@ -95,74 +96,74 @@ export const PremiumDashboard = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-8 md:mb-16">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 flex items-center justify-center">
-              <Crown className="w-6 h-6 text-black" />
+        <div className="text-center mb-6 md:mb-16">
+          <div className="flex items-center justify-center gap-3 mb-4 md:mb-6">
+            <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 flex items-center justify-center">
+              <Crown className="w-4 h-4 md:w-6 md:h-6 text-black" />
             </div>
-            <div className="px-4 py-1 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-white/20 backdrop-blur-sm">
-              <span className="text-white text-sm font-light">Premium Feature</span>
+            <div className="px-3 py-1 md:px-4 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-white/20 backdrop-blur-sm">
+              <span className="text-white text-xs md:text-sm font-light">Premium Feature</span>
             </div>
           </div>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-light text-white mb-6 cosmic-title">
+          <h2 className="text-2xl md:text-5xl lg:text-6xl font-light text-white mb-4 md:mb-6 cosmic-title">
             Your Emotional
             <span className="block mt-2">Intelligence Reports</span>
           </h2>
-          <p className="text-base md:text-xl text-white/70 max-w-3xl mx-auto font-light leading-relaxed">
+          <p className="text-sm md:text-xl text-white/70 max-w-3xl mx-auto font-light leading-relaxed">
             Personalized insights into your emotional growth, relationship patterns, and areas for development. 
             Share with therapists, partners, or keep as your personal growth mirror.
           </p>
         </div>
 
         {/* Feature Highlights - Artistic Cards */}
-        <div className="max-w-6xl mx-auto mb-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="max-w-6xl mx-auto mb-8 md:mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
             {/* Emotional Reports */}
-            <div className="glass-card p-6 text-center group">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <BarChart3 className="w-6 h-6 text-purple-300 group-hover:scale-110 transition-transform" />
-                <h3 className="text-base md:text-lg font-light text-white">Emotional Reports</h3>
+            <div className="glass-card p-4 md:p-6 text-center group">
+              <div className="flex items-center justify-center gap-2 md:gap-3 mb-3 md:mb-4">
+                <BarChart3 className="w-5 h-5 md:w-6 md:h-6 text-purple-300 group-hover:scale-110 transition-transform" />
+                <h3 className="text-sm md:text-lg font-light text-white">Emotional Reports</h3>
               </div>
-              <p className="text-sm text-white/70 font-light">
+              <p className="text-xs md:text-sm text-white/70 font-light">
                 Monthly, quarterly & annual insights
               </p>
             </div>
 
             {/* Voice-Aware AI */}
-            <div className="glass-card p-6 text-center group">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <Mic className="w-6 h-6 text-purple-300 group-hover:scale-110 transition-transform" />
-                <h3 className="text-base md:text-lg font-light text-white">Voice-Aware AI</h3>
+            <div className="glass-card p-4 md:p-6 text-center group">
+              <div className="flex items-center justify-center gap-2 md:gap-3 mb-3 md:mb-4">
+                <Mic className="w-5 h-5 md:w-6 md:h-6 text-purple-300 group-hover:scale-110 transition-transform" />
+                <h3 className="text-sm md:text-lg font-light text-white">Voice-Aware AI</h3>
               </div>
-              <p className="text-sm text-white/70 font-light">
+              <p className="text-xs md:text-sm text-white/70 font-light">
                 AI checks in when you sound off
               </p>
             </div>
 
             {/* Couples' Insights */}
-            <div className="glass-card p-6 text-center group">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <Users className="w-6 h-6 text-purple-300 group-hover:scale-110 transition-transform" />
-                <h3 className="text-base md:text-lg font-light text-white">Couples' Insights</h3>
+            <div className="glass-card p-4 md:p-6 text-center group">
+              <div className="flex items-center justify-center gap-2 md:gap-3 mb-3 md:mb-4">
+                <Users className="w-5 h-5 md:w-6 md:h-6 text-purple-300 group-hover:scale-110 transition-transform" />
+                <h3 className="text-sm md:text-lg font-light text-white">Couples' Insights</h3>
               </div>
-              <p className="text-sm text-white/70 font-light">
+              <p className="text-xs md:text-sm text-white/70 font-light">
                 Shared reports with your partner
               </p>
             </div>
           </div>
 
           {/* Add Someone Feature - Improved */}
-          <div className="glass-card p-6 md:p-8 text-center mb-8 border border-purple-500/30">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <UserPlus className="w-6 h-6 md:w-8 md:h-8 text-purple-300" />
-              <h3 className="text-lg md:text-xl font-light text-white cosmic-title">Add Your Partner</h3>
+          <div className="glass-card p-4 md:p-8 text-center mb-6 md:mb-8 border border-purple-500/30">
+            <div className="flex items-center justify-center gap-2 md:gap-3 mb-3 md:mb-4">
+              <UserPlus className="w-5 h-5 md:w-8 md:h-8 text-purple-300" />
+              <h3 className="text-base md:text-xl font-light text-white cosmic-title">Add Your Partner</h3>
             </div>
-            <p className="text-sm md:text-base text-white/80 mb-6 max-w-md mx-auto font-light leading-relaxed">
+            <p className="text-xs md:text-base text-white/80 mb-4 md:mb-6 max-w-md mx-auto font-light leading-relaxed">
               Invite your partner to join and get shared relationship insights together
             </p>
             <div className="flex justify-center">
               <Button 
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 px-8 py-3 text-sm md:text-base font-medium transition-all duration-300 hover:scale-105"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 px-6 py-2 md:px-8 md:py-3 text-sm md:text-base font-medium transition-all duration-300 hover:scale-105"
                 size="lg"
               >
                 <UserPlus className="w-4 h-4 mr-2" />
@@ -172,23 +173,23 @@ export const PremiumDashboard = () => {
           </div>
 
           {/* Upgrade Prompt - Enhanced */}
-          <div className="glass-card p-8 md:p-12 text-center border border-yellow-400/30 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 flex items-center justify-center">
-                <Crown className="w-6 h-6 text-black" />
+          <div className="glass-card p-6 md:p-12 text-center border border-yellow-400/30 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
+            <div className="flex items-center justify-center gap-2 md:gap-3 mb-4 md:mb-6">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 flex items-center justify-center">
+                <Crown className="w-5 h-5 md:w-6 md:h-6 text-black" />
               </div>
-              <h3 className="text-xl md:text-2xl font-light text-white cosmic-title">Unlock Premium Insights</h3>
+              <h3 className="text-lg md:text-2xl font-light text-white cosmic-title">Unlock Premium Insights</h3>
             </div>
-            <p className="text-sm md:text-base text-white/80 mb-8 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-xs md:text-base text-white/80 mb-6 md:mb-8 max-w-2xl mx-auto font-light leading-relaxed">
               Upgrade to Premium to access detailed emotional reports, voice-aware AI coaching, 
               and couples' shared insights. Transform your relationship journey with data-driven growth.
             </p>
             <div className="flex justify-center">
               <Button 
-                className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black border-0 px-12 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black border-0 px-8 py-3 md:px-12 md:py-4 text-base md:text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
                 size="lg"
               >
-                <Crown className="w-5 h-5 mr-3" />
+                <Crown className="w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3" />
                 Upgrade to Premium
               </Button>
             </div>

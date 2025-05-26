@@ -10,33 +10,33 @@ import { PlusCircle, Search, Tag, Calendar, Edit, Trash2 } from "lucide-react";
 const tagColors = {
   relationship: "bg-pink-50 text-pink-700 border-pink-200",
   growth: "bg-green-50 text-green-700 border-green-200",
-  work: "bg-blue-50 text-blue-700 border-blue-200",
-  family: "bg-purple-50 text-purple-700 border-purple-200",
-  personal: "bg-orange-50 text-orange-700 border-orange-200"
+  redflags: "bg-red-50 text-red-700 border-red-200",
+  patterns: "bg-purple-50 text-purple-700 border-purple-200",
+  healing: "bg-orange-50 text-orange-700 border-orange-200"
 };
 
 const mockNotes = [
   {
     id: 1,
-    title: "Relationship Patterns I'm Noticing",
-    content: "I keep attracting people who are emotionally unavailable. Maybe it's because I'm scared of real intimacy too?",
-    tags: ["relationship", "growth"],
+    title: "Red Flags I Keep Ignoring",
+    content: "He always checks my phone but gets defensive when I ask about his. Also never wants to meet my friends or include me with his.",
+    tags: ["redflags", "relationship"],
     date: "2024-01-15",
     lastEdited: "Today, 2:34 PM"
   },
   {
     id: 2,
-    title: "Self-Care Ideas",
-    content: "1. Morning walks without music 2. Journaling with tea 3. Setting boundaries with friends",
-    tags: ["personal", "growth"],
+    title: "Why I Stay in Bad Relationships",
+    content: "I think I'm scared of being alone. Every time someone shows interest, I ignore the red flags because attention feels better than loneliness.",
+    tags: ["patterns", "growth"],
     date: "2024-01-14",
     lastEdited: "Yesterday, 6:22 PM"
   },
   {
     id: 3,
-    title: "Career Reflection",
-    content: "I think I want to switch fields but I'm scared of starting over. What if I'm not good at anything else?",
-    tags: ["work", "growth"],
+    title: "Things I Want in My Next Relationship",
+    content: "Someone who actually listens when I talk. Who doesn't make me feel crazy for having feelings. Who shows up consistently.",
+    tags: ["relationship", "healing"],
     date: "2024-01-13",
     lastEdited: "2 days ago"
   }
@@ -48,7 +48,7 @@ export const NotesDashboard = () => {
   const [showNewNote, setShowNewNote] = useState(false);
   const [newNote, setNewNote] = useState({ title: "", content: "", tags: [] as string[] });
 
-  const availableTags = ["relationship", "growth", "work", "family", "personal"];
+  const availableTags = ["relationship", "growth", "redflags", "patterns", "healing"];
 
   const filteredNotes = mockNotes.filter(note => {
     const matchesSearch = note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

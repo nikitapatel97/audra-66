@@ -57,9 +57,9 @@ export const NotesDashboard = () => {
   });
 
   return (
-    <section className="px-0 sm:px-6 lg:px-8 bg-white sm:py-20">
+    <section className="py-4 px-4 bg-white sm:px-6 lg:px-8 sm:py-20">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8 sm:mb-16 px-4 sm:px-0">
+        <div className="text-center mb-8 sm:mb-16">
           <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6 font-playfair">
             Personal{" "}
             <span className="italic text-gray-600 font-playfair">
@@ -71,147 +71,145 @@ export const NotesDashboard = () => {
           </p>
         </div>
 
-        <div className="px-4 sm:px-0">
-          {/* Search and Filter Bar */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <Input
-                placeholder="Search your notes..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 border-gray-200 focus:border-gray-400 font-crimson"
-              />
-            </div>
-            
-            <div className="flex gap-2 flex-wrap">
-              <Button
-                variant={selectedTag === null ? "default" : "outline"}
-                onClick={() => setSelectedTag(null)}
-                className={selectedTag === null ? "bg-gray-900 hover:bg-gray-800 font-crimson" : "border-gray-200 hover:bg-gray-50 font-crimson"}
-              >
-                All
-              </Button>
-              {availableTags.map(tag => (
-                <Button
-                  key={tag}
-                  variant={selectedTag === tag ? "default" : "outline"}
-                  onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
-                  className={selectedTag === tag ? "bg-gray-900 hover:bg-gray-800 font-crimson" : "border-gray-200 hover:bg-gray-50 font-crimson"}
-                >
-                  <Tag className="w-3 h-3 mr-1" />
-                  {tag}
-                </Button>
-              ))}
-            </div>
-
-            <Button 
-              onClick={() => setShowNewNote(!showNewNote)}
-              className="bg-gray-900 hover:bg-gray-800 font-crimson"
-            >
-              <PlusCircle className="w-4 h-4 mr-2" />
-              New Note
-            </Button>
+        {/* Search and Filter Bar */}
+        <div className="flex flex-col sm:flex-row gap-4 mb-8">
+          <div className="flex-1 relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <Input
+              placeholder="Search your notes..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 border-gray-200 focus:border-gray-400 font-crimson"
+            />
           </div>
-
-          {/* New Note Form */}
-          {showNewNote && (
-            <Card className="mb-8 border-gray-200">
-              <CardHeader>
-                <CardTitle className="font-playfair">Create New Note</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Input
-                  placeholder="Note title..."
-                  value={newNote.title}
-                  onChange={(e) => setNewNote({...newNote, title: e.target.value})}
-                  className="border-gray-200 focus:border-gray-400 font-crimson"
-                />
-                <Textarea
-                  placeholder="Start writing your note..."
-                  value={newNote.content}
-                  onChange={(e) => setNewNote({...newNote, content: e.target.value})}
-                  className="min-h-32 border-gray-200 focus:border-gray-400 font-crimson"
-                />
-                <div className="flex flex-wrap gap-2">
-                  {availableTags.map(tag => (
-                    <Button
-                      key={tag}
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        const newTags = newNote.tags.includes(tag)
-                          ? newNote.tags.filter(t => t !== tag)
-                          : [...newNote.tags, tag];
-                        setNewNote({...newNote, tags: newTags});
-                      }}
-                      className={`font-crimson ${
-                        newNote.tags.includes(tag)
-                          ? tagColors[tag as keyof typeof tagColors]
-                          : "border-gray-200 hover:border-gray-300"
-                      }`}
-                    >
-                      {tag}
-                    </Button>
-                  ))}
-                </div>
-                <div className="flex gap-2">
-                  <Button className="bg-gray-900 hover:bg-gray-800 font-crimson">Save Note</Button>
-                  <Button variant="outline" onClick={() => setShowNewNote(false)} className="border-gray-200 hover:bg-gray-50 font-crimson">
-                    Cancel
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* Notes Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredNotes.map(note => (
-              <Card key={note.id} className="border-gray-200 hover:shadow-md transition-shadow">
-                <CardHeader className="pb-3">
-                  <div className="flex justify-between items-start">
-                    <CardTitle className="text-lg font-playfair line-clamp-2">{note.title}</CardTitle>
-                    <div className="flex gap-1">
-                      <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-gray-600">
-                        <Edit className="w-4 h-4" />
-                      </Button>
-                      <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-red-500">
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 mb-4 line-clamp-3 font-crimson italic">{note.content}</p>
-                  
-                  <div className="flex flex-wrap gap-1 mb-3">
-                    {note.tags.map(tag => (
-                      <Badge
-                        key={tag}
-                        variant="outline"
-                        className={`text-xs font-crimson ${tagColors[tag as keyof typeof tagColors]}`}
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  
-                  <div className="flex items-center text-xs text-gray-500 font-crimson">
-                    <Calendar className="w-3 h-3 mr-1" />
-                    {note.lastEdited}
-                  </div>
-                </CardContent>
-              </Card>
+          
+          <div className="flex gap-2 flex-wrap">
+            <Button
+              variant={selectedTag === null ? "default" : "outline"}
+              onClick={() => setSelectedTag(null)}
+              className={selectedTag === null ? "bg-gray-900 hover:bg-gray-800 font-crimson" : "border-gray-200 hover:bg-gray-50 font-crimson"}
+            >
+              All
+            </Button>
+            {availableTags.map(tag => (
+              <Button
+                key={tag}
+                variant={selectedTag === tag ? "default" : "outline"}
+                onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
+                className={selectedTag === tag ? "bg-gray-900 hover:bg-gray-800 font-crimson" : "border-gray-200 hover:bg-gray-50 font-crimson"}
+              >
+                <Tag className="w-3 h-3 mr-1" />
+                {tag}
+              </Button>
             ))}
           </div>
 
-          {filteredNotes.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-gray-500 font-crimson italic">No notes found. Create your first note to get started!</p>
-            </div>
-          )}
+          <Button 
+            onClick={() => setShowNewNote(!showNewNote)}
+            className="bg-gray-900 hover:bg-gray-800 font-crimson"
+          >
+            <PlusCircle className="w-4 h-4 mr-2" />
+            New Note
+          </Button>
         </div>
+
+        {/* New Note Form */}
+        {showNewNote && (
+          <Card className="mb-8 border-gray-200">
+            <CardHeader>
+              <CardTitle className="font-playfair">Create New Note</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Input
+                placeholder="Note title..."
+                value={newNote.title}
+                onChange={(e) => setNewNote({...newNote, title: e.target.value})}
+                className="border-gray-200 focus:border-gray-400 font-crimson"
+              />
+              <Textarea
+                placeholder="Start writing your note..."
+                value={newNote.content}
+                onChange={(e) => setNewNote({...newNote, content: e.target.value})}
+                className="min-h-32 border-gray-200 focus:border-gray-400 font-crimson"
+              />
+              <div className="flex flex-wrap gap-2">
+                {availableTags.map(tag => (
+                  <Button
+                    key={tag}
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      const newTags = newNote.tags.includes(tag)
+                        ? newNote.tags.filter(t => t !== tag)
+                        : [...newNote.tags, tag];
+                      setNewNote({...newNote, tags: newTags});
+                    }}
+                    className={`font-crimson ${
+                      newNote.tags.includes(tag)
+                        ? tagColors[tag as keyof typeof tagColors]
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                  >
+                    {tag}
+                  </Button>
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <Button className="bg-gray-900 hover:bg-gray-800 font-crimson">Save Note</Button>
+                <Button variant="outline" onClick={() => setShowNewNote(false)} className="border-gray-200 hover:bg-gray-50 font-crimson">
+                  Cancel
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Notes Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredNotes.map(note => (
+            <Card key={note.id} className="border-gray-200 hover:shadow-md transition-shadow">
+              <CardHeader className="pb-3">
+                <div className="flex justify-between items-start">
+                  <CardTitle className="text-lg font-playfair line-clamp-2">{note.title}</CardTitle>
+                  <div className="flex gap-1">
+                    <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-gray-600">
+                      <Edit className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-red-500">
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700 mb-4 line-clamp-3 font-crimson italic">{note.content}</p>
+                
+                <div className="flex flex-wrap gap-1 mb-3">
+                  {note.tags.map(tag => (
+                    <Badge
+                      key={tag}
+                      variant="outline"
+                      className={`text-xs font-crimson ${tagColors[tag as keyof typeof tagColors]}`}
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+                
+                <div className="flex items-center text-xs text-gray-500 font-crimson">
+                  <Calendar className="w-3 h-3 mr-1" />
+                  {note.lastEdited}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {filteredNotes.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-gray-500 font-crimson italic">No notes found. Create your first note to get started!</p>
+          </div>
+        )}
       </div>
     </section>
   );

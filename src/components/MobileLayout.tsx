@@ -26,30 +26,13 @@ export const MobileLayout = () => {
     }
   };
 
-  const shouldShowHero = activeTab === "chatbot";
-
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
       
       {/* Mobile Content */}
-      <div className="pt-16 pb-20 px-4">
-        {/* Hero Section - Only for AI Chat */}
-        {shouldShowHero && (
-          <div className="py-8 text-center">
-            <h1 className="text-3xl font-light text-gray-900 mb-4 font-playfair">
-              Welcome to Audra
-            </h1>
-            <p className="text-sm text-gray-600 mb-8 max-w-sm mx-auto font-light leading-relaxed font-crimson italic">
-              Your AI companion for emotional growth and deeper connections
-            </p>
-          </div>
-        )}
-
-        {/* Active Tab Content */}
-        <div className={shouldShowHero ? "" : "pt-4"}>
-          {renderActiveTab()}
-        </div>
+      <div className="pt-16 pb-20">
+        {renderActiveTab()}
       </div>
 
       {/* Mobile Navigation */}

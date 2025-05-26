@@ -18,7 +18,7 @@ export const CTA = () => {
           <span className="italic text-gray-300">actual</span> feelings?
         </h2>
         
-        <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto journal-body">
+        <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto journal-body italic">
           Join thousands of Millennials and Gen Z users who are finally getting clarity on their emotions, 
           relationships, and dating patterns with Audra.
         </p>

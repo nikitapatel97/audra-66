@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Feather, Heart, CheckCircle, XCircle } from "lucide-react";
 
@@ -18,7 +17,7 @@ export const Hero = () => {
   };
 
   return (
-    <section className="pt-20 pb-16 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+    <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
       {/* Female Face Portrait Background */}
       <div className="absolute left-0 top-1/2 transform -translate-y-1/2 opacity-5 pointer-events-none">
         <svg 

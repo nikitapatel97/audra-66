@@ -12,8 +12,21 @@ const queryClient = new QueryClient();
 
 const ScrollToTop = () => {
   useEffect(() => {
+    // Scroll to top immediately
     window.scrollTo(0, 0);
+    
+    // Also scroll to top after page is fully loaded
+    const handleLoad = () => {
+      window.scrollTo(0, 0);
+    };
+    
+    window.addEventListener('load', handleLoad);
+    
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
   }, []);
+  
   return null;
 };
 

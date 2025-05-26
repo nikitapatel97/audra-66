@@ -74,67 +74,76 @@ export const MobileSocialDashboard = () => {
   };
 
   return (
-    <div className="space-y-3">
-      <div className="text-center mb-4">
-        <h2 className="text-xl font-bold text-gray-900 mb-2">Community</h2>
-        <p className="text-sm text-gray-600">Share your journey with close friends</p>
-      </div>
+    <section className="py-4 px-4 bg-white">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6 font-playfair">
+            Community{" "}
+            <span className="italic text-gray-600 font-playfair">
+              connections
+            </span>
+          </h2>
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto font-crimson italic">
+            Share your journey with close friends and find support in your growth
+          </p>
+        </div>
 
-      {/* Quick Actions */}
-      <div className="flex gap-2 mb-4">
-        <Button variant="outline" size="sm" className="flex-1 text-xs">
-          <Plus className="w-3 h-3 mr-1" />
-          Add Friends
-        </Button>
-        <Button size="sm" className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-xs">
-          <Share2 className="w-3 h-3 mr-1" />
-          Share Update
-        </Button>
-      </div>
+        {/* Quick Actions */}
+        <div className="flex gap-2 mb-6">
+          <Button variant="outline" size="sm" className="flex-1 text-xs border-gray-200 hover:bg-gray-50 font-crimson">
+            <Plus className="w-3 h-3 mr-1" />
+            Add Friends
+          </Button>
+          <Button size="sm" className="flex-1 bg-gray-900 hover:bg-gray-800 text-xs font-crimson">
+            <Share2 className="w-3 h-3 mr-1" />
+            Share Update
+          </Button>
+        </div>
 
-      {/* Feed Posts */}
-      <div className="space-y-3">
-        {feedPosts.map((post) => (
-          <Card key={post.id} className="border border-purple-100">
-            <CardContent className="p-3">
-              <div className="flex items-start gap-2">
-                <Avatar className="w-7 h-7 flex-shrink-0">
-                  <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs">
-                    {post.author.split(' ').map(n => n[0]).join('')}
-                  </AvatarFallback>
-                </Avatar>
-                
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-1 mb-1">
-                    <span className="font-medium text-xs text-gray-900">{post.author}</span>
-                    {post.type === "streak" && <Flame className="w-3 h-3 text-orange-500" />}
-                    <span className="text-xs text-gray-500 ml-auto">{formatTimeAgo(post.timestamp)}</span>
-                  </div>
+        {/* Feed Posts */}
+        <div className="space-y-4">
+          {feedPosts.map((post) => (
+            <Card key={post.id} className="border-gray-200">
+              <CardContent className="p-4">
+                <div className="flex items-start gap-3">
+                  <Avatar className="w-8 h-8 flex-shrink-0">
+                    <AvatarFallback className="bg-gray-900 text-white text-xs">
+                      {post.author.split(' ').map(n => n[0]).join('')}
+                    </AvatarFallback>
+                  </Avatar>
                   
-                  <p className="text-xs text-gray-700 mb-2 leading-relaxed">{post.content}</p>
-                  
-                  <div className="flex items-center gap-3">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleLike(post.id)}
-                      className={`h-auto p-0 ${post.isLiked ? 'text-red-500' : 'text-gray-500'} hover:text-red-500`}
-                    >
-                      <Heart className={`w-3 h-3 mr-1 ${post.isLiked ? 'fill-current' : ''}`} />
-                      <span className="text-xs">{post.likes}</span>
-                    </Button>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="font-medium text-sm text-gray-900 font-playfair">{post.author}</span>
+                      {post.type === "streak" && <Flame className="w-4 h-4 text-orange-500" />}
+                      <span className="text-xs text-gray-500 ml-auto font-crimson">{formatTimeAgo(post.timestamp)}</span>
+                    </div>
                     
-                    <Button variant="ghost" size="sm" className="h-auto p-0 text-gray-500 hover:text-purple-600">
-                      <MessageCircle className="w-3 h-3 mr-1" />
-                      <span className="text-xs">{post.comments}</span>
-                    </Button>
+                    <p className="text-sm text-gray-700 mb-3 leading-relaxed font-crimson italic">{post.content}</p>
+                    
+                    <div className="flex items-center gap-4">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleLike(post.id)}
+                        className={`h-auto p-0 ${post.isLiked ? 'text-red-500' : 'text-gray-500'} hover:text-red-500 font-crimson`}
+                      >
+                        <Heart className={`w-4 h-4 mr-1 ${post.isLiked ? 'fill-current' : ''}`} />
+                        <span className="text-sm">{post.likes}</span>
+                      </Button>
+                      
+                      <Button variant="ghost" size="sm" className="h-auto p-0 text-gray-500 hover:text-gray-700 font-crimson">
+                        <MessageCircle className="w-4 h-4 mr-1" />
+                        <span className="text-sm">{post.comments}</span>
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };

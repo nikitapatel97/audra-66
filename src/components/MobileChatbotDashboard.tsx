@@ -60,20 +60,8 @@ export const MobileChatbotDashboard = () => {
 
   return (
     <div className="space-y-6 p-4">
-      <div className="text-center mb-6">
-        <div className="flex items-center justify-center gap-3 mb-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center">
-            <Bot className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <h2 className="text-xl font-light text-white cosmic-title">Chat with Audra</h2>
-            <p className="text-xs text-white/60 font-light">Your AI companion for emotional support</p>
-          </div>
-        </div>
-      </div>
-
       {/* Chat Container */}
-      <div className="glass-card h-96 flex flex-col overflow-hidden">
+      <Card className="h-96 flex flex-col overflow-hidden border-gray-200">
         <div className="flex-1 p-4 overflow-y-auto space-y-4">
           {messages.map((message) => (
             <div
@@ -84,16 +72,16 @@ export const MobileChatbotDashboard = () => {
             >
               {message.type === "ai" && (
                 <Avatar className="w-8 h-8 flex-shrink-0">
-                  <AvatarFallback className="bg-gradient-to-r from-purple-400 to-pink-400 text-white text-sm">
+                  <AvatarFallback className="bg-gray-900 text-white text-sm">
                     A
                   </AvatarFallback>
                 </Avatar>
               )}
               <div
-                className={`max-w-[75%] rounded-3xl px-4 py-3 text-sm font-light ${
+                className={`max-w-[75%] rounded-3xl px-4 py-3 text-sm font-crimson ${
                   message.type === "user"
-                    ? "chat-bubble chat-bubble-user text-white"
-                    : "chat-bubble text-white/90"
+                    ? "bg-gray-900 text-white"
+                    : "bg-gray-100 text-gray-900"
                 }`}
               >
                 {message.content}
@@ -104,30 +92,30 @@ export const MobileChatbotDashboard = () => {
           {isTyping && (
             <div className="flex gap-3 justify-start">
               <Avatar className="w-8 h-8 flex-shrink-0">
-                <AvatarFallback className="bg-gradient-to-r from-purple-400 to-pink-400 text-white text-sm">
+                <AvatarFallback className="bg-gray-900 text-white text-sm">
                   A
                 </AvatarFallback>
               </Avatar>
-              <div className="chat-bubble px-4 py-3">
+              <div className="bg-gray-100 rounded-3xl px-4 py-3">
                 <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
-                  <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
                 </div>
               </div>
             </div>
           )}
         </div>
-      </div>
+      </Card>
 
       {/* Quick Questions */}
       <div className="space-y-3">
-        <p className="text-xs text-white/60 font-light accent-line">Suggested questions:</p>
+        <p className="text-xs text-gray-600 font-crimson italic">Suggested questions:</p>
         <div className="space-y-2">
           {suggestedQuestions.map((question, index) => (
             <button
               key={index}
-              className="w-full text-left text-xs py-3 px-4 cosmic-button font-light"
+              className="w-full text-left text-xs py-3 px-4 border border-gray-200 rounded-lg hover:bg-gray-50 font-crimson"
               onClick={() => setInputMessage(question)}
             >
               {question}
@@ -138,19 +126,19 @@ export const MobileChatbotDashboard = () => {
 
       {/* Input */}
       <div className="flex gap-3">
-        <input
+        <Input
           placeholder="Type your message..."
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
           onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-          className="flex-1 text-sm py-3 px-4 cosmic-input font-light"
+          className="flex-1 text-sm border-gray-200 focus:border-gray-400 font-crimson"
         />
-        <button
+        <Button
           onClick={handleSendMessage}
-          className="cosmic-button px-4 py-3 flex items-center justify-center"
+          className="bg-gray-900 hover:bg-gray-800 px-4"
         >
           <Send className="w-4 h-4" />
-        </button>
+        </Button>
       </div>
     </div>
   );

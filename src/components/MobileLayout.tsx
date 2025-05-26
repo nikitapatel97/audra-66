@@ -26,51 +26,28 @@ export const MobileLayout = () => {
     }
   };
 
-  return (
-    <div className="min-h-screen cosmic-sparkle relative">
-      {/* Artistic Flow Elements */}
-      <div className="flow-shape"></div>
-      <div className="flow-shape"></div>
-      <div className="flow-shape"></div>
-      
-      {/* Star Field */}
-      <div className="star-field">
-        {[...Array(30)].map((_, i) => (
-          <div
-            key={i}
-            className="star"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${1 + Math.random() * 2}px`,
-              height: `${1 + Math.random() * 2}px`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 4}s`
-            }}
-          />
-        ))}
-      </div>
+  const shouldShowHero = activeTab === "chatbot";
 
+  return (
+    <div className="min-h-screen bg-white">
       <Navigation />
       
       {/* Mobile Content */}
-      <div className="pt-16 pb-20 px-4 relative z-10 page-transition">
-        {/* Hero Section - Enhanced with artistic design */}
-        <div className="py-8 text-center">
-          <h1 className="text-3xl font-light cosmic-title mb-4">
-            Welcome to{" "}
-            <span className="block mt-2">
-              Audra
-            </span>
-          </h1>
-          <div className="accent-line mx-auto mb-6"></div>
-          <p className="text-sm text-white/70 mb-8 max-w-sm mx-auto font-light leading-relaxed">
-            Your AI companion for emotional growth and deeper connections
-          </p>
-        </div>
+      <div className="pt-16 pb-20 px-4">
+        {/* Hero Section - Only for AI Chat */}
+        {shouldShowHero && (
+          <div className="py-8 text-center">
+            <h1 className="text-3xl font-light text-gray-900 mb-4 font-playfair">
+              Welcome to Audra
+            </h1>
+            <p className="text-sm text-gray-600 mb-8 max-w-sm mx-auto font-light leading-relaxed font-crimson italic">
+              Your AI companion for emotional growth and deeper connections
+            </p>
+          </div>
+        )}
 
-        {/* Active Tab Content in Glass Container */}
-        <div className="glass-card p-1">
+        {/* Active Tab Content */}
+        <div className={shouldShowHero ? "" : "pt-4"}>
           {renderActiveTab()}
         </div>
       </div>

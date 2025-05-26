@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -384,6 +383,10 @@ export const PremiumDashboard = () => {
                   <div className="flex items-center gap-2 md:gap-3 p-2 md:p-3 bg-pink-500/20 border border-pink-300/30 rounded-lg backdrop-blur-sm">
                     <Heart className="w-3 h-3 md:w-5 md:h-5 text-pink-300" />
                     <span className="text-xs md:text-sm text-white font-light">Shared communication patterns</span>
+                  </div>
+                  <div className="flex items-center gap-2 md:gap-3 p-2 md:p-3 bg-purple-500/20 border border-purple-300/30 rounded-lg backdrop-blur-sm">
+                    <Users className="w-3 h-3 md:w-5 md:h-5 text-purple-300" />
+                    <span className="text-xs md:text-sm text-white font-light">Attachment style breakdowns</span>
                   </div>
                   <div className="flex items-center gap-2 md:gap-3 p-2 md:p-3 bg-blue-500/20 border border-blue-300/30 rounded-lg backdrop-blur-sm">
                     <TrendingUp className="w-3 h-3 md:w-5 md:h-5 text-blue-300" />

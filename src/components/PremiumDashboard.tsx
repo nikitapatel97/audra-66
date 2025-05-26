@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -153,8 +153,8 @@ export const PremiumDashboard = () => {
             </div>
           </div>
 
-          {/* Add Someone Feature */}
-          <div className="glass-card p-6 md:p-8 text-center mb-8">
+          {/* Add Someone Feature - Improved */}
+          <div className="glass-card p-6 md:p-8 text-center mb-8 border border-purple-500/30">
             <div className="flex items-center justify-center gap-3 mb-4">
               <UserPlus className="w-6 h-6 md:w-8 md:h-8 text-purple-300" />
               <h3 className="text-lg md:text-xl font-light text-white cosmic-title">Add Your Partner</h3>
@@ -163,28 +163,36 @@ export const PremiumDashboard = () => {
               Invite your partner to join and get shared relationship insights together
             </p>
             <div className="flex justify-center">
-              <button className="cosmic-button px-8 py-3 font-light">
+              <Button 
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 px-8 py-3 text-sm md:text-base font-medium transition-all duration-300 hover:scale-105"
+                size="lg"
+              >
                 <UserPlus className="w-4 h-4 mr-2" />
                 Invite Partner
-              </button>
+              </Button>
             </div>
           </div>
 
-          {/* Upgrade Prompt */}
-          <div className="glass-card p-6 md:p-8 text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-yellow-400" />
+          {/* Upgrade Prompt - Enhanced */}
+          <div className="glass-card p-8 md:p-12 text-center border border-yellow-400/30 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 flex items-center justify-center">
+                <Crown className="w-6 h-6 text-black" />
+              </div>
               <h3 className="text-xl md:text-2xl font-light text-white cosmic-title">Unlock Premium Insights</h3>
             </div>
-            <p className="text-sm md:text-base text-white/80 mb-6 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-sm md:text-base text-white/80 mb-8 max-w-2xl mx-auto font-light leading-relaxed">
               Upgrade to Premium to access detailed emotional reports, voice-aware AI coaching, 
               and couples' shared insights. Transform your relationship journey with data-driven growth.
             </p>
             <div className="flex justify-center">
-              <button className="cosmic-button px-8 py-4 text-lg font-light">
-                <Crown className="w-5 h-5 mr-2" />
+              <Button 
+                className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black border-0 px-12 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                size="lg"
+              >
+                <Crown className="w-5 h-5 mr-3" />
                 Upgrade to Premium
-              </button>
+              </Button>
             </div>
           </div>
         </div>

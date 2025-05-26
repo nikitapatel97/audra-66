@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,38 +11,10 @@ const queryClient = new QueryClient();
 
 const ScrollToTop = () => {
   useEffect(() => {
-    // Force scroll to top immediately and repeatedly
-    const scrollToTop = () => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-      console.log('ScrollToTop: Scrolled to top, current position:', window.pageYOffset);
-    };
-
-    // Scroll immediately
-    scrollToTop();
-    
-    // Scroll after a short delay to override any other scroll behaviors
-    const timeoutId = setTimeout(scrollToTop, 100);
-    
-    // Scroll when page is fully loaded
-    const handleLoad = () => {
-      scrollToTop();
-    };
-    
-    // Scroll when DOM is ready
-    const handleDOMContentLoaded = () => {
-      scrollToTop();
-    };
-    
-    window.addEventListener('load', handleLoad);
-    document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
-    
-    return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener('load', handleLoad);
-      document.removeEventListener('DOMContentLoaded', handleDOMContentLoaded);
-    };
+    // Simple scroll to top on mount
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   }, []);
   
   return null;

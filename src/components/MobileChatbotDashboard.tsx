@@ -53,10 +53,10 @@ export const MobileChatbotDashboard = () => {
   };
 
   return (
-    <div className="py-2 px-4 bg-white h-screen flex flex-col">
-      <div className="max-w-6xl mx-auto flex-1 flex flex-col">
-        <div className="text-center">
-          <h2 className="text-3xl md:text-5xl font-light text-gray-900 font-playfair">
+    <div className="px-4 bg-white h-screen flex flex-col">
+      <div className="max-w-6xl mx-auto flex-1 flex flex-col min-h-0">
+        <div className="text-center py-2">
+          <h2 className="text-2xl md:text-3xl font-light text-gray-900 font-playfair">
             Chat with{" "}
             <span className="italic text-gray-600 font-playfair">
               Audra
@@ -64,10 +64,10 @@ export const MobileChatbotDashboard = () => {
           </h2>
         </div>
 
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col min-h-0">
           {/* Chat Container */}
-          <Card className="flex-1 flex flex-col overflow-hidden border-gray-200 mt-2">
-            <div className="flex-1 p-2 overflow-y-auto space-y-1">
+          <Card className="flex-1 flex flex-col overflow-hidden border-gray-200 min-h-0">
+            <div className="flex-1 p-3 overflow-y-auto space-y-1 min-h-0">
               {messages.map((message) => (
                 <div
                   key={message.id}
@@ -114,7 +114,7 @@ export const MobileChatbotDashboard = () => {
           </Card>
 
           {/* Input */}
-          <div className="flex gap-3 mt-2">
+          <div className="flex gap-3 mt-3 pb-2">
             <Input
               placeholder="Type your message..."
               value={inputMessage}

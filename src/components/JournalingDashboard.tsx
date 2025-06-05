@@ -15,7 +15,7 @@ export const JournalingDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
-  const availableTags = ["relationship", "growth", "redflags", "patterns", "exes", "healing", "work", "family", "personal"];
+  const availableTags = ["relationship", "growth", "redflags", "patterns", "exes"];
 
   const [journalEntries, setJournalEntries] = useState([
     {

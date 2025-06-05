@@ -272,7 +272,7 @@ export const TrackerDashboard = () => {
                 <ul className="space-y-2 text-sm text-gray-700 font-crimson">
                   <li className="flex items-start space-x-2">
                     <span className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Managing work stress spillover</span>
+                    <span>Not lying about cheating / infidelity</span>
                   </li>
                   <li className="flex items-start space-x-2">
                     <span className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></span>
@@ -280,7 +280,7 @@ export const TrackerDashboard = () => {
                   </li>
                   <li className="flex items-start space-x-2">
                     <span className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Creating more quality time together</span>
+                    <span>Being open and honest about all relationships</span>
                   </li>
                 </ul>
               </CardContent>

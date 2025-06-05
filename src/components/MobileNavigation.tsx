@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { BookOpen, FileText, MessageCircle, BarChart3 } from "lucide-react";
+import { BookOpen, Lightbulb, MessageCircle, BarChart3 } from "lucide-react";
 
 interface MobileNavigationProps {
   activeTab: string;
@@ -35,8 +35,8 @@ export const MobileNavigation = ({ activeTab, onTabChange }: MobileNavigationPro
               : "text-purple-200"
           }`}
         >
-          <FileText className="w-4 h-4" />
-          <span className="text-xs">Notes</span>
+          <Lightbulb className="w-4 h-4" />
+          <span className="text-xs">Insights</span>
         </Button>
         
         <Button

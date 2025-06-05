@@ -4,7 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Calendar, Heart, TrendingUp, MessageCircle, Target, Sparkles, ChevronRight, PenTool, Smile, Frown, Meh, X, Clock } from "lucide-react";
+import { Calendar, Heart, TrendingUp, MessageCircle, Target, Sparkles, ChevronRight, PenTool, Smile, Frown, Meh, X, Clock, Tag, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 export const JournalingDashboard = () => {
   const [selectedEntry, setSelectedEntry] = useState<number | null>(null);
@@ -12,6 +13,10 @@ export const JournalingDashboard = () => {
   const [newEntryTitle, setNewEntryTitle] = useState("");
   const [newEntryContent, setNewEntryContent] = useState("");
   const [newEntryMood, setNewEntryMood] = useState("5");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+
+  const availableTags = ["relationship", "growth", "redflags", "patterns", "exes", "healing", "work", "family", "personal"];
 
   const [journalEntries, setJournalEntries] = useState([
     {
@@ -83,6 +88,13 @@ export const JournalingDashboard = () => {
     { goal: "Practice self-compassion", progress: 80, current: 4, target: 5 },
     { goal: "Limit social media to 30min/day", progress: 40, current: 2, target: 5 }
   ];
+
+  const filteredEntries = journalEntries.filter(entry => {
+    const matchesSearch = entry.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         entry.fullContent.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesTag = selectedTag ? entry.tags.includes(selectedTag) : true;
+    return matchesSearch && matchesTag;
+  });
 
   const handleSaveEntry = () => {
     // Create new entry object
@@ -230,6 +242,40 @@ export const JournalingDashboard = () => {
           </Card>
         </div>
 
+        {/* Search and Filter Bar */}
+        <div className="flex flex-col sm:flex-row gap-4 mb-8">
+          <div className="flex-1 relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <Input
+              placeholder="Search your entries..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 border-gray-200 focus:border-gray-400 font-crimson"
+            />
+          </div>
+          
+          <div className="flex gap-2 flex-wrap">
+            <Button
+              variant={selectedTag === null ? "default" : "outline"}
+              onClick={() => setSelectedTag(null)}
+              className={selectedTag === null ? "bg-gray-900 hover:bg-gray-800 font-crimson" : "border-gray-200 hover:bg-gray-50 font-crimson"}
+            >
+              All
+            </Button>
+            {availableTags.map(tag => (
+              <Button
+                key={tag}
+                variant={selectedTag === tag ? "default" : "outline"}
+                onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
+                className={selectedTag === tag ? "bg-gray-900 hover:bg-gray-800 font-crimson" : "border-gray-200 hover:bg-gray-50 font-crimson"}
+              >
+                <Tag className="w-3 h-3 mr-1" />
+                {tag}
+              </Button>
+            ))}
+          </div>
+        </div>
+
         {/* Start New Entry CTA */}
         <div className="text-center mb-12 bg-gray-50 rounded-lg p-8 border border-gray-200">
           <Dialog open={isNewEntryOpen} onOpenChange={setIsNewEntryOpen}>
@@ -311,7 +357,7 @@ export const JournalingDashboard = () => {
               </Button>
             </div>
 
-            {journalEntries.map((entry, index) => (
+            {filteredEntries.map((entry, index) => (
               <Card key={entry.id} className="border-gray-200 hover:shadow-md transition-shadow cursor-pointer" onClick={() => setSelectedEntry(index)}>
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">
@@ -441,9 +487,9 @@ export const JournalingDashboard = () => {
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
-                  {getMoodIcon(journalEntries[selectedEntry].moodScore)}
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getMoodColor(journalEntries[selectedEntry].moodScore)}`}>
-                    {journalEntries[selectedEntry].mood}
+                  {getMoodIcon(filteredEntries[selectedEntry].moodScore)}
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getMoodColor(filteredEntries[selectedEntry].moodScore)}`}>
+                    {filteredEntries[selectedEntry].mood}
                   </span>
                 </div>
                 <Button variant="ghost" size="icon" onClick={() => setSelectedEntry(null)}>
@@ -452,17 +498,17 @@ export const JournalingDashboard = () => {
               </div>
               
               <div className="text-right mb-4">
-                <p className="text-sm text-gray-600 font-crimson">{journalEntries[selectedEntry].date}</p>
-                <p className="text-xs text-gray-500 font-crimson">{journalEntries[selectedEntry].time}</p>
+                <p className="text-sm text-gray-600 font-crimson">{filteredEntries[selectedEntry].date}</p>
+                <p className="text-xs text-gray-500 font-crimson">{filteredEntries[selectedEntry].time}</p>
               </div>
               
-              <h2 className="text-2xl font-normal text-gray-900 mb-4 font-playfair">{journalEntries[selectedEntry].title}</h2>
-              <p className="text-gray-700 leading-relaxed mb-6 font-crimson italic">{journalEntries[selectedEntry].fullContent}</p>
+              <h2 className="text-2xl font-normal text-gray-900 mb-4 font-playfair">{filteredEntries[selectedEntry].title}</h2>
+              <p className="text-gray-700 leading-relaxed mb-6 font-crimson italic">{filteredEntries[selectedEntry].fullContent}</p>
               
               <div className="border-t pt-4">
                 <h3 className="text-lg font-normal text-gray-900 mb-3 font-playfair">AI Insights</h3>
                 <ul className="space-y-2">
-                  {journalEntries[selectedEntry].insights.map((insight, index) => (
+                  {filteredEntries[selectedEntry].insights.map((insight, index) => (
                     <li key={index} className="flex items-start space-x-2">
                       <span className="w-1.5 h-1.5 bg-gray-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span className="text-sm text-gray-700 font-crimson italic">{insight}</span>
@@ -472,7 +518,7 @@ export const JournalingDashboard = () => {
               </div>
               
               <div className="flex flex-wrap gap-2 mt-4">
-                {journalEntries[selectedEntry].tags.map((tag) => (
+                {filteredEntries[selectedEntry].tags.map((tag) => (
                   <Badge key={tag} variant="secondary" className="text-xs bg-gray-100 text-gray-700">
                     {tag}
                   </Badge>

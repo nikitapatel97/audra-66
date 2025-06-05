@@ -67,9 +67,6 @@ export const NotesDashboard = () => {
               notes & insights
             </span>
           </h2>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto font-crimson italic">
-            Capture thoughts, ideas, and personal insights. Organize your mental space with smart tagging and search.
-          </p>
         </div>
 
         {/* Search and Filter Bar */}

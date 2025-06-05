@@ -25,13 +25,6 @@ export const MobileChatbotDashboard = () => {
   const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
-  const suggestedQuestions = [
-    "How should I respond to this text from my crush?",
-    "What are some red flags I should watch out for?",
-    "How do I set better boundaries in dating?",
-    "I'm seeing my ex at a party. How should I handle it?"
-  ];
-
   const handleSendMessage = () => {
     if (!inputMessage.trim()) return;
 
@@ -60,9 +53,9 @@ export const MobileChatbotDashboard = () => {
   };
 
   return (
-    <div className="py-4 px-4 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8">
+    <div className="py-4 px-4 bg-white h-screen flex flex-col">
+      <div className="max-w-6xl mx-auto flex-1 flex flex-col">
+        <div className="text-center mb-6">
           <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6 font-playfair">
             Chat with{" "}
             <span className="italic text-gray-600 font-playfair">
@@ -71,9 +64,9 @@ export const MobileChatbotDashboard = () => {
           </h2>
         </div>
 
-        <div className="space-y-6">
+        <div className="flex-1 flex flex-col space-y-4">
           {/* Chat Container */}
-          <Card className="h-96 flex flex-col overflow-hidden border-gray-200">
+          <Card className="flex-1 flex flex-col overflow-hidden border-gray-200">
             <div className="flex-1 p-4 overflow-y-auto space-y-4">
               {messages.map((message) => (
                 <div
@@ -119,22 +112,6 @@ export const MobileChatbotDashboard = () => {
               )}
             </div>
           </Card>
-
-          {/* Quick Questions */}
-          <div className="space-y-3">
-            <p className="text-xs text-gray-600 font-crimson italic">Suggested questions:</p>
-            <div className="space-y-2">
-              {suggestedQuestions.map((question, index) => (
-                <button
-                  key={index}
-                  className="w-full text-left text-xs py-3 px-4 border border-gray-200 rounded-lg hover:bg-gray-50 font-crimson"
-                  onClick={() => setInputMessage(question)}
-                >
-                  {question}
-                </button>
-              ))}
-            </div>
-          </div>
 
           {/* Input */}
           <div className="flex gap-3">

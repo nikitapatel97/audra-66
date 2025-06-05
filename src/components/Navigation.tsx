@@ -30,10 +30,10 @@ export const Navigation = () => {
           
           <div className="flex items-center space-x-4">
             <Button variant="ghost" className="text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-crimson">
-              Sign In
+              Signed In
             </Button>
             <Button className="bg-gray-900 hover:bg-gray-800 border-0 font-crimson">
-              Get Started
+              Alyssa
             </Button>
           </div>
         </div>

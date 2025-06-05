@@ -13,7 +13,7 @@ export const JournalingDashboard = () => {
   const [newEntryContent, setNewEntryContent] = useState("");
   const [newEntryMood, setNewEntryMood] = useState("5");
 
-  const journalEntries = [
+  const [journalEntries, setJournalEntries] = useState([
     {
       id: 2,
       date: "May 13, 2025",
@@ -42,7 +42,7 @@ export const JournalingDashboard = () => {
       wordCount: 183,
       readTime: "2 min"
     }
-  ];
+  ]);
 
   const moodData = [
     { day: "Mon", mood: 6, entries: 1 },
@@ -85,7 +85,26 @@ export const JournalingDashboard = () => {
   ];
 
   const handleSaveEntry = () => {
-    // Here you would typically save to a database
+    // Create new entry object
+    const now = new Date();
+    const newEntry = {
+      id: Date.now(), // Simple ID generation
+      date: now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+      time: now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }),
+      mood: getMoodText(parseInt(newEntryMood)),
+      moodScore: parseInt(newEntryMood),
+      title: newEntryTitle,
+      preview: newEntryContent.length > 100 ? newEntryContent.substring(0, 100) + "..." : newEntryContent,
+      fullContent: newEntryContent,
+      insights: generateInsights(newEntryContent, parseInt(newEntryMood)),
+      tags: generateTags(newEntryContent),
+      wordCount: newEntryContent.split(' ').length,
+      readTime: Math.max(1, Math.ceil(newEntryContent.split(' ').length / 200)) + " min"
+    };
+
+    // Add new entry to the beginning of the array (most recent first)
+    setJournalEntries(prev => [newEntry, ...prev]);
+    
     console.log("Saving entry:", { title: newEntryTitle, content: newEntryContent, mood: newEntryMood });
     
     // Reset form and close dialog
@@ -93,6 +112,54 @@ export const JournalingDashboard = () => {
     setNewEntryContent("");
     setNewEntryMood("5");
     setIsNewEntryOpen(false);
+  };
+
+  const getMoodText = (score: number) => {
+    if (score === 1) return "Devastated";
+    if (score === 2) return "Very sad";
+    if (score === 3) return "Confused and hurt";
+    if (score === 4) return "Not great";
+    if (score === 5) return "Okay";
+    if (score === 6) return "Good";
+    if (score === 7) return "Very good";
+    if (score === 8) return "Great";
+    if (score === 9) return "Amazing";
+    if (score === 10) return "Perfect";
+    return "Okay";
+  };
+
+  const generateInsights = (content: string, mood: number) => {
+    // Simple insight generation based on content and mood
+    const insights = [];
+    if (mood <= 3) {
+      insights.push("You're processing difficult emotions");
+      insights.push("Your feelings are valid and important");
+    }
+    if (content.toLowerCase().includes("relationship")) {
+      insights.push("Relationship dynamics are affecting your wellbeing");
+    }
+    if (content.toLowerCase().includes("trust")) {
+      insights.push("Trust issues need concrete actions to heal");
+    }
+    return insights.length > 0 ? insights : ["You're taking time to reflect on your experiences"];
+  };
+
+  const generateTags = (content: string) => {
+    const tags = [];
+    const lowerContent = content.toLowerCase();
+    if (lowerContent.includes("relationship") || lowerContent.includes("boyfriend") || lowerContent.includes("partner")) {
+      tags.push("relationship");
+    }
+    if (lowerContent.includes("trust") || lowerContent.includes("betrayal") || lowerContent.includes("cheating")) {
+      tags.push("trust");
+    }
+    if (lowerContent.includes("work") || lowerContent.includes("job")) {
+      tags.push("work");
+    }
+    if (lowerContent.includes("family") || lowerContent.includes("parents")) {
+      tags.push("family");
+    }
+    return tags.length > 0 ? tags : ["personal"];
   };
 
   const getMoodIcon = (score) => {

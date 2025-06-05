@@ -95,7 +95,7 @@ export const MobileChatbotDashboard = () => {
           </h2>
         </div>
 
-        <div className="flex-1 flex flex-col min-h-0">
+        <div className="flex-1 flex flex-col min-h-0 gap-2">
           {/* Chat Container */}
           <div className="flex-1 border border-gray-200 rounded-lg overflow-hidden flex flex-col">
             <div className="flex-1 p-2 overflow-y-auto">
@@ -146,7 +146,7 @@ export const MobileChatbotDashboard = () => {
           </div>
 
           {/* Input */}
-          <div className="flex gap-3 mt-2">
+          <div className="flex gap-3">
             <Input
               placeholder="Type your message..."
               value={inputMessage}

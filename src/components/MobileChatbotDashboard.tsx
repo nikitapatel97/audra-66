@@ -67,23 +67,23 @@ export const MobileChatbotDashboard = () => {
         <div className="flex-1 flex flex-col">
           {/* Chat Container */}
           <Card className="flex-1 flex flex-col overflow-hidden border-gray-200 mt-2">
-            <div className="flex-1 p-2 overflow-y-auto space-y-1">
+            <div className="flex-1 p-1 overflow-y-auto">
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex gap-3 ${
+                  className={`flex gap-2 mb-1 ${
                     message.type === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
                   {message.type === "ai" && (
-                    <Avatar className="w-8 h-8 flex-shrink-0">
-                      <AvatarFallback className="bg-gray-900 text-white text-sm">
+                    <Avatar className="w-6 h-6 flex-shrink-0">
+                      <AvatarFallback className="bg-gray-900 text-white text-xs">
                         A
                       </AvatarFallback>
                     </Avatar>
                   )}
                   <div
-                    className={`max-w-[75%] rounded-3xl px-4 py-3 text-sm font-crimson ${
+                    className={`max-w-[75%] rounded-3xl px-3 py-2 text-sm font-crimson ${
                       message.type === "user"
                         ? "bg-gray-900 text-white"
                         : "bg-gray-100 text-gray-900"
@@ -95,13 +95,13 @@ export const MobileChatbotDashboard = () => {
               ))}
               
               {isTyping && (
-                <div className="flex gap-3 justify-start">
-                  <Avatar className="w-8 h-8 flex-shrink-0">
-                    <AvatarFallback className="bg-gray-900 text-white text-sm">
+                <div className="flex gap-2 justify-start mb-1">
+                  <Avatar className="w-6 h-6 flex-shrink-0">
+                    <AvatarFallback className="bg-gray-900 text-white text-xs">
                       A
                     </AvatarFallback>
                   </Avatar>
-                  <div className="bg-gray-100 rounded-3xl px-4 py-3">
+                  <div className="bg-gray-100 rounded-3xl px-3 py-2">
                     <div className="flex space-x-1">
                       <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                       <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>

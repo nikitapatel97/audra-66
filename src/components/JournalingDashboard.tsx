@@ -1,13 +1,17 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Calendar, Heart, TrendingUp, MessageCircle, Target, Sparkles, ChevronRight, PenTool, Smile, Frown, Meh, X, Clock } from "lucide-react";
 
 export const JournalingDashboard = () => {
   const [selectedEntry, setSelectedEntry] = useState<number | null>(null);
+  const [isNewEntryOpen, setIsNewEntryOpen] = useState(false);
+  const [newEntryTitle, setNewEntryTitle] = useState("");
+  const [newEntryContent, setNewEntryContent] = useState("");
+  const [newEntryMood, setNewEntryMood] = useState("5");
 
   const journalEntries = [
     {
@@ -94,6 +98,17 @@ export const JournalingDashboard = () => {
     { goal: "Limit social media to 30min/day", progress: 40, current: 2, target: 5 }
   ];
 
+  const handleSaveEntry = () => {
+    // Here you would typically save to a database
+    console.log("Saving entry:", { title: newEntryTitle, content: newEntryContent, mood: newEntryMood });
+    
+    // Reset form and close dialog
+    setNewEntryTitle("");
+    setNewEntryContent("");
+    setNewEntryMood("5");
+    setIsNewEntryOpen(false);
+  };
+
   const getMoodIcon = (score) => {
     if (score >= 7) return <Smile className="w-4 h-4 text-green-500" />;
     if (score >= 5) return <Meh className="w-4 h-4 text-yellow-500" />;
@@ -164,10 +179,71 @@ export const JournalingDashboard = () => {
 
         {/* Start New Entry CTA */}
         <div className="text-center mb-12 bg-gray-50 rounded-lg p-8 border border-gray-200">
-          <Button className="bg-gray-900 hover:bg-gray-800 border-0 font-crimson">
-            Start New Entry
-            <PenTool className="ml-2 w-4 h-4" />
-          </Button>
+          <Dialog open={isNewEntryOpen} onOpenChange={setIsNewEntryOpen}>
+            <DialogTrigger asChild>
+              <Button className="bg-gray-900 hover:bg-gray-800 border-0 font-crimson">
+                Start New Entry
+                <PenTool className="ml-2 w-4 h-4" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle className="font-playfair text-2xl">New Journal Entry</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 font-crimson">Title</label>
+                  <input
+                    type="text"
+                    value={newEntryTitle}
+                    onChange={(e) => setNewEntryTitle(e.target.value)}
+                    placeholder="What's on your mind today?"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent font-crimson"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 font-crimson">How are you feeling? (1-10)</label>
+                  <select
+                    value={newEntryMood}
+                    onChange={(e) => setNewEntryMood(e.target.value)}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent font-crimson"
+                  >
+                    <option value="1">1 - Terrible</option>
+                    <option value="2">2 - Very Bad</option>
+                    <option value="3">3 - Bad</option>
+                    <option value="4">4 - Not Great</option>
+                    <option value="5">5 - Okay</option>
+                    <option value="6">6 - Good</option>
+                    <option value="7">7 - Very Good</option>
+                    <option value="8">8 - Great</option>
+                    <option value="9">9 - Amazing</option>
+                    <option value="10">10 - Perfect</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 font-crimson">Your thoughts</label>
+                  <textarea
+                    value={newEntryContent}
+                    onChange={(e) => setNewEntryContent(e.target.value)}
+                    placeholder="Write about your day, your feelings, your thoughts..."
+                    rows={8}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent font-crimson resize-none"
+                  />
+                </div>
+                
+                <div className="flex justify-end space-x-3">
+                  <Button variant="outline" onClick={() => setIsNewEntryOpen(false)} className="font-crimson">
+                    Cancel
+                  </Button>
+                  <Button onClick={handleSaveEntry} className="bg-gray-900 hover:bg-gray-800 font-crimson">
+                    Save Entry
+                  </Button>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
 
         {/* Main Dashboard Grid */}

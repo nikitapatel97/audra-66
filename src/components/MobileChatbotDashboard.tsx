@@ -25,6 +25,10 @@ export const MobileChatbotDashboard = () => {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Demo message and response
+  const demoMessage = "I saw messages from Sarah on Jake's phone. They were flirty. He swore nothing was going on but now he's avoiding me. I feel anxious and angry and I don't know if I'm being paranoid or if something really is wrong.";
+  const demoResponse = "You're feeling so much uncertainty right now, and that's a really tough place to be. Those feelings of anxiety and anger are completely valid, your gut is trying to protect you, and it's okay to be upset when something doesn't feel right. When everything feels tangled, a little self-care can sometimes help create space to think clearly. Maybe take a break from conversations with Jake for a bit, and find something grounding for yourself, whether it's a walk, a favorite song, or just a deep breath. Giving yourself permission to feel angry and anxious, instead of trying to \"fix\" those feelings right away, can be surprisingly comforting. If you're unsure what's true, it's okay to ask yourself what *you* need, right now and in the future, to feel safe and respected. What would help you feel a little more in control or settled tonight?";
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -46,34 +50,56 @@ export const MobileChatbotDashboard = () => {
     };
 
     setMessages((prev) => [...prev, userMessage]);
+    const currentInput = inputMessage;
     setInputMessage("");
     setIsTyping(true);
 
     console.log("User message added, AI typing...");
 
-    // Simulate AI response with more varied responses
-    setTimeout(() => {
-      const responses = [
-        "I understand you're going through something important. Let's explore this together. Can you tell me more about what's on your mind?",
-        "Thank you for sharing that with me. How does that make you feel?",
-        "That sounds challenging. What support do you feel you need right now?",
-        "I hear you. Sometimes talking through our feelings can help us process them better.",
-        "That's really insightful. What do you think might help you move forward?"
-      ];
-      
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      
-      const aiResponse: Message = {
-        id: Date.now() + 1,
-        type: "ai",
-        content: randomResponse,
-        timestamp: new Date(),
-      };
-      
-      console.log("AI response:", randomResponse);
-      setMessages((prev) => [...prev, aiResponse]);
-      setIsTyping(false);
-    }, 1500 + Math.random() * 1000); // Variable response time
+    // Check if this is the demo message
+    const isDemoMessage = currentInput.toLowerCase().includes("sarah") && 
+                          currentInput.toLowerCase().includes("jake") && 
+                          currentInput.toLowerCase().includes("flirty");
+
+    if (isDemoMessage) {
+      // Demo response with longer loading time
+      setTimeout(() => {
+        const aiResponse: Message = {
+          id: Date.now() + 1,
+          type: "ai",
+          content: demoResponse,
+          timestamp: new Date(),
+        };
+        
+        console.log("AI demo response:", demoResponse);
+        setMessages((prev) => [...prev, aiResponse]);
+        setIsTyping(false);
+      }, 3000); // 3 seconds to show the thinking indicator
+    } else {
+      // Regular responses
+      setTimeout(() => {
+        const responses = [
+          "I understand you're going through something important. Let's explore this together. Can you tell me more about what's on your mind?",
+          "Thank you for sharing that with me. How does that make you feel?",
+          "That sounds challenging. What support do you feel you need right now?",
+          "I hear you. Sometimes talking through our feelings can help us process them better.",
+          "That's really insightful. What do you think might help you move forward?"
+        ];
+        
+        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+        
+        const aiResponse: Message = {
+          id: Date.now() + 1,
+          type: "ai",
+          content: randomResponse,
+          timestamp: new Date(),
+        };
+        
+        console.log("AI response:", randomResponse);
+        setMessages((prev) => [...prev, aiResponse]);
+        setIsTyping(false);
+      }, 1500 + Math.random() * 1000);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -132,7 +158,8 @@ export const MobileChatbotDashboard = () => {
                   </AvatarFallback>
                 </Avatar>
                 <div className="bg-gray-100 rounded-3xl px-3 py-2">
-                  <div className="flex space-x-1">
+                  <div className="flex items-center space-x-1">
+                    <div className="text-xs text-gray-500 mr-2">Audra is thinking...</div>
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>

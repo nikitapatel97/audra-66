@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,7 +11,7 @@ export const JournalingDashboard = () => {
   const journalEntries = [
     {
       id: 1,
-      date: "January 15, 2024",
+      date: "May 15, 2025",
       time: "11:47 PM",
       mood: "Devastated",
       moodScore: 2,
@@ -26,7 +25,7 @@ export const JournalingDashboard = () => {
     },
     {
       id: 2,
-      date: "January 13, 2024",
+      date: "May 13, 2025",
       time: "8:30 PM",
       mood: "Cautiously hopeful",
       moodScore: 5,
@@ -40,7 +39,7 @@ export const JournalingDashboard = () => {
     },
     {
       id: 3,
-      date: "January 11, 2024",
+      date: "May 11, 2025",
       time: "2:15 PM",
       mood: "Confused and hurt",
       moodScore: 3,
@@ -117,9 +116,6 @@ export const JournalingDashboard = () => {
             </span>{" "}
             growth journey
           </h2>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto font-crimson italic">
-            Discover insights about yourself through intelligent journaling.
-          </p>
         </div>
 
         {/* Quick Stats */}
@@ -168,10 +164,6 @@ export const JournalingDashboard = () => {
         {/* Start New Entry CTA */}
         <div className="text-center mb-12 bg-gray-50 rounded-lg p-8 border border-gray-200">
           <BookOpen className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-          <h3 className="text-2xl font-light text-gray-900 mb-4 font-playfair">Ready to continue writing?</h3>
-          <p className="text-gray-700 mb-6 max-w-2xl mx-auto font-crimson italic">
-            Capture today's thoughts, process your emotions, and unlock deeper insights about yourself.
-          </p>
           <Button className="bg-gray-900 hover:bg-gray-800 border-0 font-crimson">
             Start New Entry
             <PenTool className="ml-2 w-4 h-4" />

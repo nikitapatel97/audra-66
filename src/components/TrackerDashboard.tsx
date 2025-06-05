@@ -18,21 +18,21 @@ export const TrackerDashboard = () => {
   
   const getEmotionValue = (emotion: string) => {
     const emotionMap: { [key: string]: number } = {
-      "calm": 2,
-      "content": 3,
-      "happy": 4,
-      "excited": 5,
-      "stressed": 6,
-      "frustrated": 7,
-      "angry": 8,
-      "overwhelmed": 9
+      "calm": 1,        // baseline
+      "content": 1,     // baseline
+      "happy": 1,       // baseline
+      "excited": 1,     // baseline
+      "stressed": 4,    // negative spike
+      "frustrated": 5,  // negative spike
+      "angry": 6,       // negative spike
+      "overwhelmed": 7  // negative spike
     };
-    return emotionMap[emotion] || 3;
+    return emotionMap[emotion] || 1;
   };
 
   const getRandomEmotion = (isSpike: boolean) => {
     if (isSpike) {
-      return emotions[Math.floor(Math.random() * 3) + 5]; // stressed, frustrated, angry, overwhelmed
+      return emotions[Math.floor(Math.random() * 4) + 4]; // stressed, frustrated, angry, overwhelmed
     } else {
       return emotions[Math.floor(Math.random() * 4)]; // calm, content, happy, excited
     }

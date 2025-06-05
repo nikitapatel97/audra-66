@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,33 +5,131 @@ import { Progress } from "@/components/ui/progress";
 import { TrendingUp, MessageCircle, Target, Sparkles, AlertTriangle, Heart, Brain } from "lucide-react";
 
 export const NotesDashboard = () => {
-  // Recent entry-specific insights
-  const recentInsights = [
-    {
-      type: "trust",
-      title: "Trust Rebuilding Process",
-      content: "Your recent entries show you're setting clear boundaries with Jake while staying open to rebuilding trust. This balance is healthy.",
-      confidence: 94,
-      icon: Heart,
-      entryDate: "May 13, 2025"
-    },
-    {
-      type: "communication",
-      title: "Communication Growth",
-      content: "You articulated your feelings clearly during your conversation with Jake. This shows significant emotional maturity and self-advocacy.",
-      confidence: 91,
-      icon: MessageCircle,
-      entryDate: "May 13, 2025"
-    },
-    {
-      type: "intuition",
-      title: "Trusting Your Gut",
-      content: "Your instinct about the phone messages proved valid. Your entries reflect growing confidence in trusting your intuition.",
-      confidence: 88,
-      icon: Brain,
-      entryDate: "May 11, 2025"
+  // Get journal entries from localStorage or use default entries
+  const getStoredEntries = () => {
+    try {
+      const stored = localStorage.getItem('journalEntries');
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch (error) {
+      console.log('No stored entries found');
     }
-  ];
+    return [
+      {
+        id: 2,
+        date: "May 13, 2025",
+        time: "8:30 PM",
+        mood: "Cautiously hopeful",
+        moodScore: 5,
+        title: "The long talk we needed to have",
+        fullContent: "Jake and I finally sat down and talked about what I found on his phone. He swore it was nothing, that she's just a coworker, but I could see the guilt in his eyes. He admitted that he's been 'friendly' with her but insisted nothing physical happened. I told him how it made me feel - like I couldn't trust him, like I was going crazy questioning everything. He cried and said he never meant to hurt me, that he'll be completely transparent from now on. He promised to be better, to show me his phone whenever I ask, to not hide anything. Part of me wants to believe him because I love him, but another part of me feels like I've heard these promises before. We agreed to work on rebuilding trust, but I told him this is his last chance. I can't keep going through this emotional rollercoaster.",
+        tags: ["relationship", "communication", "trust"]
+      },
+      {
+        id: 3,
+        date: "May 11, 2025", 
+        time: "2:15 PM",
+        mood: "Confused and hurt",
+        moodScore: 3,
+        title: "Found something on his phone",
+        fullContent: "I wasn't trying to snoop, I swear. Jake's phone was charging next to me and a text popped up from someone named 'Sarah' with a heart emoji. My stomach dropped. The preview said 'can't wait to see you tomorrow' with a kissy face. I've never heard him mention a Sarah before. When he came back from the kitchen, I asked him about it and he got super defensive, saying it was just a coworker and that I was being paranoid. But why does a coworker have a heart emoji next to her name? Why is she sending kissy faces? He snatched his phone away and said I need to trust him more. But how can I trust him when he's being so secretive? I feel like I'm going crazy. Maybe I am being paranoid, but something in my gut tells me this isn't innocent. I can't shake this feeling that he's hiding something from me.",
+        tags: ["relationship", "trust", "infidelity"]
+      }
+    ];
+  };
+
+  const journalEntries = getStoredEntries();
+
+  // Generate dynamic insights based on recent entries
+  const generateRecentInsights = (entries) => {
+    const recentEntries = entries.slice(0, 3); // Get 3 most recent entries
+    const insights = [];
+
+    recentEntries.forEach(entry => {
+      const content = entry.fullContent.toLowerCase();
+      const title = entry.title.toLowerCase();
+      
+      // Generate specific insights based on content
+      if (content.includes("didn't come home") || content.includes("never came home") || title.includes("never came home")) {
+        insights.push({
+          type: "concern",
+          title: "Reliability Concerns",
+          content: "Your recent entry about Jake not coming home shows a pattern of unreliability that's affecting your sense of security in the relationship.",
+          confidence: 92,
+          icon: AlertTriangle,
+          entryDate: entry.date
+        });
+      }
+      
+      if (content.includes("trust") && entry.moodScore <= 5) {
+        insights.push({
+          type: "trust",
+          title: "Trust Rebuilding Process", 
+          content: "Your entries show you're working through trust issues. Setting clear expectations and boundaries is a healthy approach.",
+          confidence: 89,
+          icon: Heart,
+          entryDate: entry.date
+        });
+      }
+
+      if (content.includes("talked") || content.includes("conversation")) {
+        insights.push({
+          type: "communication",
+          title: "Communication Growth",
+          content: "You're actively engaging in difficult conversations, which shows emotional maturity and commitment to resolving issues.",
+          confidence: 91,
+          icon: MessageCircle,
+          entryDate: entry.date
+        });
+      }
+
+      if (content.includes("gut") || content.includes("instinct") || content.includes("feeling")) {
+        insights.push({
+          type: "intuition",
+          title: "Trusting Your Intuition",
+          content: "Your entries show you're learning to trust your instincts. This self-awareness is a valuable tool for making decisions.",
+          confidence: 88,
+          icon: Brain,
+          entryDate: entry.date
+        });
+      }
+
+      if (content.includes("last chance") || content.includes("boundaries")) {
+        insights.push({
+          type: "boundaries",
+          title: "Setting Clear Boundaries",
+          content: "You're establishing important boundaries and consequences. This shows growth in self-advocacy and relationship management.",
+          confidence: 94,
+          icon: Target,
+          entryDate: entry.date
+        });
+      }
+    });
+
+    // Remove duplicates and limit to 3 most relevant insights
+    const uniqueInsights = insights.filter((insight, index, self) => 
+      index === self.findIndex(i => i.type === insight.type)
+    ).slice(0, 3);
+
+    // If no specific insights found, provide default ones
+    if (uniqueInsights.length === 0) {
+      return [
+        {
+          type: "reflection",
+          title: "Processing Your Experiences",
+          content: "Your recent entries show thoughtful reflection on your relationships and emotions. This self-awareness is a sign of personal growth.",
+          confidence: 85,
+          icon: Brain,
+          entryDate: recentEntries[0]?.date || "Recent"
+        }
+      ];
+    }
+
+    return uniqueInsights;
+  };
+
+  const recentInsights = generateRecentInsights(journalEntries);
 
   // General behavioral/emotional trends
   const generalTrends = [
@@ -46,7 +143,7 @@ export const NotesDashboard = () => {
     },
     {
       type: "boundary",
-      title: "Boundary Setting Development",
+      title: "Boundary Setting Development", 
       content: "You've mentioned boundaries or 'last chances' in 60% of your recent relationship entries, showing growing assertiveness.",
       confidence: 82,
       icon: Target,

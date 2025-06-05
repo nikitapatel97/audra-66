@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -17,36 +17,54 @@ export const JournalingDashboard = () => {
 
   const availableTags = ["relationship", "growth", "redflags", "patterns", "exes"];
 
-  const [journalEntries, setJournalEntries] = useState([
-    {
-      id: 2,
-      date: "May 13, 2025",
-      time: "8:30 PM",
-      mood: "Cautiously hopeful",
-      moodScore: 5,
-      title: "The long talk we needed to have",
-      preview: "Jake and I finally sat down and talked about what I found on his phone. He swore it was nothing, that she's just a coworker, but I could see the guilt in his eyes...",
-      fullContent: "Jake and I finally sat down and talked about what I found on his phone. He swore it was nothing, that she's just a coworker, but I could see the guilt in his eyes. He admitted that he's been 'friendly' with her but insisted nothing physical happened. I told him how it made me feel - like I couldn't trust him, like I was going crazy questioning everything. He cried and said he never meant to hurt me, that he'll be completely transparent from now on. He promised to be better, to show me his phone whenever I ask, to not hide anything. Part of me wants to believe him because I love him, but another part of me feels like I've heard these promises before. We agreed to work on rebuilding trust, but I told him this is his last chance. I can't keep going through this emotional rollercoaster.",
-      insights: ["You're communicating your needs clearly", "Trust issues need concrete actions to heal", "You're setting boundaries"],
-      tags: ["relationship", "communication", "trust"],
-      wordCount: 203,
-      readTime: "2 min"
-    },
-    {
-      id: 3,
-      date: "May 11, 2025",
-      time: "2:15 PM",
-      mood: "Confused and hurt",
-      moodScore: 3,
-      title: "Found something on his phone",
-      preview: "I wasn't trying to snoop, I swear. Jake's phone was charging next to me and a text popped up from someone named 'Sarah' with a heart emoji...",
-      fullContent: "I wasn't trying to snoop, I swear. Jake's phone was charging next to me and a text popped up from someone named 'Sarah' with a heart emoji. My stomach dropped. The preview said 'can't wait to see you tomorrow' with a kissy face. I've never heard him mention a Sarah before. When he came back from the kitchen, I asked him about it and he got super defensive, saying it was just a coworker and that I was being paranoid. But why does a coworker have a heart emoji next to her name? Why is she sending kissy faces? He snatched his phone away and said I need to trust him more. But how can I trust him when he's being so secretive? I feel like I'm going crazy. Maybe I am being paranoid, but something in my gut tells me this isn't innocent. I can't shake this feeling that he's hiding something from me.",
-      insights: ["Trust your intuition when something feels off", "Defensive reactions often hide guilt", "You deserve transparency in relationships"],
-      tags: ["relationship", "trust", "infidelity"],
-      wordCount: 183,
-      readTime: "2 min"
+  // Load entries from localStorage on mount
+  const loadEntriesFromStorage = () => {
+    try {
+      const stored = localStorage.getItem('journalEntries');
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch (error) {
+      console.log('Error loading entries from storage');
     }
-  ]);
+    return [
+      {
+        id: 2,
+        date: "May 13, 2025",
+        time: "8:30 PM",
+        mood: "Cautiously hopeful",
+        moodScore: 5,
+        title: "The long talk we needed to have",
+        preview: "Jake and I finally sat down and talked about what I found on his phone. He swore it was nothing, that she's just a coworker, but I could see the guilt in his eyes...",
+        fullContent: "Jake and I finally sat down and talked about what I found on his phone. He swore it was nothing, that she's just a coworker, but I could see the guilt in his eyes. He admitted that he's been 'friendly' with her but insisted nothing physical happened. I told him how it made me feel - like I couldn't trust him, like I was going crazy questioning everything. He cried and said he never meant to hurt me, that he'll be completely transparent from now on. He promised to be better, to show me his phone whenever I ask, to not hide anything. Part of me wants to believe him because I love him, but another part of me feels like I've heard these promises before. We agreed to work on rebuilding trust, but I told him this is his last chance. I can't keep going through this emotional rollercoaster.",
+        insights: ["You're communicating your needs clearly", "Trust issues need concrete actions to heal", "You're setting boundaries"],
+        tags: ["relationship", "communication", "trust"],
+        wordCount: 203,
+        readTime: "2 min"
+      },
+      {
+        id: 3,
+        date: "May 11, 2025",
+        time: "2:15 PM",
+        mood: "Confused and hurt",
+        moodScore: 3,
+        title: "Found something on his phone",
+        preview: "I wasn't trying to snoop, I swear. Jake's phone was charging next to me and a text popped up from someone named 'Sarah' with a heart emoji...",
+        fullContent: "I wasn't trying to snoop, I swear. Jake's phone was charging next to me and a text popped up from someone named 'Sarah' with a heart emoji. My stomach dropped. The preview said 'can't wait to see you tomorrow' with a kissy face. I've never heard him mention a Sarah before. When he came back from the kitchen, I asked him about it and he got super defensive, saying it was just a coworker and that I was being paranoid. But why does a coworker have a heart emoji next to her name? Why is she sending kissy faces? He snatched his phone away and said I need to trust him more. But how can I trust him when he's being so secretive? I feel like I'm going crazy. Maybe I am being paranoid, but something in my gut tells me this isn't innocent. I can't shake this feeling that he's hiding something from me.",
+        insights: ["Trust your intuition when something feels off", "Defensive reactions often hide guilt", "You deserve transparency in relationships"],
+        tags: ["relationship", "trust", "infidelity"],
+        wordCount: 183,
+        readTime: "2 min"
+      }
+    ];
+  };
+
+  const [journalEntries, setJournalEntries] = useState(loadEntriesFromStorage);
+
+  // Save entries to localStorage whenever journalEntries changes
+  useEffect(() => {
+    localStorage.setItem('journalEntries', JSON.stringify(journalEntries));
+  }, [journalEntries]);
 
   const moodData = [
     { day: "Mon", mood: 6, entries: 1 },

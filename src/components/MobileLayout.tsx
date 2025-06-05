@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { MobileNavigation } from "@/components/MobileNavigation";
+import { Navigation } from "@/components/Navigation";
 import { JournalingDashboard } from "@/components/JournalingDashboard";
 import { NotesDashboard } from "@/components/NotesDashboard";
 import { MobileChatbotDashboard } from "@/components/MobileChatbotDashboard";
@@ -27,8 +28,11 @@ export const MobileLayout = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Top Navigation */}
+      <Navigation />
+      
       {/* Mobile Content */}
-      <div className="pb-20">
+      <div className="pt-16 pb-20">
         {renderActiveTab()}
       </div>
 

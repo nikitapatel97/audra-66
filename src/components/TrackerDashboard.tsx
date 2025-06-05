@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -174,6 +173,7 @@ export const TrackerDashboard = () => {
             <CardTitle className="flex items-center space-x-2 text-lg font-normal font-playfair">
               <span>Monthly Activity</span>
             </CardTitle>
+            <p className="text-sm text-gray-600 font-crimson">Days Angry + Frustrated</p>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[400px] w-full">

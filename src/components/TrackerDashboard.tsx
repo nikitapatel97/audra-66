@@ -1,7 +1,8 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, Plus, Calendar, Target, TrendingUp, Heart } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, Target, TrendingUp, Heart } from "lucide-react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
 
@@ -137,12 +138,9 @@ export const TrackerDashboard = () => {
               <ChevronLeft className="w-4 h-4" />
             </Button>
             
-            <div className="flex items-center space-x-2">
-              <Calendar className="w-5 h-5 text-gray-600" />
-              <h3 className="text-xl font-light text-gray-900 font-playfair">
-                {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
-              </h3>
-            </div>
+            <h3 className="text-xl font-light text-gray-900 font-playfair whitespace-nowrap">
+              {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+            </h3>
             
             <Button
               variant="outline"

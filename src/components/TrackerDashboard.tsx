@@ -14,6 +14,30 @@ export const TrackerDashboard = () => {
     "July", "August", "September", "October", "November", "December"
   ];
 
+  const emotions = ["calm", "content", "happy", "excited", "stressed", "frustrated", "angry", "overwhelmed"];
+  
+  const getEmotionValue = (emotion: string) => {
+    const emotionMap: { [key: string]: number } = {
+      "calm": 2,
+      "content": 3,
+      "happy": 4,
+      "excited": 5,
+      "stressed": 6,
+      "frustrated": 7,
+      "angry": 8,
+      "overwhelmed": 9
+    };
+    return emotionMap[emotion] || 3;
+  };
+
+  const getRandomEmotion = (isSpike: boolean) => {
+    if (isSpike) {
+      return emotions[Math.floor(Math.random() * 3) + 5]; // stressed, frustrated, angry, overwhelmed
+    } else {
+      return emotions[Math.floor(Math.random() * 4)]; // calm, content, happy, excited
+    }
+  };
+
   const navigateMonth = (direction: 'prev' | 'next') => {
     setCurrentDate(prev => {
       const newDate = new Date(prev);
@@ -37,14 +61,16 @@ export const TrackerDashboard = () => {
     
     const data = [];
     for (let day = 1; day <= daysInMonth; day++) {
-      const alyssa = alyssaSpikes.includes(day) ? Math.random() * 3 + 7 : Math.random() * 2 + 3;
-      const jake = jakeSpikes.includes(day) ? Math.random() * 3 + 7 : Math.random() * 2 + 3;
+      const alyssaEmotion = getRandomEmotion(alyssaSpikes.includes(day));
+      const jakeEmotion = getRandomEmotion(jakeSpikes.includes(day));
       
       data.push({
         day: day,
         date: `${month + 1}/${day}`,
-        alyssa: Math.round(alyssa * 10) / 10,
-        jake: Math.round(jake * 10) / 10,
+        alyssa: getEmotionValue(alyssaEmotion),
+        jake: getEmotionValue(jakeEmotion),
+        alyssaEmotion: alyssaEmotion,
+        jakeEmotion: jakeEmotion,
       });
     }
     return data;
@@ -61,6 +87,31 @@ export const TrackerDashboard = () => {
       label: "Jake (Partner)",
       color: "#3b82f6", // blue-500
     },
+  };
+
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
+          <p className="font-medium mb-2">{`Day ${label}`}</p>
+          {payload.map((entry: any, index: number) => (
+            <div key={index} className="flex items-center space-x-2">
+              <div 
+                className="w-3 h-3 rounded-full" 
+                style={{ backgroundColor: entry.color }}
+              />
+              <span className="text-sm">
+                {entry.name === "alyssa" ? "Alyssa" : "Jake (Partner)"}: {" "}
+                <span className="font-medium">
+                  {entry.name === "alyssa" ? entry.payload.alyssaEmotion : entry.payload.jakeEmotion}
+                </span>
+              </span>
+            </div>
+          ))}
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -127,7 +178,7 @@ export const TrackerDashboard = () => {
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[400px] w-full">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                <LineChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 20 }}>
                   <XAxis 
                     dataKey="day" 
                     axisLine={false}
@@ -135,15 +186,9 @@ export const TrackerDashboard = () => {
                     tick={{ fontSize: 12, fill: '#6b7280' }}
                     interval="preserveStartEnd"
                   />
-                  <YAxis 
-                    axisLine={false}
-                    tickLine={false}
-                    tick={{ fontSize: 12, fill: '#6b7280' }}
-                    domain={[0, 10]}
-                  />
+                  <YAxis hide />
                   <ChartTooltip 
-                    content={<ChartTooltipContent />}
-                    labelFormatter={(value) => `Day ${value}`}
+                    content={<CustomTooltip />}
                   />
                   <Line
                     type="monotone"

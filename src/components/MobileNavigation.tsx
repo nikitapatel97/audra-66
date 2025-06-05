@@ -9,7 +9,7 @@ interface MobileNavigationProps {
 
 export const MobileNavigation = ({ activeTab, onTabChange }: MobileNavigationProps) => {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-md border-t border-purple-500/30 z-50 md:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-md border-t border-purple-500/30 z-50">
       <div className="flex items-center justify-around py-2">
         <Button
           variant="ghost"

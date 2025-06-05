@@ -53,10 +53,10 @@ export const MobileChatbotDashboard = () => {
   };
 
   return (
-    <div className="px-4 bg-white h-screen flex flex-col">
+    <div className="px-2 bg-white h-screen flex flex-col">
       <div className="max-w-6xl mx-auto flex-1 flex flex-col min-h-0">
-        <div className="text-center py-1">
-          <h2 className="text-xl md:text-2xl font-light text-gray-900 font-playfair">
+        <div className="text-center">
+          <h2 className="text-lg font-light text-gray-900 font-playfair">
             Chat with{" "}
             <span className="italic text-gray-600 font-playfair">
               Audra
@@ -64,26 +64,26 @@ export const MobileChatbotDashboard = () => {
           </h2>
         </div>
 
-        <div className="flex-1 flex flex-col min-h-0">
+        <div className="flex-1 flex flex-col min-h-0 mt-1">
           {/* Chat Container */}
           <Card className="flex-1 flex flex-col overflow-hidden border-gray-200 min-h-0">
-            <div className="flex-1 p-2 overflow-y-auto space-y-1 min-h-0">
+            <div className="flex-1 p-1 overflow-y-auto space-y-1 min-h-0">
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex gap-3 ${
+                  className={`flex gap-2 ${
                     message.type === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
                   {message.type === "ai" && (
-                    <Avatar className="w-8 h-8 flex-shrink-0">
-                      <AvatarFallback className="bg-gray-900 text-white text-sm">
+                    <Avatar className="w-6 h-6 flex-shrink-0">
+                      <AvatarFallback className="bg-gray-900 text-white text-xs">
                         A
                       </AvatarFallback>
                     </Avatar>
                   )}
                   <div
-                    className={`max-w-[75%] rounded-3xl px-4 py-3 text-sm font-crimson ${
+                    className={`max-w-[75%] rounded-3xl px-3 py-2 text-sm font-crimson ${
                       message.type === "user"
                         ? "bg-gray-900 text-white"
                         : "bg-gray-100 text-gray-900"
@@ -95,13 +95,13 @@ export const MobileChatbotDashboard = () => {
               ))}
               
               {isTyping && (
-                <div className="flex gap-3 justify-start">
-                  <Avatar className="w-8 h-8 flex-shrink-0">
-                    <AvatarFallback className="bg-gray-900 text-white text-sm">
+                <div className="flex gap-2 justify-start">
+                  <Avatar className="w-6 h-6 flex-shrink-0">
+                    <AvatarFallback className="bg-gray-900 text-white text-xs">
                       A
                     </AvatarFallback>
                   </Avatar>
-                  <div className="bg-gray-100 rounded-3xl px-4 py-3">
+                  <div className="bg-gray-100 rounded-3xl px-3 py-2">
                     <div className="flex space-x-1">
                       <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                       <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
@@ -114,7 +114,7 @@ export const MobileChatbotDashboard = () => {
           </Card>
 
           {/* Input */}
-          <div className="flex gap-3 mt-2 pb-1">
+          <div className="flex gap-2 mt-1 pb-1">
             <Input
               placeholder="Type your message..."
               value={inputMessage}
@@ -124,7 +124,7 @@ export const MobileChatbotDashboard = () => {
             />
             <Button
               onClick={handleSendMessage}
-              className="bg-gray-900 hover:bg-gray-800 px-4"
+              className="bg-gray-900 hover:bg-gray-800 px-3"
             >
               <Send className="w-4 h-4" />
             </Button>

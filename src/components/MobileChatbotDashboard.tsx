@@ -84,69 +84,69 @@ export const MobileChatbotDashboard = () => {
   };
 
   return (
-    <div className="py-2 px-4 bg-white h-screen flex flex-col">
-      <div className="max-w-6xl mx-auto flex-1 flex flex-col">
-        <div className="text-center mb-4">
-          <h2 className="text-3xl md:text-5xl font-light text-gray-900 font-playfair">
-            Chat with{" "}
-            <span className="italic text-gray-600 font-playfair">
-              Audra
-            </span>
-          </h2>
-        </div>
+    <div className="h-screen bg-white flex flex-col">
+      <div className="flex-shrink-0 px-4 pt-4 pb-2">
+        <h2 className="text-2xl md:text-3xl font-light text-gray-900 font-playfair text-center">
+          Chat with{" "}
+          <span className="italic text-gray-600 font-playfair">
+            Audra
+          </span>
+        </h2>
+      </div>
 
-        <div className="flex-1 flex flex-col min-h-0">
-          {/* Chat Container - Made much smaller */}
-          <div className="h-80 border border-gray-200 rounded-lg overflow-hidden flex flex-col">
-            <div className="flex-1 p-3 overflow-y-auto">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex gap-2 mb-3 ${
-                    message.type === "user" ? "justify-end" : "justify-start"
-                  }`}
-                >
-                  {message.type === "ai" && (
-                    <Avatar className="w-6 h-6 flex-shrink-0">
-                      <AvatarFallback className="bg-gray-900 text-white text-xs">
-                        A
-                      </AvatarFallback>
-                    </Avatar>
-                  )}
-                  <div
-                    className={`max-w-[75%] rounded-3xl px-3 py-2 text-sm font-crimson ${
-                      message.type === "user"
-                        ? "bg-gray-900 text-white"
-                        : "bg-gray-100 text-gray-900"
-                    }`}
-                  >
-                    {message.content}
-                  </div>
-                </div>
-              ))}
-              
-              {isTyping && (
-                <div className="flex gap-2 justify-start mb-3">
+      <div className="flex-1 flex flex-col min-h-0 px-4">
+        {/* Chat Container - Uses available space */}
+        <div className="flex-1 border border-gray-200 rounded-lg overflow-hidden flex flex-col mb-4">
+          <div className="flex-1 p-3 overflow-y-auto">
+            {messages.map((message) => (
+              <div
+                key={message.id}
+                className={`flex gap-2 mb-3 ${
+                  message.type === "user" ? "justify-end" : "justify-start"
+                }`}
+              >
+                {message.type === "ai" && (
                   <Avatar className="w-6 h-6 flex-shrink-0">
                     <AvatarFallback className="bg-gray-900 text-white text-xs">
                       A
                     </AvatarFallback>
                   </Avatar>
-                  <div className="bg-gray-100 rounded-3xl px-3 py-2">
-                    <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
-                    </div>
+                )}
+                <div
+                  className={`max-w-[75%] rounded-3xl px-3 py-2 text-sm font-crimson ${
+                    message.type === "user"
+                      ? "bg-gray-900 text-white"
+                      : "bg-gray-100 text-gray-900"
+                  }`}
+                >
+                  {message.content}
+                </div>
+              </div>
+            ))}
+            
+            {isTyping && (
+              <div className="flex gap-2 justify-start mb-3">
+                <Avatar className="w-6 h-6 flex-shrink-0">
+                  <AvatarFallback className="bg-gray-900 text-white text-xs">
+                    A
+                  </AvatarFallback>
+                </Avatar>
+                <div className="bg-gray-100 rounded-3xl px-3 py-2">
+                  <div className="flex space-x-1">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
                   </div>
                 </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
           </div>
+        </div>
 
-          {/* Input - Now more visible */}
-          <div className="flex gap-3 mt-4">
+        {/* Input - Fixed at bottom */}
+        <div className="flex-shrink-0 pb-4">
+          <div className="flex gap-3">
             <Input
               placeholder="Type your message..."
               value={inputMessage}

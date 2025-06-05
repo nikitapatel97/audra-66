@@ -1,55 +1,56 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Calendar, Heart, TrendingUp, MessageCircle, BookOpen, Star, Clock, Target, Sparkles, ChevronRight, PenTool, Smile, Frown, Meh } from "lucide-react";
+import { Calendar, Heart, TrendingUp, MessageCircle, BookOpen, Star, Clock, Target, Sparkles, ChevronRight, PenTool, Smile, Frown, Meh, X } from "lucide-react";
 
 export const JournalingDashboard = () => {
-  const [selectedEntry, setSelectedEntry] = useState(0);
+  const [selectedEntry, setSelectedEntry] = useState<number | null>(null);
 
   const journalEntries = [
     {
       id: 1,
-      date: "Today",
-      time: "2:15 PM",
-      mood: "Confused but hopeful",
-      moodScore: 6,
-      title: "Coffee date aftermath",
-      preview: "Had coffee with Alex today and I'm honestly not sure what to think. The conversation flowed really well and there were definitely some moments that felt...",
-      insights: ["You tend to overthink mixed signals", "Your anxiety peaks after social interactions", "Writing helps you process complex emotions"],
-      tags: ["dating", "anxiety", "self-reflection"],
-      wordCount: 247,
-      readTime: "2 min",
-      aiSummary: "You're processing mixed signals from a coffee date with Alex. While the interaction felt positive, you're experiencing post-social anxiety and uncertainty about their intentions."
+      date: "January 15, 2024",
+      time: "11:47 PM",
+      mood: "Devastated",
+      moodScore: 2,
+      title: "He never came home",
+      preview: "Jake said he was going out for drinks with Sarah from work after their project meeting. That was at 6 PM. It's almost midnight and he's not answering his phone...",
+      fullContent: "Jake said he was going out for drinks with Sarah from work after their project meeting. That was at 6 PM. It's almost midnight and he's not answering his phone. After everything we talked about just two days ago, after all his promises about being better and more honest, he does this. I can't stop thinking about that girl's name I saw on his phone three days ago. Is this Sarah the same person? I feel so stupid for believing him when he said it was nothing. I gave him another chance and this is what I get. I can't do this anymore. I deserve better than wondering where my boyfriend is at midnight, wondering if he's with another woman. This feels like the final straw. I'm done making excuses for him.",
+      insights: ["You're recognizing patterns of broken trust", "Your boundaries are becoming clearer", "You're valuing your self-worth"],
+      tags: ["relationship", "betrayal", "boundaries"],
+      wordCount: 156,
+      readTime: "2 min"
     },
     {
       id: 2,
-      date: "Yesterday",
-      time: "11:30 PM",
-      mood: "Frustrated",
-      moodScore: 4,
-      title: "Why is dating so complicated?",
-      preview: "Ugh, I'm so tired of trying to decode every text message and wondering if someone actually likes me or if they're just being polite. When did everything become so...",
-      insights: ["You value direct communication", "Uncertainty triggers your stress response", "You're seeking authentic connections"],
-      tags: ["dating", "communication", "frustration"],
-      wordCount: 156,
-      readTime: "1 min",
-      aiSummary: "You're expressing frustration with modern dating communication patterns and the difficulty of reading people's true intentions."
+      date: "January 13, 2024",
+      time: "8:30 PM",
+      mood: "Cautiously hopeful",
+      moodScore: 5,
+      title: "The long talk we needed to have",
+      preview: "Jake and I finally sat down and talked about what I found on his phone. He swore it was nothing, that she's just a coworker, but I could see the guilt in his eyes...",
+      fullContent: "Jake and I finally sat down and talked about what I found on his phone. He swore it was nothing, that she's just a coworker, but I could see the guilt in his eyes. He admitted that he's been 'friendly' with her but insisted nothing physical happened. I told him how it made me feel - like I couldn't trust him, like I was going crazy questioning everything. He cried and said he never meant to hurt me, that he'll be completely transparent from now on. He promised to be better, to show me his phone whenever I ask, to not hide anything. Part of me wants to believe him because I love him, but another part of me feels like I've heard these promises before. We agreed to work on rebuilding trust, but I told him this is his last chance. I can't keep going through this emotional rollercoaster.",
+      insights: ["You're communicating your needs clearly", "Trust issues need concrete actions to heal", "You're setting boundaries"],
+      tags: ["relationship", "communication", "trust"],
+      wordCount: 203,
+      readTime: "2 min"
     },
     {
       id: 3,
-      date: "3 days ago",
-      time: "7:45 AM",
-      mood: "Optimistic",
-      moodScore: 8,
-      title: "New mindset, new me?",
-      preview: "I've been thinking about what my therapist said about focusing on my own growth instead of trying to figure out what other people want from me...",
-      insights: ["You're embracing personal growth", "Therapy insights are resonating", "You're shifting from external to internal validation"],
-      tags: ["growth", "therapy", "self-love"],
-      wordCount: 203,
-      readTime: "2 min",
-      aiSummary: "You're reflecting on therapeutic insights about self-focus and personal growth, showing a positive shift in mindset."
+      date: "January 11, 2024",
+      time: "2:15 PM",
+      mood: "Confused and hurt",
+      moodScore: 3,
+      title: "Found something on his phone",
+      preview: "I wasn't trying to snoop, I swear. Jake's phone was charging next to me and a text popped up from someone named 'Sarah' with a heart emoji...",
+      fullContent: "I wasn't trying to snoop, I swear. Jake's phone was charging next to me and a text popped up from someone named 'Sarah' with a heart emoji. My stomach dropped. The preview said 'can't wait to see you tomorrow' with a kissy face. I've never heard him mention a Sarah before. When he came back from the kitchen, I asked him about it and he got super defensive, saying it was just a coworker and that I was being paranoid. But why does a coworker have a heart emoji next to her name? Why is she sending kissy faces? He snatched his phone away and said I need to trust him more. But how can I trust him when he's being so secretive? I feel like I'm going crazy. Maybe I am being paranoid, but something in my gut tells me this isn't innocent. I can't shake this feeling that he's hiding something from me.",
+      insights: ["Trust your intuition when something feels off", "Defensive reactions often hide guilt", "You deserve transparency in relationships"],
+      tags: ["relationship", "trust", "infidelity"],
+      wordCount: 183,
+      readTime: "2 min"
     }
   ];
 
@@ -117,7 +118,7 @@ export const JournalingDashboard = () => {
             growth journey
           </h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto font-crimson italic">
-            Track your emotional patterns, celebrate progress, and discover insights about yourself through intelligent journaling.
+            Discover insights about yourself through intelligent journaling.
           </p>
         </div>
 
@@ -162,6 +163,19 @@ export const JournalingDashboard = () => {
               <p className="text-sm text-gray-600 font-crimson">Day streak</p>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Start New Entry CTA */}
+        <div className="text-center mb-12 bg-gray-50 rounded-lg p-8 border border-gray-200">
+          <BookOpen className="w-12 h-12 text-gray-600 mx-auto mb-4" />
+          <h3 className="text-2xl font-light text-gray-900 mb-4 font-playfair">Ready to continue writing?</h3>
+          <p className="text-gray-700 mb-6 max-w-2xl mx-auto font-crimson italic">
+            Capture today's thoughts, process your emotions, and unlock deeper insights about yourself.
+          </p>
+          <Button className="bg-gray-900 hover:bg-gray-800 border-0 font-crimson">
+            Start New Entry
+            <PenTool className="ml-2 w-4 h-4" />
+          </Button>
         </div>
 
         {/* Main Dashboard Grid */}
@@ -297,20 +311,56 @@ export const JournalingDashboard = () => {
             </Card>
           </div>
         </div>
-
-        {/* CTA Section */}
-        <div className="text-center mt-16 bg-gray-50 rounded-lg p-8 border border-gray-200">
-          <BookOpen className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-          <h3 className="text-2xl font-light text-gray-900 mb-4 font-playfair">Ready to continue writing?</h3>
-          <p className="text-gray-700 mb-6 max-w-2xl mx-auto font-crimson italic">
-            Capture today's thoughts, process your emotions, and unlock deeper insights about yourself.
-          </p>
-          <Button className="bg-gray-900 hover:bg-gray-800 border-0 font-crimson">
-            Start New Entry
-            <PenTool className="ml-2 w-4 h-4" />
-          </Button>
-        </div>
       </div>
+
+      {/* Full Entry Modal */}
+      {selectedEntry !== null && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  {getMoodIcon(journalEntries[selectedEntry].moodScore)}
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getMoodColor(journalEntries[selectedEntry].moodScore)}`}>
+                    {journalEntries[selectedEntry].mood}
+                  </span>
+                </div>
+                <Button variant="ghost" size="icon" onClick={() => setSelectedEntry(null)}>
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+              
+              <div className="text-right mb-4">
+                <p className="text-sm text-gray-600 font-crimson">{journalEntries[selectedEntry].date}</p>
+                <p className="text-xs text-gray-500 font-crimson">{journalEntries[selectedEntry].time}</p>
+              </div>
+              
+              <h2 className="text-2xl font-normal text-gray-900 mb-4 font-playfair">{journalEntries[selectedEntry].title}</h2>
+              <p className="text-gray-700 leading-relaxed mb-6 font-crimson italic">{journalEntries[selectedEntry].fullContent}</p>
+              
+              <div className="border-t pt-4">
+                <h3 className="text-lg font-normal text-gray-900 mb-3 font-playfair">AI Insights</h3>
+                <ul className="space-y-2">
+                  {journalEntries[selectedEntry].insights.map((insight, index) => (
+                    <li key={index} className="flex items-start space-x-2">
+                      <span className="w-1.5 h-1.5 bg-gray-600 rounded-full mt-2 flex-shrink-0"></span>
+                      <span className="text-sm text-gray-700 font-crimson italic">{insight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="flex flex-wrap gap-2 mt-4">
+                {journalEntries[selectedEntry].tags.map((tag) => (
+                  <Badge key={tag} variant="secondary" className="text-xs bg-gray-100 text-gray-700">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

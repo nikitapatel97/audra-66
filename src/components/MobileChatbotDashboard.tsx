@@ -1,9 +1,9 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Send } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Send, Info } from "lucide-react";
 
 interface Message {
   id: number;
@@ -77,13 +77,16 @@ export const MobileChatbotDashboard = ({ onNavigateToTools }: MobileChatbotDashb
                           currentInput.toLowerCase().includes("feel invisible");
 
     if (isDemoMessage1) {
-      // Demo response 1 with longer loading time
+      // Demo response 1 with calendar update badge
       setTimeout(() => {
         const aiResponse: Message = {
           id: Date.now() + 1,
           type: "ai",
           content: demoResponse1,
           timestamp: new Date(),
+          hasButton: true,
+          buttonText: "Calendar Updated",
+          buttonAction: undefined, // Non-clickable
         };
         
         console.log("AI demo response 1:", demoResponse1);
@@ -181,13 +184,25 @@ export const MobileChatbotDashboard = ({ onNavigateToTools }: MobileChatbotDashb
                     {message.content}
                   </div>
                   {message.hasButton && message.buttonText && (
-                    <Button
-                      onClick={message.buttonAction}
-                      className="mt-2 bg-gray-900 hover:bg-gray-800 text-white text-xs px-3 py-1 h-auto self-start"
-                      size="sm"
-                    >
-                      {message.buttonText}
-                    </Button>
+                    <>
+                      {message.buttonAction ? (
+                        <Button
+                          onClick={message.buttonAction}
+                          className="mt-2 bg-gray-900 hover:bg-gray-800 text-white text-xs px-3 py-1 h-auto self-start"
+                          size="sm"
+                        >
+                          {message.buttonText}
+                        </Button>
+                      ) : (
+                        <Badge
+                          variant="outline"
+                          className="mt-2 bg-blue-50 border-blue-200 text-blue-700 text-xs px-3 py-1 self-start flex items-center gap-1"
+                        >
+                          <Info className="w-3 h-3" />
+                          {message.buttonText}
+                        </Badge>
+                      )}
+                    </>
                   )}
                 </div>
               </div>

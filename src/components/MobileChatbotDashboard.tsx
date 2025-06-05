@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -68,9 +69,6 @@ export const MobileChatbotDashboard = () => {
               Audra
             </span>
           </h2>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto font-crimson italic">
-            Your AI companion for emotional growth and deeper connections
-          </p>
         </div>
 
         <div className="space-y-6">

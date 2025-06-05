@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Heart, BookOpen, FileText, MessageCircle, Crown, Users } from "lucide-react";
+import { BookOpen, FileText, MessageCircle, BarChart3 } from "lucide-react";
 
 interface MobileNavigationProps {
   activeTab: string;
@@ -56,29 +56,15 @@ export const MobileNavigation = ({ activeTab, onTabChange }: MobileNavigationPro
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => onTabChange("social")}
+          onClick={() => onTabChange("tracker")}
           className={`flex flex-col items-center gap-1 px-2 py-2 ${
-            activeTab === "social" 
+            activeTab === "tracker" 
               ? "text-purple-400 bg-purple-500/20" 
               : "text-purple-200"
           }`}
         >
-          <Users className="w-4 h-4" />
-          <span className="text-xs">Social</span>
-        </Button>
-        
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => onTabChange("premium")}
-          className={`flex flex-col items-center gap-1 px-2 py-2 ${
-            activeTab === "premium" 
-              ? "text-yellow-400 bg-yellow-500/20" 
-              : "text-purple-200"
-          }`}
-        >
-          <Crown className="w-4 h-4" />
-          <span className="text-xs">Premium</span>
+          <BarChart3 className="w-4 h-4" />
+          <span className="text-xs">Tracker</span>
         </Button>
       </div>
     </nav>

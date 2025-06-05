@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Calendar, Heart, TrendingUp, MessageCircle, Target, Sparkles, ChevronRight, PenTool, Smile, Frown, Meh, X, Clock, Tag, Search } from "lucide-react";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { Calendar, Heart, TrendingUp, MessageCircle, Target, Sparkles, ChevronRight, PenTool, Smile, Frown, Meh, X, Clock, Tag, Search, Trash2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 export const JournalingDashboard = () => {
@@ -112,6 +113,12 @@ export const JournalingDashboard = () => {
     const matchesTag = selectedTag ? entry.tags.includes(selectedTag) : true;
     return matchesSearch && matchesTag;
   });
+
+  // Delete entry function
+  const handleDeleteEntry = (entryId: number) => {
+    setJournalEntries(prev => prev.filter(entry => entry.id !== entryId));
+    console.log("Deleted entry with ID:", entryId);
+  };
 
   const handleSaveEntry = () => {
     // Create new entry object
@@ -374,8 +381,39 @@ export const JournalingDashboard = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredEntries.map((entry, index) => (
-              <Card key={entry.id} className="border-gray-200 hover:shadow-md transition-shadow cursor-pointer" onClick={() => setSelectedEntry(index)}>
-                <CardContent className="p-6">
+              <Card key={entry.id} className="border-gray-200 hover:shadow-md transition-shadow cursor-pointer relative group">
+                {/* Delete Button */}
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity z-10 h-8 w-8 hover:bg-red-50"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Trash2 className="w-4 h-4 text-red-500" />
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Delete Entry</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Are you sure you want to delete "{entry.title}"? This action cannot be undone.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction 
+                        onClick={() => handleDeleteEntry(entry.id)}
+                        className="bg-red-600 hover:bg-red-700"
+                      >
+                        Delete
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+
+                <CardContent className="p-6" onClick={() => setSelectedEntry(index)}>
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center space-x-3">
                       <div className="flex items-center space-x-2">

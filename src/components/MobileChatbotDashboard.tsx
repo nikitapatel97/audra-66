@@ -1,10 +1,9 @@
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Send, Heart, Sparkles, Bot } from "lucide-react";
+import { Send } from "lucide-react";
 
 interface Message {
   id: number;
@@ -24,9 +23,20 @@ export const MobileChatbotDashboard = () => {
   ]);
   const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
 
   const handleSendMessage = () => {
     if (!inputMessage.trim()) return;
+
+    console.log("Sending message:", inputMessage);
 
     const userMessage: Message = {
       id: Date.now(),
@@ -39,17 +49,38 @@ export const MobileChatbotDashboard = () => {
     setInputMessage("");
     setIsTyping(true);
 
-    // Simulate AI response
+    console.log("User message added, AI typing...");
+
+    // Simulate AI response with more varied responses
     setTimeout(() => {
+      const responses = [
+        "I understand you're going through something important. Let's explore this together. Can you tell me more about what's on your mind?",
+        "Thank you for sharing that with me. How does that make you feel?",
+        "That sounds challenging. What support do you feel you need right now?",
+        "I hear you. Sometimes talking through our feelings can help us process them better.",
+        "That's really insightful. What do you think might help you move forward?"
+      ];
+      
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+      
       const aiResponse: Message = {
         id: Date.now() + 1,
         type: "ai",
-        content: "I understand you're going through something important. Let's explore this together. Can you tell me more about what's on your mind?",
+        content: randomResponse,
         timestamp: new Date(),
       };
+      
+      console.log("AI response:", randomResponse);
       setMessages((prev) => [...prev, aiResponse]);
       setIsTyping(false);
-    }, 2000);
+    }, 1500 + Math.random() * 1000); // Variable response time
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
   };
 
   return (
@@ -110,6 +141,7 @@ export const MobileChatbotDashboard = () => {
                   </div>
                 </div>
               )}
+              <div ref={messagesEndRef} />
             </div>
           </div>
 
@@ -119,12 +151,14 @@ export const MobileChatbotDashboard = () => {
               placeholder="Type your message..."
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+              onKeyPress={handleKeyPress}
+              disabled={isTyping}
               className="flex-1 text-sm border-gray-200 focus:border-gray-400 font-crimson"
             />
             <Button
               onClick={handleSendMessage}
-              className="bg-gray-900 hover:bg-gray-800 px-4"
+              disabled={!inputMessage.trim() || isTyping}
+              className="bg-gray-900 hover:bg-gray-800 px-4 disabled:opacity-50"
             >
               <Send className="w-4 h-4" />
             </Button>

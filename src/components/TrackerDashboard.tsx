@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, Plus, Calendar } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, Calendar, Target, TrendingUp, Heart } from "lucide-react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
 
@@ -225,17 +225,100 @@ export const TrackerDashboard = () => {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center bg-gray-50 rounded-lg p-6 border border-gray-200">
-          <Calendar className="w-10 h-10 text-gray-600 mx-auto mb-4" />
-          <h3 className="text-xl font-light text-gray-900 mb-3 font-playfair">Track together</h3>
-          <p className="text-gray-700 mb-4 font-crimson italic">
-            Build stronger connections by understanding each other's patterns
-          </p>
-          <Button className="bg-gray-900 hover:bg-gray-800 border-0 font-crimson">
-            Log Today's Activity
-            <Plus className="ml-2 w-4 h-4" />
-          </Button>
+        {/* Couples Dashboard */}
+        <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+          <div className="text-center mb-6">
+            <Heart className="w-8 h-8 text-gray-600 mx-auto mb-3" />
+            <h3 className="text-2xl font-light text-gray-900 font-playfair">Couples Dashboard</h3>
+            <p className="text-gray-700 font-crimson italic">Building stronger connections together</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-6">
+            {/* Monthly Goals */}
+            <Card className="border-gray-200">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center space-x-2 text-lg font-normal font-playfair">
+                  <Target className="w-5 h-5 text-blue-600" />
+                  <span>Monthly Goals</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm text-gray-700 font-crimson">
+                  <li className="flex items-start space-x-2">
+                    <span className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Practice daily check-ins together</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Schedule weekly date nights</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Reduce stress-triggered arguments</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Areas of Improvement */}
+            <Card className="border-gray-200">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center space-x-2 text-lg font-normal font-playfair">
+                  <TrendingUp className="w-5 h-5 text-orange-600" />
+                  <span>Areas of Improvement</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm text-gray-700 font-crimson">
+                  <li className="flex items-start space-x-2">
+                    <span className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Managing work stress spillover</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Better communication during conflicts</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Creating more quality time together</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Areas of Growth */}
+            <Card className="border-gray-200">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center space-x-2 text-lg font-normal font-playfair">
+                  <Heart className="w-5 h-5 text-green-600" />
+                  <span>Areas of Growth</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm text-gray-700 font-crimson">
+                  <li className="flex items-start space-x-2">
+                    <span className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Emotional support and understanding</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Shared goal setting and planning</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Celebrating small victories together</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center">
+            <Button className="bg-gray-900 hover:bg-gray-800 border-0 font-crimson">
+              Log Today's Activity
+              <Plus className="ml-2 w-4 h-4" />
+            </Button>
+          </div>
         </div>
       </div>
     </section>

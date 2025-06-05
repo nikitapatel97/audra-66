@@ -84,16 +84,25 @@ export const MobileChatbotDashboard = () => {
   };
 
   return (
-    <div className="px-4 bg-white h-screen flex flex-col">
+    <div className="py-2 px-4 bg-white h-screen flex flex-col">
       <div className="max-w-6xl mx-auto flex-1 flex flex-col">
+        <div className="text-center mb-1">
+          <h2 className="text-3xl md:text-5xl font-light text-gray-900 font-playfair">
+            Chat with{" "}
+            <span className="italic text-gray-600 font-playfair">
+              Audra
+            </span>
+          </h2>
+        </div>
+
         <div className="flex-1 flex flex-col min-h-0">
           {/* Chat Container */}
           <div className="flex-1 border border-gray-200 rounded-lg overflow-hidden flex flex-col">
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 p-1 overflow-y-auto">
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex gap-2 ${
+                  className={`flex gap-2 mb-1 ${
                     message.type === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
@@ -117,7 +126,7 @@ export const MobileChatbotDashboard = () => {
               ))}
               
               {isTyping && (
-                <div className="flex gap-2 justify-start">
+                <div className="flex gap-2 justify-start mb-1">
                   <Avatar className="w-6 h-6 flex-shrink-0">
                     <AvatarFallback className="bg-gray-900 text-white text-xs">
                       A
@@ -137,7 +146,7 @@ export const MobileChatbotDashboard = () => {
           </div>
 
           {/* Input */}
-          <div className="flex gap-3">
+          <div className="flex gap-3 mt-1">
             <Input
               placeholder="Type your message..."
               value={inputMessage}

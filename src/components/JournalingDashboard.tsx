@@ -1,9 +1,10 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Calendar, Heart, TrendingUp, MessageCircle, BookOpen, Star, Clock, Target, Sparkles, ChevronRight, PenTool, Smile, Frown, Meh, X } from "lucide-react";
+import { Calendar, Heart, TrendingUp, MessageCircle, Target, Sparkles, ChevronRight, PenTool, Smile, Frown, Meh, X } from "lucide-react";
 
 export const JournalingDashboard = () => {
   const [selectedEntry, setSelectedEntry] = useState<number | null>(null);
@@ -163,7 +164,6 @@ export const JournalingDashboard = () => {
 
         {/* Start New Entry CTA */}
         <div className="text-center mb-12 bg-gray-50 rounded-lg p-8 border border-gray-200">
-          <BookOpen className="w-12 h-12 text-gray-600 mx-auto mb-4" />
           <Button className="bg-gray-900 hover:bg-gray-800 border-0 font-crimson">
             Start New Entry
             <PenTool className="ml-2 w-4 h-4" />

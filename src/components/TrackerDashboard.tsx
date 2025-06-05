@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -55,8 +56,8 @@ export const TrackerDashboard = () => {
     const month = currentDate.getMonth();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     
-    const alyssaSpikes = [8, 15, 16, 17, 20, 25];
-    const jakeSpikes = [9, 17, 18, 25];
+    const alyssaSpikes = [3, 8, 12, 15, 16, 17, 20, 22, 25, 28, 30];
+    const jakeSpikes = [5, 9, 13, 17, 18, 21, 23, 25, 27, 29];
     
     const data = [];
     for (let day = 1; day <= daysInMonth; day++) {

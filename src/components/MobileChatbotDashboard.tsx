@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -37,7 +36,7 @@ export const MobileChatbotDashboard = ({ onNavigateToTools }: MobileChatbotDashb
   const demoResponse1 = "You're feeling so much uncertainty right now, and that's a really tough place to be. Those feelings of anxiety and anger are completely valid, your gut is trying to protect you, and it's okay to be upset when something doesn't feel right. When everything feels tangled, a little self-care can sometimes help create space to think clearly. Maybe take a break from conversations with Jake for a bit, and find something grounding for yourself, whether it's a walk, a favorite song, or just a deep breath. Giving yourself permission to feel angry and anxious, instead of trying to \"fix\" those feelings right away, can be surprisingly comforting. If you're unsure what's true, it's okay to ask yourself what *you* need, right now and in the future, to feel safe and respected. What would help you feel a little more in control or settled tonight?";
 
   const demoMessage2 = "He stayed out all night and just came home this morning like nothing happened. He just made coffee and asked if I wanted some. No apology. I feel invisible.";
-  const demoResponse2 = "That sounds so painful — when someone acts like everything is fine while you're still hurting, it can make you feel completely unseen. Your feelings matter, and it's okay to want more acknowledgment from him.\n\nIt seems like you're at a bit of an impasse right now. This might be a good time to consider speaking with a therapist, not because something is wrong with you, but because you deserve space to feel supported, heard, and clear about what you need next.";
+  const demoResponse2 = "That sounds so painful — when someone acts like everything is fine while you're still hurting, it can make you feel completely unseen. Your feelings matter, and it's okay to want more acknowledgment from him.\n\nIt seems like you're at a bit of an impasse right now. This might be a good time to consider speaking with a therapist, not because something is wrong with you, but because you deserve space to feel supported, heard, and clear about what you need next.\n\nI noticed it's been a pattern of stress for you over the last few months, so to alleviate this burden I've cleared your calendar and added a wellness day for you on Thursday. All of your scheduled appointments have been rescheduled, and emails have been sent notifying your contacts of a subtle emergency.";
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });

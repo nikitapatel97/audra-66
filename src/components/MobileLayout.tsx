@@ -11,6 +11,10 @@ import { ToolsDashboard } from "@/components/ToolsDashboard";
 export const MobileLayout = () => {
   const [activeTab, setActiveTab] = useState("chatbot");
 
+  const handleNavigateToTools = () => {
+    setActiveTab("tools");
+  };
+
   const renderActiveTab = () => {
     switch (activeTab) {
       case "journal":
@@ -22,7 +26,7 @@ export const MobileLayout = () => {
       case "tools":
         return <ToolsDashboard />;
       default:
-        return <MobileChatbotDashboard />;
+        return <MobileChatbotDashboard onNavigateToTools={handleNavigateToTools} />;
     }
   };
 

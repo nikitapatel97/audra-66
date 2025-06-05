@@ -10,9 +10,16 @@ interface Message {
   type: "ai" | "user";
   content: string;
   timestamp: Date;
+  hasButton?: boolean;
+  buttonText?: string;
+  buttonAction?: () => void;
 }
 
-export const MobileChatbotDashboard = () => {
+interface MobileChatbotDashboardProps {
+  onNavigateToTools?: () => void;
+}
+
+export const MobileChatbotDashboard = ({ onNavigateToTools }: MobileChatbotDashboardProps) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
@@ -25,9 +32,12 @@ export const MobileChatbotDashboard = () => {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Demo message and response
-  const demoMessage = "I saw messages from Sarah on Jake's phone. They were flirty. He swore nothing was going on but now he's avoiding me. I feel anxious and angry and I don't know if I'm being paranoid or if something really is wrong.";
-  const demoResponse = "You're feeling so much uncertainty right now, and that's a really tough place to be. Those feelings of anxiety and anger are completely valid, your gut is trying to protect you, and it's okay to be upset when something doesn't feel right. When everything feels tangled, a little self-care can sometimes help create space to think clearly. Maybe take a break from conversations with Jake for a bit, and find something grounding for yourself, whether it's a walk, a favorite song, or just a deep breath. Giving yourself permission to feel angry and anxious, instead of trying to \"fix\" those feelings right away, can be surprisingly comforting. If you're unsure what's true, it's okay to ask yourself what *you* need, right now and in the future, to feel safe and respected. What would help you feel a little more in control or settled tonight?";
+  // Demo messages and responses
+  const demoMessage1 = "I saw messages from Sarah on Jake's phone. They were flirty. He swore nothing was going on but now he's avoiding me. I feel anxious and angry and I don't know if I'm being paranoid or if something really is wrong.";
+  const demoResponse1 = "You're feeling so much uncertainty right now, and that's a really tough place to be. Those feelings of anxiety and anger are completely valid, your gut is trying to protect you, and it's okay to be upset when something doesn't feel right. When everything feels tangled, a little self-care can sometimes help create space to think clearly. Maybe take a break from conversations with Jake for a bit, and find something grounding for yourself, whether it's a walk, a favorite song, or just a deep breath. Giving yourself permission to feel angry and anxious, instead of trying to \"fix\" those feelings right away, can be surprisingly comforting. If you're unsure what's true, it's okay to ask yourself what *you* need, right now and in the future, to feel safe and respected. What would help you feel a little more in control or settled tonight?";
+
+  const demoMessage2 = "He stayed out all night and just came home this morning like nothing happened. He just made coffee and asked if I wanted some. No apology. I feel invisible.";
+  const demoResponse2 = "That sounds so painful — when someone acts like everything is fine while you're still hurting, it can make you feel completely unseen. Your feelings matter, and it's okay to want more acknowledgment from him.\n\nIt seems like you're at a bit of an impasse right now. This might be a good time to consider speaking with a therapist, not because something is wrong with you, but because you deserve space to feel supported, heard, and clear about what you need next.";
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -56,22 +66,44 @@ export const MobileChatbotDashboard = () => {
 
     console.log("User message added, AI typing...");
 
-    // Check if this is the demo message
-    const isDemoMessage = currentInput.toLowerCase().includes("sarah") && 
+    // Check if this is demo message 1
+    const isDemoMessage1 = currentInput.toLowerCase().includes("sarah") && 
                           currentInput.toLowerCase().includes("jake") && 
                           currentInput.toLowerCase().includes("flirty");
 
-    if (isDemoMessage) {
-      // Demo response with longer loading time
+    // Check if this is demo message 2
+    const isDemoMessage2 = currentInput.toLowerCase().includes("stayed out all night") && 
+                          currentInput.toLowerCase().includes("made coffee") && 
+                          currentInput.toLowerCase().includes("feel invisible");
+
+    if (isDemoMessage1) {
+      // Demo response 1 with longer loading time
       setTimeout(() => {
         const aiResponse: Message = {
           id: Date.now() + 1,
           type: "ai",
-          content: demoResponse,
+          content: demoResponse1,
           timestamp: new Date(),
         };
         
-        console.log("AI demo response:", demoResponse);
+        console.log("AI demo response 1:", demoResponse1);
+        setMessages((prev) => [...prev, aiResponse]);
+        setIsTyping(false);
+      }, 3000); // 3 seconds to show the thinking indicator
+    } else if (isDemoMessage2) {
+      // Demo response 2 with button
+      setTimeout(() => {
+        const aiResponse: Message = {
+          id: Date.now() + 1,
+          type: "ai",
+          content: demoResponse2,
+          timestamp: new Date(),
+          hasButton: true,
+          buttonText: "Find a Relationship Therapist",
+          buttonAction: onNavigateToTools,
+        };
+        
+        console.log("AI demo response 2:", demoResponse2);
         setMessages((prev) => [...prev, aiResponse]);
         setIsTyping(false);
       }, 3000); // 3 seconds to show the thinking indicator
@@ -138,14 +170,25 @@ export const MobileChatbotDashboard = () => {
                     </AvatarFallback>
                   </Avatar>
                 )}
-                <div
-                  className={`max-w-[75%] rounded-3xl px-3 py-2 text-sm font-crimson ${
-                    message.type === "user"
-                      ? "bg-gray-900 text-white"
-                      : "bg-gray-100 text-gray-900"
-                  }`}
-                >
-                  {message.content}
+                <div className="flex flex-col max-w-[75%]">
+                  <div
+                    className={`rounded-3xl px-3 py-2 text-sm font-crimson ${
+                      message.type === "user"
+                        ? "bg-gray-900 text-white"
+                        : "bg-gray-100 text-gray-900"
+                    }`}
+                  >
+                    {message.content}
+                  </div>
+                  {message.hasButton && message.buttonText && (
+                    <Button
+                      onClick={message.buttonAction}
+                      className="mt-2 bg-gray-900 hover:bg-gray-800 text-white text-xs px-3 py-1 h-auto self-start"
+                      size="sm"
+                    >
+                      {message.buttonText}
+                    </Button>
+                  )}
                 </div>
               </div>
             ))}

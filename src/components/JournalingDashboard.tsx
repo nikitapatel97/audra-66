@@ -1,9 +1,7 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Calendar, Heart, TrendingUp, MessageCircle, Target, Sparkles, ChevronRight, PenTool, Smile, Frown, Meh, X, Clock, Tag, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -243,40 +241,6 @@ export const JournalingDashboard = () => {
           </Card>
         </div>
 
-        {/* Search and Filter Bar */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <Input
-              placeholder="Search your entries..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 border-gray-200 focus:border-gray-400 font-crimson"
-            />
-          </div>
-          
-          <div className="flex gap-2 flex-wrap">
-            <Button
-              variant={selectedTag === null ? "default" : "outline"}
-              onClick={() => setSelectedTag(null)}
-              className={selectedTag === null ? "bg-gray-900 hover:bg-gray-800 font-crimson" : "border-gray-200 hover:bg-gray-50 font-crimson"}
-            >
-              All
-            </Button>
-            {availableTags.map(tag => (
-              <Button
-                key={tag}
-                variant={selectedTag === tag ? "default" : "outline"}
-                onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
-                className={selectedTag === tag ? "bg-gray-900 hover:bg-gray-800 font-crimson" : "border-gray-200 hover:bg-gray-50 font-crimson"}
-              >
-                <Tag className="w-3 h-3 mr-1" />
-                {tag}
-              </Button>
-            ))}
-          </div>
-        </div>
-
         {/* Start New Entry CTA */}
         <div className="text-center mb-8 bg-gray-50 rounded-lg p-8 border border-gray-200">
           <Dialog open={isNewEntryOpen} onOpenChange={setIsNewEntryOpen}>
@@ -380,18 +344,17 @@ export const JournalingDashboard = () => {
           </div>
         </div>
 
-        {/* Main Dashboard Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Recent Entries */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-light text-gray-900 font-playfair">Recent Entries</h3>
-              <Button variant="outline" className="text-gray-600 border-gray-300 hover:bg-gray-50 font-crimson">
-                View All
-                <ChevronRight className="ml-2 w-4 h-4" />
-              </Button>
-            </div>
+        {/* Recent Entries - Full Width */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-2xl font-light text-gray-900 font-playfair">Recent Entries</h3>
+            <Button variant="outline" className="text-gray-600 border-gray-300 hover:bg-gray-50 font-crimson">
+              View All
+              <ChevronRight className="ml-2 w-4 h-4" />
+            </Button>
+          </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredEntries.map((entry, index) => (
               <Card key={entry.id} className="border-gray-200 hover:shadow-md transition-shadow cursor-pointer" onClick={() => setSelectedEntry(index)}>
                 <CardContent className="p-6">
@@ -429,88 +392,6 @@ export const JournalingDashboard = () => {
                 </CardContent>
               </Card>
             ))}
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* AI Insights */}
-            <Card className="border-gray-200">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-lg font-normal font-playfair">
-                  <Sparkles className="w-5 h-5 text-gray-600" />
-                  <span>AI Insights</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {insights.map((insight, index) => (
-                  <div key={index} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <div className="flex items-start space-x-3">
-                      <insight.icon className="w-5 h-5 text-gray-600 mt-0.5" />
-                      <div className="flex-1">
-                        <h5 className="font-medium text-gray-900 mb-1 font-crimson">{insight.title}</h5>
-                        <p className="text-sm text-gray-700 mb-2 font-crimson italic">{insight.content}</p>
-                        <div className="flex items-center space-x-2">
-                          <div className="flex-1 bg-gray-200 rounded-full h-1.5">
-                            <div 
-                              className="bg-gray-600 h-1.5 rounded-full" 
-                              style={{ width: `${insight.confidence}%` }}
-                            ></div>
-                          </div>
-                          <span className="text-xs text-gray-500 font-crimson">{insight.confidence}%</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-            {/* Weekly Goals */}
-            <Card className="border-gray-200">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-lg font-normal font-playfair">
-                  <Target className="w-5 h-5 text-gray-600" />
-                  <span>Weekly Goals</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {weeklyGoals.map((goal, index) => (
-                  <div key={index} className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium text-gray-900 font-crimson">{goal.goal}</span>
-                      <span className="text-xs text-gray-500 font-crimson">{goal.current}/{goal.target}</span>
-                    </div>
-                    <Progress value={goal.progress} className="h-2" />
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-            {/* Mood Chart */}
-            <Card className="border-gray-200">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-lg font-normal font-playfair">
-                  <TrendingUp className="w-5 h-5 text-gray-600" />
-                  <span>Mood Trends</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {moodData.map((day) => (
-                    <div key={day.day} className="flex items-center space-x-3">
-                      <span className="text-xs font-medium text-gray-600 w-8 font-crimson">{day.day}</span>
-                      <div className="flex-1 bg-gray-200 rounded-full h-2">
-                        <div 
-                          className="bg-gray-600 h-2 rounded-full transition-all duration-500" 
-                          style={{ width: `${(day.mood / 10) * 100}%` }}
-                        ></div>
-                      </div>
-                      <span className="text-xs text-gray-500 w-8 font-crimson">{day.mood}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </div>

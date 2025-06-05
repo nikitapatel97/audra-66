@@ -1,46 +1,50 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PlusCircle, Search, Calendar, Edit, Trash2 } from "lucide-react";
-
-const mockNotes = [
-  {
-    id: 1,
-    title: "Red Flags I Keep Ignoring",
-    content: "He always checks my phone but gets defensive when I ask about his. Also never wants to meet my friends or include me with his.",
-    date: "2024-01-15",
-    lastEdited: "Today, 2:34 PM"
-  },
-  {
-    id: 2,
-    title: "Why I Stay in Bad Relationships",
-    content: "I think I'm scared of being alone. Every time someone shows interest, I ignore the red flags because attention feels better than loneliness.",
-    date: "2024-01-14",
-    lastEdited: "Yesterday, 6:22 PM"
-  },
-  {
-    id: 3,
-    title: "Things I Want in My Next Relationship",
-    content: "Someone who actually listens when I talk. Who doesn't make me feel crazy for having feelings. Who shows up consistently.",
-    date: "2024-01-13",
-    lastEdited: "2 days ago"
-  }
-];
+import { Progress } from "@/components/ui/progress";
+import { TrendingUp, MessageCircle, Target, Sparkles, Heart, PenTool, Clock } from "lucide-react";
 
 export const NotesDashboard = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [showNewNote, setShowNewNote] = useState(false);
-  const [newNote, setNewNote] = useState({ title: "", content: "" });
+  const insights = [
+    {
+      type: "pattern",
+      title: "Emotional Pattern Detected",
+      content: "You tend to feel more anxious on Sundays, possibly due to upcoming week stress.",
+      confidence: 87,
+      icon: TrendingUp
+    },
+    {
+      type: "growth",
+      title: "Growth Opportunity",
+      content: "Your entries show increased self-awareness. Consider exploring boundary-setting techniques.",
+      confidence: 92,
+      icon: Target
+    },
+    {
+      type: "trigger",
+      title: "Trigger Identified", 
+      content: "Social media browsing often precedes negative mood entries. Consider mindful usage.",
+      confidence: 79,
+      icon: MessageCircle
+    }
+  ];
 
-  const filteredNotes = mockNotes.filter(note => {
-    const matchesSearch = note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         note.content.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesSearch;
-  });
+  const weeklyGoals = [
+    { goal: "Write 5 journal entries", progress: 60, current: 3, target: 5 },
+    { goal: "Practice self-compassion", progress: 80, current: 4, target: 5 },
+    { goal: "Limit social media to 30min/day", progress: 40, current: 2, target: 5 }
+  ];
+
+  const moodData = [
+    { day: "Mon", mood: 6, entries: 1 },
+    { day: "Tue", mood: 7, entries: 2 },
+    { day: "Wed", mood: 4, entries: 1 },
+    { day: "Thu", mood: 6, entries: 1 },
+    { day: "Fri", mood: 8, entries: 2 },
+    { day: "Sat", mood: 5, entries: 1 },
+    { day: "Sun", mood: 6, entries: 1 }
+  ];
 
   return (
     <section className="py-4 px-4 bg-white sm:px-6 lg:px-8 sm:py-20">
@@ -54,90 +58,130 @@ export const NotesDashboard = () => {
           </h2>
         </div>
 
-        {/* Search Bar */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <Input
-              placeholder="Search your insights..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 border-gray-200 focus:border-gray-400 font-crimson"
-            />
-          </div>
-
-          <Button 
-            onClick={() => setShowNewNote(!showNewNote)}
-            className="bg-gray-900 hover:bg-gray-800 font-crimson"
-          >
-            <PlusCircle className="w-4 h-4 mr-2" />
-            New Insight
-          </Button>
+        {/* Quick Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <Card className="text-center border-gray-200">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-center space-x-2 mb-2">
+                <PenTool className="w-5 h-5 text-gray-600" />
+                <span className="text-2xl font-light text-gray-900">12</span>
+              </div>
+              <p className="text-sm text-gray-600 font-crimson">Entries this month</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="text-center border-gray-200">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-center space-x-2 mb-2">
+                <Heart className="w-5 h-5 text-gray-600" />
+                <span className="text-2xl font-light text-gray-900">6.2</span>
+              </div>
+              <p className="text-sm text-gray-600 font-crimson">Avg mood score</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="text-center border-gray-200">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-center space-x-2 mb-2">
+                <Target className="w-5 h-5 text-gray-600" />
+                <span className="text-2xl font-light text-gray-900">3</span>
+              </div>
+              <p className="text-sm text-gray-600 font-crimson">Insights unlocked</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="text-center border-gray-200">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-center space-x-2 mb-2">
+                <Clock className="w-5 h-5 text-gray-600" />
+                <span className="text-2xl font-light text-gray-900">7</span>
+              </div>
+              <p className="text-sm text-gray-600 font-crimson">Day streak</p>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* New Note Form */}
-        {showNewNote && (
-          <Card className="mb-8 border-gray-200">
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* AI Insights */}
+          <Card className="border-gray-200">
             <CardHeader>
-              <CardTitle className="font-playfair">Create New Insight</CardTitle>
+              <CardTitle className="flex items-center space-x-2 text-lg font-normal font-playfair">
+                <Sparkles className="w-5 h-5 text-gray-600" />
+                <span>AI Insights</span>
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Input
-                placeholder="Insight title..."
-                value={newNote.title}
-                onChange={(e) => setNewNote({...newNote, title: e.target.value})}
-                className="border-gray-200 focus:border-gray-400 font-crimson"
-              />
-              <Textarea
-                placeholder="Start writing your insight..."
-                value={newNote.content}
-                onChange={(e) => setNewNote({...newNote, content: e.target.value})}
-                className="min-h-32 border-gray-200 focus:border-gray-400 font-crimson"
-              />
-              <div className="flex gap-2">
-                <Button className="bg-gray-900 hover:bg-gray-800 font-crimson">Save Insight</Button>
-                <Button variant="outline" onClick={() => setShowNewNote(false)} className="border-gray-200 hover:bg-gray-50 font-crimson">
-                  Cancel
-                </Button>
+              {insights.map((insight, index) => (
+                <div key={index} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <div className="flex items-start space-x-3">
+                    <insight.icon className="w-5 h-5 text-gray-600 mt-0.5" />
+                    <div className="flex-1">
+                      <h5 className="font-medium text-gray-900 mb-1 font-crimson">{insight.title}</h5>
+                      <p className="text-sm text-gray-700 mb-2 font-crimson italic">{insight.content}</p>
+                      <div className="flex items-center space-x-2">
+                        <div className="flex-1 bg-gray-200 rounded-full h-1.5">
+                          <div 
+                            className="bg-gray-600 h-1.5 rounded-full" 
+                            style={{ width: `${insight.confidence}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs text-gray-500 font-crimson">{insight.confidence}%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          {/* Weekly Goals */}
+          <Card className="border-gray-200">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2 text-lg font-normal font-playfair">
+                <Target className="w-5 h-5 text-gray-600" />
+                <span>Weekly Goals</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {weeklyGoals.map((goal, index) => (
+                <div key={index} className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-gray-900 font-crimson">{goal.goal}</span>
+                    <span className="text-xs text-gray-500 font-crimson">{goal.current}/{goal.target}</span>
+                  </div>
+                  <Progress value={goal.progress} className="h-2" />
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          {/* Mood Chart */}
+          <Card className="border-gray-200 lg:col-span-2">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2 text-lg font-normal font-playfair">
+                <TrendingUp className="w-5 h-5 text-gray-600" />
+                <span>Mood Trends</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {moodData.map((day) => (
+                  <div key={day.day} className="flex items-center space-x-3">
+                    <span className="text-xs font-medium text-gray-600 w-8 font-crimson">{day.day}</span>
+                    <div className="flex-1 bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-gray-600 h-2 rounded-full transition-all duration-500" 
+                        style={{ width: `${(day.mood / 10) * 100}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-xs text-gray-500 w-8 font-crimson">{day.mood}</span>
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
-        )}
-
-        {/* Notes Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredNotes.map(note => (
-            <Card key={note.id} className="border-gray-200 hover:shadow-md transition-shadow">
-              <CardHeader className="pb-3">
-                <div className="flex justify-between items-start">
-                  <CardTitle className="text-lg font-playfair line-clamp-2">{note.title}</CardTitle>
-                  <div className="flex gap-1">
-                    <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-gray-600">
-                      <Edit className="w-4 h-4" />
-                    </Button>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-red-500">
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700 mb-4 line-clamp-3 font-crimson italic">{note.content}</p>
-                
-                <div className="flex items-center text-xs text-gray-500 font-crimson">
-                  <Calendar className="w-3 h-3 mr-1" />
-                  {note.lastEdited}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
         </div>
-
-        {filteredNotes.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500 font-crimson italic">No insights found. Create your first insight to get started!</p>
-          </div>
-        )}
       </div>
     </section>
   );

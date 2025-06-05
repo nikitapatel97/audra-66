@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { TrendingUp, MessageCircle, Target, Sparkles, Heart, PenTool, Clock } from "lucide-react";
+import { TrendingUp, MessageCircle, Target, Sparkles } from "lucide-react";
 
 export const NotesDashboard = () => {
   const insights = [
@@ -56,49 +56,6 @@ export const NotesDashboard = () => {
               insights
             </span>
           </h2>
-        </div>
-
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <Card className="text-center border-gray-200">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-center space-x-2 mb-2">
-                <PenTool className="w-5 h-5 text-gray-600" />
-                <span className="text-2xl font-light text-gray-900">12</span>
-              </div>
-              <p className="text-sm text-gray-600 font-crimson">Entries this month</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="text-center border-gray-200">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-center space-x-2 mb-2">
-                <Heart className="w-5 h-5 text-gray-600" />
-                <span className="text-2xl font-light text-gray-900">6.2</span>
-              </div>
-              <p className="text-sm text-gray-600 font-crimson">Avg mood score</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="text-center border-gray-200">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-center space-x-2 mb-2">
-                <Target className="w-5 h-5 text-gray-600" />
-                <span className="text-2xl font-light text-gray-900">3</span>
-              </div>
-              <p className="text-sm text-gray-600 font-crimson">Insights unlocked</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="text-center border-gray-200">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-center space-x-2 mb-2">
-                <Clock className="w-5 h-5 text-gray-600" />
-                <span className="text-2xl font-light text-gray-900">7</span>
-              </div>
-              <p className="text-sm text-gray-600 font-crimson">Day streak</p>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Main Content Grid */}

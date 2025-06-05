@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -124,9 +123,6 @@ export const TrackerDashboard = () => {
               tracker
             </span>
           </h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto font-crimson italic">
-            Track your relationship journey together
-          </p>
         </div>
 
         {/* Header with Month Navigation and Add Partner */}

@@ -216,45 +216,45 @@ export const JournalingDashboard = () => {
           </h2>
         </div>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        {/* Quick Stats - Made Smaller */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
           <Card className="text-center border-gray-200">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-center space-x-2 mb-2">
-                <PenTool className="w-5 h-5 text-gray-600" />
-                <span className="text-2xl font-light text-gray-900">12</span>
+            <CardContent className="pt-3 pb-3">
+              <div className="flex items-center justify-center space-x-2 mb-1">
+                <PenTool className="w-4 h-4 text-gray-600" />
+                <span className="text-xl font-light text-gray-900">12</span>
               </div>
-              <p className="text-sm text-gray-600 font-crimson">Entries this month</p>
+              <p className="text-xs text-gray-600 font-crimson">Entries this month</p>
             </CardContent>
           </Card>
           
           <Card className="text-center border-gray-200">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-center space-x-2 mb-2">
-                <Heart className="w-5 h-5 text-gray-600" />
-                <span className="text-2xl font-light text-gray-900">6.2</span>
+            <CardContent className="pt-3 pb-3">
+              <div className="flex items-center justify-center space-x-2 mb-1">
+                <Heart className="w-4 h-4 text-gray-600" />
+                <span className="text-xl font-light text-gray-900">6.2</span>
               </div>
-              <p className="text-sm text-gray-600 font-crimson">Avg mood score</p>
+              <p className="text-xs text-gray-600 font-crimson">Avg mood score</p>
             </CardContent>
           </Card>
           
           <Card className="text-center border-gray-200">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-center space-x-2 mb-2">
-                <Target className="w-5 h-5 text-gray-600" />
-                <span className="text-2xl font-light text-gray-900">3</span>
+            <CardContent className="pt-3 pb-3">
+              <div className="flex items-center justify-center space-x-2 mb-1">
+                <Target className="w-4 h-4 text-gray-600" />
+                <span className="text-xl font-light text-gray-900">3</span>
               </div>
-              <p className="text-sm text-gray-600 font-crimson">Insights unlocked</p>
+              <p className="text-xs text-gray-600 font-crimson">Insights unlocked</p>
             </CardContent>
           </Card>
           
           <Card className="text-center border-gray-200">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-center space-x-2 mb-2">
-                <Clock className="w-5 h-5 text-gray-600" />
-                <span className="text-2xl font-light text-gray-900">7</span>
+            <CardContent className="pt-3 pb-3">
+              <div className="flex items-center justify-center space-x-2 mb-1">
+                <Clock className="w-4 h-4 text-gray-600" />
+                <span className="text-xl font-light text-gray-900">7</span>
               </div>
-              <p className="text-sm text-gray-600 font-crimson">Day streak</p>
+              <p className="text-xs text-gray-600 font-crimson">Day streak</p>
             </CardContent>
           </Card>
         </div>

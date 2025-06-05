@@ -95,9 +95,9 @@ export const MobileChatbotDashboard = () => {
           </h2>
         </div>
 
-        <div className="flex-1 flex flex-col min-h-0 gap-2">
+        <div className="flex-1 flex flex-col min-h-0">
           {/* Chat Container */}
-          <div className="flex-1 border border-gray-200 rounded-lg overflow-hidden flex flex-col">
+          <div className="flex-1 border border-gray-200 rounded-lg overflow-hidden flex flex-col mb-2">
             <div className="flex-1 p-2 overflow-y-auto">
               {messages.map((message) => (
                 <div

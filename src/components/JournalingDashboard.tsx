@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -277,7 +278,7 @@ export const JournalingDashboard = () => {
         </div>
 
         {/* Start New Entry CTA */}
-        <div className="text-center mb-12 bg-gray-50 rounded-lg p-8 border border-gray-200">
+        <div className="text-center mb-8 bg-gray-50 rounded-lg p-8 border border-gray-200">
           <Dialog open={isNewEntryOpen} onOpenChange={setIsNewEntryOpen}>
             <DialogTrigger asChild>
               <Button className="bg-gray-900 hover:bg-gray-800 border-0 font-crimson">
@@ -343,6 +344,40 @@ export const JournalingDashboard = () => {
               </div>
             </DialogContent>
           </Dialog>
+        </div>
+
+        {/* Search and Filter Bar */}
+        <div className="flex flex-col sm:flex-row gap-4 mb-8">
+          <div className="flex-1 relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <Input
+              placeholder="Search your entries..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 border-gray-200 focus:border-gray-400 font-crimson"
+            />
+          </div>
+          
+          <div className="flex gap-2 flex-wrap">
+            <Button
+              variant={selectedTag === null ? "default" : "outline"}
+              onClick={() => setSelectedTag(null)}
+              className={selectedTag === null ? "bg-gray-900 hover:bg-gray-800 font-crimson" : "border-gray-200 hover:bg-gray-50 font-crimson"}
+            >
+              All
+            </Button>
+            {availableTags.map(tag => (
+              <Button
+                key={tag}
+                variant={selectedTag === tag ? "default" : "outline"}
+                onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
+                className={selectedTag === tag ? "bg-gray-900 hover:bg-gray-800 font-crimson" : "border-gray-200 hover:bg-gray-50 font-crimson"}
+              >
+                <Tag className="w-3 h-3 mr-1" />
+                {tag}
+              </Button>
+            ))}
+          </div>
         </div>
 
         {/* Main Dashboard Grid */}

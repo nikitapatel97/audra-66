@@ -6,6 +6,7 @@ import { JournalingDashboard } from "@/components/JournalingDashboard";
 import { NotesDashboard } from "@/components/NotesDashboard";
 import { MobileChatbotDashboard } from "@/components/MobileChatbotDashboard";
 import { TrackerDashboard } from "@/components/TrackerDashboard";
+import { ToolsDashboard } from "@/components/ToolsDashboard";
 
 export const MobileLayout = () => {
   const [activeTab, setActiveTab] = useState("chatbot");
@@ -18,6 +19,8 @@ export const MobileLayout = () => {
         return <NotesDashboard />;
       case "tracker":
         return <TrackerDashboard />;
+      case "tools":
+        return <ToolsDashboard />;
       default:
         return <MobileChatbotDashboard />;
     }

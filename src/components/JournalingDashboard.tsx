@@ -15,20 +15,6 @@ export const JournalingDashboard = () => {
 
   const journalEntries = [
     {
-      id: 1,
-      date: "May 15, 2025",
-      time: "11:47 PM",
-      mood: "Devastated",
-      moodScore: 2,
-      title: "He never came home",
-      preview: "Jake said he was going out for drinks with Sarah from work after their project meeting. That was at 6 PM. It's almost midnight and he's not answering his phone...",
-      fullContent: "Jake said he was going out for drinks with Sarah from work after their project meeting. That was at 6 PM. It's almost midnight and he's not answering his phone. After everything we talked about just two days ago, after all his promises about being better and more honest, he does this. I can't stop thinking about that girl's name I saw on his phone three days ago. Is this Sarah the same person? I feel so stupid for believing him when he said it was nothing. I gave him another chance and this is what I get. I can't do this anymore. I deserve better than wondering where my boyfriend is at midnight, wondering if he's with another woman. This feels like the final straw. I'm done making excuses for him.",
-      insights: ["You're recognizing patterns of broken trust", "Your boundaries are becoming clearer", "You're valuing your self-worth"],
-      tags: ["relationship", "betrayal", "boundaries"],
-      wordCount: 156,
-      readTime: "2 min"
-    },
-    {
       id: 2,
       date: "May 13, 2025",
       time: "8:30 PM",

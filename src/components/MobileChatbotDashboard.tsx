@@ -55,7 +55,7 @@ export const MobileChatbotDashboard = () => {
   return (
     <div className="py-4 px-4 bg-white h-screen flex flex-col">
       <div className="max-w-6xl mx-auto flex-1 flex flex-col">
-        <div className="text-center mb-4">
+        <div className="text-center mb-2">
           <h2 className="text-3xl md:text-5xl font-light text-gray-900 font-playfair">
             Chat with{" "}
             <span className="italic text-gray-600 font-playfair">
@@ -64,10 +64,10 @@ export const MobileChatbotDashboard = () => {
           </h2>
         </div>
 
-        <div className="flex-1 flex flex-col space-y-4">
+        <div className="flex-1 flex flex-col space-y-2">
           {/* Chat Container */}
           <Card className="flex-1 flex flex-col overflow-hidden border-gray-200">
-            <div className="flex-1 p-4 overflow-y-auto space-y-4">
+            <div className="flex-1 p-3 overflow-y-auto space-y-3">
               {messages.map((message) => (
                 <div
                   key={message.id}
